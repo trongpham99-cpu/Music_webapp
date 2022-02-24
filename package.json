@@ -21,7 +21,13 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
+    "http-errors": "^2.0.0",
+    "mongoose": "^6.2.3",
+    "primeicons": "^5.0.0",
+    "primeng": "^13.2.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
