@@ -1,0 +1,32 @@
+.container {
+    float: left;
+    width: 15rem;
+    height: 39.5rem;
+    background: #000000;
+    color: white;
+}
+
+.logo {
+    width: 10rem;
+    height: 10rem;
+    margin-left: 2.5rem;
+}
+
+.name-icon {
+    font-size: 17px;
+    margin-top: 0.2rem;
+    margin-left: 0.8rem;
+}
+
+hr {
+    margin-top: 2rem;
+    width: 12rem;
+    background-color: #C4C4C4;
+}
+
+.name-list {
+    display: grid;
+    margin-left: 2rem;
+    margin-top: 3rem;
+    border-top: white;
+}
