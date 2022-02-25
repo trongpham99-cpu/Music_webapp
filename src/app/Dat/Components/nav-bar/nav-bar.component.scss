@@ -1,0 +1,38 @@
+.container {
+    width: 81rem;
+    height: 3.8rem;
+    background: #1C1C1C;
+    color: white;
+    display: flex;
+}
+
+.search[type=text] {
+    width: 25rem;
+    float: left;
+    padding: 6px;
+    border: 5%;
+    margin: 10px 10px 10px 40px;
+    font-size: 13px;
+}
+
+.upgrade {
+    margin-left: 20rem;
+    border-radius: 20px;
+    width: 150px;
+    height: 40px;
+    margin-top: 0.5rem;
+}
+
+.icon {
+    color: aliceblue;
+    margin-top: 18px;
+}
+
+.login {
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    margin-left: 5rem;
+    width: 150px;
+    height: 40px;
+    margin-top: 0.5rem;
+}
