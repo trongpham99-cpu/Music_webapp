@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AdmMusicRoutingModule } from './adm-music-routing.module';
 import { AdmMusicComponent } from './adm-music.component';
-import {AdminMusicManageComponent} from '../../components/admin-music-manage/admin-music-manage.component';
-import { AdminVideoManageComponent } from '../../components/admin-video-manage/admin-video-manage.component';
-import {MatIconModule} from '@angular/material/icon';
-
+import { MaterialModule } from '../../../shared/material.module';
+import { AdminMusicManageComponent } from '../../../Huhu/components/admin-music-manage/admin-music-manage.component';
+import { AdminVideoManageComponent } from '../../../Huhu/components/admin-video-manage/admin-video-manage.component';
 @NgModule({
   declarations: [
     AdmMusicComponent,
@@ -16,7 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
   imports: [
     CommonModule,
     AdmMusicRoutingModule,
-    MatIconModule
+    MaterialModule
   ]
 })
 export class AdmMusicModule { }
