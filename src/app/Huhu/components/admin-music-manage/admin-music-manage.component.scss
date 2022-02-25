@@ -1,0 +1,108 @@
+.content{
+    display: grid;
+    grid-template-rows: minmax(150px, 25%) 1fr;
+
+    width: 70em;
+    height: 50em;
+    border: 1px solid;
+    margin-top: 5%;
+    margin-left: 12rem;
+    margin-bottom: 25%;
+    margin-right: 15%;
+    background-color: #202020;
+}
+
+
+table{
+    width: 100%;
+    border: 1px solid;
+    background-color: #202020;
+}
+th{
+    text-align: start;
+    padding-left: 2%;
+    font-size: large;
+    color:white;
+}
+table,td{
+    text-align: start;
+    padding-left: 2%;
+    padding-top: 5%;
+    color:white;
+}
+#count{
+    display: flex;
+    flex-direction: row;
+    padding-top: 25%;
+ }
+
+ .add-button{
+    // position: absolute;
+    position: fixed;
+    bottom: 5%;
+    right: 5%
+ }
+ .edit{
+    padding-right: 30px;
+ }
+// #artist{
+//     font-size: 30px;
+// }
+// #listener{
+//     font-size: 30px;
+// }
+// .name{
+//     padding-left: 5%;
+//     margin-top: 3%;
+    
+    
+// }
+// .artist{
+//     padding-left: 15%;
+//     margin-top: 3%;
+// }
+// .listener{
+//     padding-left: 15%;
+//     padding-right: 10%;
+//     margin-top: 3%;
+// }
+
+// .info{
+//     display: flex;
+//     flex-direction: row;
+//     font-size: 17px;
+//     // margin-top: 15px;
+// }
+// .songname{
+//     display:flex;
+//     flex-direction: column;
+//     padding-left: 5%;
+//     margin-top: 8px;
+// }
+// .artistname{
+//     display:flex;
+//     flex-direction: column;
+//     padding-left: 15%;
+//     margin-top: 8px;
+// }
+// .listencount{
+//     // display:flex;
+//     // flex-direction: column;
+//     padding-left: 13%;
+//     padding-bottom: 15%;
+ 
+// }
+// .edit{
+//     // display:flex;
+//     flex-direction: column;
+//     padding-left: 12%;
+//     padding-right: 5%;
+//     margin-top: 8px;
+// }
+// .table{
+//     margin-bottom: 30px;
+//     border: 2px solid;
+// }
+
+
+
