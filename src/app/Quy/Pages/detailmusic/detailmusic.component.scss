@@ -1,0 +1,40 @@
+.container{
+    margin-left: 374px;
+    margin-top: 165px;
+    background-color: #202020;
+    padding: 20px;
+}
+.layout{
+    display: flex;
+    width: 1104px;
+}
+
+.image{
+    width: 399px;
+    height: 397px;
+}
+
+.name{
+    display: flex;
+    // color: white;
+}
+.name2{
+    margin-left: 90px;
+}
+.description{
+    display: flex;
+    // color: white;
+}
+.singer{
+    display: flex;
+    margin-left: 15px;
+    
+}
+.singer_name{
+    display: flex;
+    margin-left: 40px;
+}
+.singer_image{
+    width: 143px;
+    height: 143px;
+}
