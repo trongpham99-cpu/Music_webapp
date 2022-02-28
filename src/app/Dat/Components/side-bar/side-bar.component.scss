@@ -1,32 +1,31 @@
 .container {
-    float: left;
     width: 100%;
-    height: 38rem;
+    height: 115.4%;
     background: #000000;
     color: white;
 }
 
 .logo {
-    width: 10rem;
-    height: 10rem;
-    margin-left: 2.5rem;
+    width: 70%;
+    height: 70%;
+    margin-left: 15%;
 }
 
 .name-icon {
     font-size: 17px;
-    margin-top: 0.2rem;
-    margin-left: 0.8rem;
+    margin-top: 1%;
+    margin-left: 8%;
 }
 
 hr {
-    margin-top: 2rem;
-    width: 12rem;
+    margin-top: 20%;
+    width: 70%;
     background-color: #C4C4C4;
 }
 
 .name-list {
     display: grid;
-    margin-left: 2rem;
-    margin-top: 3rem;
+    margin-left: 12%;
+    margin-top: 20%;
     border-top: white;
 }
