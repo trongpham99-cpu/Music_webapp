@@ -1,14 +1,16 @@
 .content{
-    display: grid;
-    grid-template-rows: minmax(150px, 25%) 1fr;
-    width: 70em;
-    height: auto;
-    border: 1px solid;
-    margin-top: 5%;
-    margin-left: 12rem;
-    margin-bottom: 25%;
-    margin-right: 15%;
-    background-color: #202020;
+    // display: grid;
+    
+    // grid-template-columns: minmax(550px, 45%) 1fr;
+    // // width: 70em;
+    // // height: auto;
+    // // border: 1px solid;
+    // // margin-top: 5%;
+    // // margin-left: 12rem;
+    // // margin-bottom: 25%;
+    // // margin-right: 15%;
+    //  background-color: #202020;
+    
 }
 
 
@@ -38,11 +40,20 @@ table,td{
  .add-button{
     // position: absolute;
     position: fixed;
-    bottom: 5%;
-    right: 5%
+    bottom: 15%;
+    right: 5%;
+    background-color: white;
  }
  .edit{
     padding-right: 30px;
+ }
+
+ @media screen and (max-device-width:1000px)
+ and (orientation: landscape)
+ {
+     .content{
+         width: 100%;
+     }
  }
 // #artist{
 //     font-size: 30px;

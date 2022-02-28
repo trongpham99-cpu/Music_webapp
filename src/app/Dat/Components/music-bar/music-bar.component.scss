@@ -1,7 +1,19 @@
 .container {
     width: 100%;
-    height: 20%;
+    height: 16.5%;
     background: #181818;
     color: white;
     position: fixed;
+    margin-top: 0%;
+}
+
+img {
+    width: 90px;
+    height: 90px;
+    border: solid white;
+}
+
+.buttons {
+    margin-left: 20%;
+    margin-top: 1%;
 }
