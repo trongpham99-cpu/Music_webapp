@@ -1,19 +1,18 @@
 .container {
     width: 100%;
-    height: 16.5%;
-    background: #181818;
+    height: 12%;
+    background: #44ff00;
     color: white;
-    position: fixed;
-    margin-top: 0%;
+    flex-direction: row;
 }
 
 img {
-    width: 90px;
-    height: 90px;
+    width: 5%;
+    height: 5%;
     border: solid white;
 }
 
-.buttons {
-    margin-left: 20%;
-    margin-top: 1%;
-}
+// .time-of-item {
+//     width: 10%;
+//     margin-top: 0.75%;
+// }
