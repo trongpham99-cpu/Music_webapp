@@ -1,48 +1,54 @@
-.container{
+.container {
     background-color: #202020;
     padding: 5%;
     width: 100%;
     height: auto;
 }
-.layout{
+
+.layout {
     display: flex;
     width: 100%;
 }
 
-.image{
+.image {
     width: 400px;
     height: 400px;
 }
 
-.name{
+.name {
     display: flex;
     // color: white;
     font-size: larger;
-    
 }
-.name2{
+
+.name2 {
     margin-left: 17%;
 }
-.description{
+
+.description {
     display: flex;
     // color: white;
 }
-.singer{
+
+.singer {
     display: flex;
     margin-left: 15px;
-    
 }
-.singer_name{
+
+.singer_name {
     display: flex;
     margin-left: 40px;
 }
-.singer_image{
+
+.singer_image {
     width: 143px;
     height: 143px;
 }
-.suggestion{
+
+.suggestion {
     margin-top: 20px;
 }
+
 .song {
     width: 100%;
     height: auto;
