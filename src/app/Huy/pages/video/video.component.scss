@@ -21,13 +21,15 @@
 .container{
 margin-top: 10px;
 height: 230px;
-width: 250px;
+width: 400px;
 
     
 
 border-radius: 5px;
 background-color: #484848;
 text-align: center;
+display: flex;
+flex-direction: row;
 
 
     
@@ -45,4 +47,12 @@ text-align: center;
     width: 500px;
     
    
+}
+.comment{
+
+    height: 30px;
+    width: 700px;
+    background-color: aliceblue;
+    margin-left: 25px;
+    border-radius: 20px;
 }
