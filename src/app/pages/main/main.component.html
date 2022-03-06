@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <div class="parent">
         <div class="section yellow" >
             <app-side-bar class="left-sidebar"></app-side-bar>
@@ -9,8 +9,21 @@
             <router-outlet></router-outlet>
         </div>
     </div>
+</div> -->
+
+<div>
+    <app-nav-bar></app-nav-bar>
+    <div class="body">
+        <div id="w30">  
+            <app-side-bar></app-side-bar>
+        </div>
+        <div id="w70">  
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <app-music-bar></app-music-bar>
 </div>
-<app-music-bar></app-music-bar>
+
 
 
 <!-- don't user "contenteditable" -->
