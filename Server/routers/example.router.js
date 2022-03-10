@@ -9,4 +9,12 @@ router.get('/example', (req, res)=> {
     )
 })
 
+router.post('/example', (req, res)=>{
+    res.status(200).send(
+        {
+            message: "Hello World !!!"
+        }
+    )
+})
+
 module.exports = router;
