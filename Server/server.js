@@ -1,8 +1,12 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const bodyParser = require('body-parser');
+const cors = require('cors')
+const server = express()
+server.use(cors());
+server.use(bodyParser.json());
 
-const PORT = process.env.PORT || 3000;
+const exampleRouter = require('./routers/example.router');
 
-app.listen(PORT, ()=>{
-    console.log(`Server listening on port ${PORT} !!!`);
-})
+server.use("/api", exampleRouter);
+
+module.exports = server;
