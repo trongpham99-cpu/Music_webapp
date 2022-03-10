@@ -33,10 +33,15 @@
 
 .full-name {
     display: flex;
+    justify-content: space-between;
     padding: 1.15%;
 }
 
 .p-buttonset {
     // float: right;
-    padding-left: 40%;
+    padding-left: 52.5%;
+}
+
+.input-form{
+    width: 80%;
 }
