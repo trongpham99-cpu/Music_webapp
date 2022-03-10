@@ -12,10 +12,42 @@
 </div> -->
 
 <mat-toolbar>
-        <input class="search" type="text" placeholder="Tìm bài hát, nghệ sĩ,...">
-        <mat-icon class="icon" aria-hidden="false" aria-label="Example home icon">search</mat-icon>
-        
-        <span class="example-spacer"></span>
-        <button class="upgrade">Nâng cấp</button>
-        <button class="login">Đăng nhập</button>
+    <input class="search" type="text" placeholder="Tìm bài hát, nghệ sĩ,...">
+    <mat-icon class="icon" aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+
+    <span class="example-spacer"></span>
+    <button class="upgrade">Nâng cấp</button>
+    <button (click)="login()" class="login">Đăng nhập</button>
 </mat-toolbar>
+
+<p-dialog header="Đăng nhập" [(visible)]="displayBasic" [style]="{width: '40vw'}">
+    <div>
+        <div style=" margin-left: 22%;" class="grid p-fluid">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <input style="width:60%;" type="text" pInputText placeholder="Tài khoản">
+            </div>
+        </div>
+        <div style="margin-top: 1em; margin-left: 22%;" class="grid p-fluid">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+                <input style=" width:60%" type="text" pInputText placeholder="Mật khẩu">
+            </div>
+        </div>
+        <p style="font-size: small; margin-top: 1%; margin-left: 60%; font-style: italic;">Quên mật khẩu?</p>
+        <button style="margin-left: 40%; margin-top: 1%; background-color: #FF5500" pButton pRipple type="button" label="Đăng nhập"></button>
+    </div>
+    <div class="spec-text">
+        <p class="display" style="text-align:center">Hoặc</p>
+    </div>
+    <div style="display: flex; margin-top: 2em;">
+        <button style="margin-left: 24%; background-color: black;" pButton pRipple type="button" icon="pi pi-apple"></button>
+        <button style="margin-left: 7%; background-color: #FFC107;" pButton pRipple type="button" icon="pi pi-google"></button>
+        <button style="margin-left: 7%; background-color: #699BF7;" pButton pRipple type="button" icon="pi pi-facebook"></button>
+        <button style="margin-left: 7%; background-color: #55ACEE;" pButton pRipple type="button" icon="pi pi-twitter"></button>
+    </div>
+    <div style="display: flex; margin-top: 1em;">
+        <p style="font-size: medium; margin-top: 1%; margin-left: 40%; font-style: italic; font-weight: bold; margin-top: 1.5em;">Bạn không có tài khoản?</p>
+        <p style="margin-top: 4.3%; margin-left: 2%; font-weight: bold; font-size: small; font-style: italic;">Đăng ký ngay.</p>
+    </div>
+</p-dialog>
