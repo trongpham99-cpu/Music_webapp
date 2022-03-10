@@ -6,7 +6,12 @@ server.use(cors());
 server.use(bodyParser.json());
 
 const exampleRouter = require('./routers/example.router');
+const userRouter = require('./routers/user.router');
 
 server.use("/api", exampleRouter);
+server.use("/user",userRouter);
+
+
+
 
 module.exports = server;
