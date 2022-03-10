@@ -3,13 +3,15 @@
     height: 100%;
     background: #202020;
     color: rgb(255, 255, 255);
+    // position: fixed;
+    // : 0;
 }
 
 .items {
     height: 80%;
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 0.3fr));
 }
 
 .content {
@@ -25,11 +27,12 @@ img {
 }
 
 .item {
-    width: 80%;
+    width: 75%;
     height: 40%;
     background-color: #64696B;
     border-radius: 25px;
     margin: 1rem;
+    box-shadow: black 5%;
 }
 
 .page {
@@ -38,7 +41,7 @@ img {
 
 .next-page {
     margin-top: 3rem;
-    margin-left: 34rem;
+    margin-left: 37%;
     background-color: #202020;
 }
 
@@ -46,57 +49,66 @@ img {
     text-decoration: underline rgb(255, 255, 255);
 }
 
-
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
-:root{
+:root {
     // --white-light: rgba(255, 255, 255, 0.5);
     // --alice-blue: #f8f9fa;
     --carribean-green: #40c9a2;
     // --gray: #ededed;
 }
-*{
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     font-family: 'Quicksand', sans-serif;
 }
 
+
 /* Utility stylings */
-img{
+
+img {
     width: 100%;
     display: block;
     border-radius: 10px 10px 0px 0px;
 }
-.container{
+
+.container {
     width: 88vw;
     margin: 0 auto;
 }
+
 .lg-title,
 .md-title,
-.sm-title{
+.sm-title {
     font-family: 'Roboto', sans-serif;
     padding: 0.6rem 0;
     text-transform: capitalize;
 }
-.lg-title{
+
+.lg-title {
     font-size: 2.5rem;
     font-weight: 500;
     text-align: center;
     padding: 1.3rem 0;
     opacity: 0.9;
 }
-.md-title{
+
+.md-title {
     font-size: 2rem;
     font-family: 'Roboto', sans-serif;
 }
-.sm-title{
+
+.sm-title {
     font-weight: 300;
     font-size: 1rem;
     text-transform: uppercase;
 }
-.text-light{
+
+.text-light {
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.5;
@@ -104,27 +116,34 @@ img{
     margin: 0.4rem 0;
 }
 
+
 /* product section */
-.products{
+
+.products {
     background: var(--alice-blue);
     padding: 1rem 0;
 }
-.products .text-light{
+
+.products .text-light {
     text-align: center;
     width: 70%;
     margin: 0.9rem auto;
 }
-.product{
+
+.product {
     margin: 2rem;
     position: relative;
     border-radius: 10px;
 }
+
+
 /* .product-content{
     background: var(--gray);
     padding: 3rem 0.5rem 2rem 0.5rem;
     cursor: pointer;
 } */
-.product-img{
+
+.product-img {
     // background: var(--white-light);
     // box-shadow: 0 0 20px 10px var(--white-light);
     width: auto;
@@ -133,14 +152,17 @@ img{
     border-radius: 50%;
     transition: background 0.5s ease;
 }
-.product-btns{
+
+.product-btns {
     display: flex;
     justify-content: center;
     margin-top: 1.4rem;
     opacity: 0;
     transition: opacity 0.6s ease;
 }
-.btn-cart, .btn-buy{
+
+.btn-cart,
+.btn-buy {
     background: transparent;
     border: 1px solid black;
     padding: 0.8rem 0;
@@ -151,29 +173,34 @@ img{
     border: none;
     transition: all 0.6s ease;
 }
-.btn-cart{
+
+.btn-cart {
     background: black;
 }
+
 // .btn-cart:hover{
 //     background: var(--carribean-green);
 // }
-.btn-buy{
-}
+.btn-buy {}
+
 // .btn-buy:hover{
 //     background: var(--carribean-green);
 // }
-.product-info{
+.product-info {
     padding: 2rem;
 }
-.product-info-top{
+
+.product-info-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.rating span{
+
+.rating span {
     color: var(--carribean-green);
 }
-.product-name{
+
+.product-name {
     color: #0078ae;
     display: block;
     text-decoration: none;
@@ -181,18 +208,22 @@ img{
     text-transform: uppercase;
     font-weight: bold;
 }
-.product-price{
+
+.product-price {
     padding-top: 0.6rem;
     padding-right: 0.6rem;
     display: inline-block;
 }
-.product-price:first-of-type{
+
+.product-price:first-of-type {
     text-decoration: line-through;
     color: var(--carribean-green);
 }
-.product-img img{
+
+.product-img img {
     transition: transform 0.6s ease;
 }
+
 // .product:hover .product-img img{
 //     transform: scale(1.1);
 // }
@@ -202,7 +233,7 @@ img{
 // .product:hover .product-btns{
 //     opacity: 1;
 // }
-.off-info .sm-title{
+.off-info .sm-title {
     background: var(--carribean-green);
     color: white;
     display: inline-block;
@@ -217,20 +248,26 @@ img{
     cursor: pointer;
 }
 
+
 /* product collection */
-.product-collection{
+
+.product-collection {
     padding: 3.2rem 0;
 }
-.product-collection-wrapper{
+
+.product-collection-wrapper {
     padding: 3.2rem 0;
 }
-.product-col-left{
+
+.product-col-left {
     // background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url("../../../../assets/images/fashion-img-1.jpg") center/cover no-repeat;
 }
-.product-col-r-top{
+
+.product-col-r-top {
     // background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url("../../../../assets/images/fashion-img-2.png") center/cover no-repeat;
 }
-.flex{
+
+.flex {
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -238,23 +275,28 @@ img{
     padding: 2rem 1.5rem 3.2rem;
     margin: 5px;
 }
-.product-col-r-bottom > div:first-child{
+
+.product-col-r-bottom>div:first-child {
     background: #eaa001;
 }
-.product-col-r-bottom > div:last-child{
+
+.product-col-r-bottom>div:last-child {
     background: #0090ff;
 }
-.product-col-content{
+
+.product-col-content {
     text-align: center;
     // color: white;
 }
-.product-collection .text-light{
+
+.product-collection .text-light {
     opacity: 1;
     font-size: 0.8;
     font-weight: 400;
     line-height: 1.7;
 }
-.btn-dark{
+
+.btn-dark {
     background: black;
     // color: white;
     outline: 0;
@@ -267,109 +309,113 @@ img{
     font-size: 1rem;
     font-family: inherit;
 }
+
 // .btn-dark:hover{
 //     background: var(--carribean-green);
 // }
-
-
-.icon:hover{
-  cursor: pointer;
+.icon:hover {
+    cursor: pointer;
 }
 
-.title{
-    color: white;    
+.title {
+    color: white;
     font-size: 14pt;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin-left: 18px;
 }
 
-p{
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+
 /* Media Queries */
-@media screen and (min-width: 992px){
-    .product-items{
+
+@media screen and (min-width: 992px) {
+    .product-items {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
-    .product-col-r-bottom{
+    .product-col-r-bottom {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
 }
-@media screen and (min-width: 1200px){
-    .product-items{
+
+@media screen and (min-width: 1200px) {
+    .product-items {
         grid-template-columns: repeat(3, 1fr);
     }
-    .product{
+    .product {
         margin-right: 1rem;
         margin-left: 1rem;
     }
-    .products .text-light{
+    .products .text-light {
         width: 50%;
     }
 }
 
-.product-items{
+.product-items {
     background-color: #202020;
     bottom: 0;
 }
 
-@media screen and (min-width: 1336px){
-    .product-items{
+@media screen and (min-width: 1336px) {
+    .product-items {
         grid-template-columns: repeat(4, 1fr);
     }
-    .product-collection-wrapper{
+    .product-collection-wrapper {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
-    .flex{
+    .flex {
         height: 60vh;
     }
-    .product-col-left{
+    .product-col-left {
         height: 121.5vh;
     }
 }
-.title-angi{
+
+.title-angi {
     color: #212529;
     font-size: 24pt;
     font-family: 'Baloo Tammudu 2', cursive;
 }
 
-.product-content:hover{
+.product-content:hover {
     cursor: pointer;
 }
 
-.title-name{
+.title-name {
     padding: 15px 0px 0 10px;
 }
 
-.title-name:hover{
+.title-name:hover {
     cursor: pointer;
 }
 
-.artist-name{
+.artist-name {
     padding: 0px 0px 0 10px;
     color: white;
 }
 
-.date{
-    font-weight: bold; 
-    font-size: 8pt; 
+.date {
+    font-weight: bold;
+    font-size: 8pt;
     padding: 10px 0px 0px 10px;
 }
-.icon-like{
+
+.icon-like {
     margin-left: 35px;
     padding: 10px 0px 20px 20px;
     transform: scale(1.5);
 }
 
-.icon-like:hover{
+.icon-like:hover {
     cursor: pointer;
 }
 
-.footer{
+.footer {
     // width: 100%;
     // height: 200px;
     padding: 0px 0px 100px 0px;
