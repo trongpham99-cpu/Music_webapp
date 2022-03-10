@@ -9,6 +9,9 @@ import { MusicBarComponent } from 'src/app/Dat/Components/music-bar/music-bar.co
 import { NavBarComponent } from 'src/app/Dat/Components/nav-bar/nav-bar.component';
 import { SideBarComponent } from 'src/app/Dat/Components/side-bar/side-bar.component';
 import { MaterialModule } from '../../shared/material.module'
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +23,8 @@ import { MaterialModule } from '../../shared/material.module'
     KindOfMusicComponent,
   ],
   imports: [
+    ButtonModule,
+    DialogModule,
     CommonModule,
     MainRoutingModule,
     MaterialModule
