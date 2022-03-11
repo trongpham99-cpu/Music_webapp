@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 
 const audioSchema = new mongoose.Schema({
     songName: String,
-    authorName: String,
+    authorId: 
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "artist"
+        },
     dateSubmit: String,
     authorCreate: String,
     path: String,
