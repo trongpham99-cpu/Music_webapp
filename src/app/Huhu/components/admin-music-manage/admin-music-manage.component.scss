@@ -30,7 +30,8 @@ td {
     padding-top: 5%;
 }
 
-p, mat-icon {
+p,
+mat-icon {
     color: white;
 }
 
@@ -112,3 +113,7 @@ p, mat-icon {
 //     margin-bottom: 30px;
 //     border: 2px solid;
 // }
+.layout {
+    display: flex;
+    justify-content: space-between;
+}

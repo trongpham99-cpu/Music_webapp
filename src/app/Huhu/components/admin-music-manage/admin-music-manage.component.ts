@@ -6,12 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-music-manage.component.scss']
 })
 export class AdminMusicManageComponent implements OnInit {
-
+  displayUpLoad: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  upload(){
+    this.displayUpLoad = true;
+  }
   
 
 }
