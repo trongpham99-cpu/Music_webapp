@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-
+  displayBasic: boolean = false;
+    value3= String;
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  login() {
+    this.displayBasic = true;
+  }
+
 
 }

@@ -1,49 +1,63 @@
-.content{
-    display: grid;
-    grid-template-rows: minmax(150px, 25%) 1fr;
-    width: 70em;
-    height: auto;
-    border: 1px solid;
-    margin-top: 5%;
-    margin-left: 12rem;
-    margin-bottom: 25%;
-    margin-right: 15%;
-    background-color: #202020;
-}
-
-
-table{
+//.content{
+// display: grid;
+// grid-template-columns: minmax(550px, 45%) 1fr;
+// // width: 70em;
+// // height: auto;
+// // border: 1px solid;
+// // margin-top: 5%;
+// // margin-left: 12rem;
+// // margin-bottom: 25%;
+// // margin-right: 15%;
+//  background-color: #202020;
+//}
+table {
     width: 100%;
     border: 1px solid;
     background-color: #202020;
 }
-th{
+
+th {
     text-align: start;
     padding-left: 2%;
     font-size: large;
-    color:white;
+    color: white;
 }
-table,td{
+
+table,
+td {
     text-align: start;
     padding-left: 2%;
     padding-top: 5%;
-    color:white;
 }
-#count{
+
+p, mat-icon {
+    color: white;
+}
+
+#count {
     display: flex;
     flex-direction: row;
     padding-top: 25%;
- }
+}
 
- .add-button{
+.add-button {
     // position: absolute;
     position: fixed;
-    bottom: 5%;
-    right: 5%
- }
- .edit{
+    bottom: 15%;
+    right: 5%;
+    background-color: white;
+}
+
+.edit {
     padding-right: 30px;
- }
+}
+
+@media screen and (max-device-width:1000px) and (orientation: landscape) {
+    .content {
+        width: 100%;
+    }
+}
+
 // #artist{
 //     font-size: 30px;
 // }
@@ -53,8 +67,6 @@ table,td{
 // .name{
 //     padding-left: 5%;
 //     margin-top: 3%;
-    
-    
 // }
 // .artist{
 //     padding-left: 15%;
@@ -65,7 +77,6 @@ table,td{
 //     padding-right: 10%;
 //     margin-top: 3%;
 // }
-
 // .info{
 //     display: flex;
 //     flex-direction: row;
@@ -89,7 +100,6 @@ table,td{
 //     // flex-direction: column;
 //     padding-left: 13%;
 //     padding-bottom: 15%;
- 
 // }
 // .edit{
 //     // display:flex;
@@ -102,6 +112,3 @@ table,td{
 //     margin-bottom: 30px;
 //     border: 2px solid;
 // }
-
-
-

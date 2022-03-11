@@ -1,38 +1,55 @@
-.container{
+.container {
     background-color: #202020;
-    padding: 20px;
+    padding: 0% 5% 0% 5%;
+    width: 100%;
+    height: 100%;
 }
-.layout{
+
+.layout {
     display: flex;
-    width: 1104px;
+    width: 100%;
 }
 
-.image{
-    width: 399px;
-    height: 397px;
+.image {
+    width: 20%;
+    height: 20%;
 }
 
-.name{
+.name {
+    display: flex;
+    // color: white;
+    font-size: larger;
+}
+
+.name2 {
+    margin-left: 17%;
+}
+
+.description {
     display: flex;
     // color: white;
 }
-.name2{
-    margin-left: 90px;
-}
-.description{
-    display: flex;
-    // color: white;
-}
-.singer{
+
+.singer {
     display: flex;
     margin-left: 15px;
-    
 }
-.singer_name{
+
+.singer_name {
     display: flex;
     margin-left: 40px;
 }
-.singer_image{
+
+.singer_image {
     width: 143px;
     height: 143px;
+}
+
+.suggestion {
+    // margin-top: 0%;
+}
+
+.song {
+    width: 100%;
+    height: auto;
 }

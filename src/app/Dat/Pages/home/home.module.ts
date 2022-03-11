@@ -6,7 +6,6 @@ import { HomeComponent } from './home.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 
-
 @NgModule({
   declarations: [
     HomeComponent,
