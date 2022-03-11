@@ -6,9 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'primeng/api';
 
+import { ThanhtoanComponent } from './Huy/components/thanhtoan/thanhtoan.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+   
+    ThanhtoanComponent,
   ],
   imports: [
     BrowserAnimationsModule,
