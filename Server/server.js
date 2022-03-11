@@ -9,10 +9,12 @@ server.use(bodyParser.json());
 const exampleRouter = require('./routers/example.router');
 const userRouter = require('./routers/user.router');
 const audioRouter = require("./routers/audio.js"); 
+const artistRouter = require("./routers/artist.js");
 
 server.use("/user",userRouter);
 server.use("/api", exampleRouter);
 server.use("/audio", audioRouter);
+server.use("/artist", artistRouter);
 
 server.use((req, res, next)=>{
     next(createError.NotFound(`This route does not exits`))
