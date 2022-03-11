@@ -1,6 +1,7 @@
+import { Artist } from "./artist.model"
 export interface Audio{
     songName: string,
-    authorId: string,
+    authorId: Artist,
     dateSubmit: string,
     authorCreate: string,
     path: string,

@@ -4,7 +4,7 @@ const artistModel = require("../schemas/artist.schema.js");
 
 router.get('/getAll', async (request, response)=> {
     try{
-        let artist = await artistModel.find();
+        let artist = await artistModel.find().populate("songs");
         response.status(200).send(artist);
     }catch(err){
         response.status(500).send(err);
@@ -16,6 +16,11 @@ router.get('/getDetail/:docId', async (request,response) => {
     try {
         let params = request.params.docId;
         let artist = await artistModel.findById(params).populate("songs");
+        if(artist == null){
+            return response.status(404).send({
+                message: "Wrong id"
+            })
+        }
         response.status(200).send(artist);
     } catch (error) {
         response.status(500).send(err);
