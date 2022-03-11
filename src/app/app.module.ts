@@ -7,9 +7,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'primeng/api';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ThanhtoanComponent } from './Huy/components/thanhtoan/thanhtoan.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+   
+    ThanhtoanComponent,
   ],
   imports: [
     BrowserAnimationsModule,
