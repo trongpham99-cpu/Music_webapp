@@ -7,7 +7,7 @@ const audioModel = require("../schemas/audio.schema.js");
 
 router.get("/getAll", async (request, response) => {
     try{
-        let audio = await audioModel.find();
+        let audio = await audioModel.find().populate("authorId");
         response.send(audio);
     }catch(err){
         console.log(err);
@@ -32,10 +32,13 @@ router.post("/add", (request,response) => {
         // console.log(data)
         let temp = new audioModel(data);
         temp.save((err, value) => {
-            response.status(200).json({
-                message: "Thêm thành công",
-                data: value,
-            });
+            audioModel.findByIdAndUpdate(docId,data,(err,value,res)=>{
+                console.log(err,value,res);
+                response.status(200).json({
+                    message: "sửa thành công",
+                    // data:value,
+                });
+            })
         })
         
     }catch(err){
@@ -49,13 +52,7 @@ router.put("/updateData", (request,response) => {
         let data = body.data;
         let docId = body.docId
         console.log(data)
-        audioModel.findByIdAndUpdate(docId,data,(err,value,res)=>{
-            console.log(err,value,res);
-            response.status(200).json({
-                message: "sửa thành công",
-                // data:value,
-            });
-        })
+        
     }catch(err){
         response.status(404).json({ message: err.toString() })
     }
