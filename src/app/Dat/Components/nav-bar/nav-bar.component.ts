@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
   displayBasic: boolean = false;
+  displayRegister:boolean = false;
     value3= String;
   constructor() { }
 
@@ -14,8 +15,13 @@ export class NavBarComponent implements OnInit {
   }
 
   login() {
+    this.displayRegister = false;
     this.displayBasic = true;
   }
 
+  registration(){
+    this.displayBasic = false;
+    this.displayRegister = true;
+  }
 
 }

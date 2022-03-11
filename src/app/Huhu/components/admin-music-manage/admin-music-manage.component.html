@@ -261,11 +261,45 @@
                 <mat-icon style="padding-left:10px;">delete</mat-icon>
             </td>
         </tr>
-
-       
     </table>
 </div>
 
 <div class="add-button">
-    <button style="font-size: 40px;border-radius: 10px;background-color: white;" mat-flat-button><mat-icon style="color: black;">file_upload</mat-icon></button>
+    <button style="font-size: 40px;border-radius: 10px;background-color: white;" mat-flat-button><mat-icon style="color: black;" (click)="upload()" >file_upload</mat-icon></button>
 </div>
+
+
+<p-dialog header="Tải nhạc lên" [(visible)]="displayUpLoad" [style]="{width: '50vw'}">
+    <p>Đóng góp thêm phần đa dạng cho âm nhạc</p>
+    <div class="">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="margin-left: 10%;" class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-angle-right"></i></span>
+                    <input type="text" pInputText placeholder="Tên bài hát">
+                </div>
+            </div>
+            <div style="margin-right: 10%; float: right; " class="col-12 md:col-4 ">
+                <div class="p-inputgroup ">
+                    <span class="p-inputgroup-addon "><i class="pi pi-angle-right "></i></span>
+                    <input type="text " pInputText placeholder="Tên ca sĩ ">
+                </div>
+            </div>
+        </div>
+        <div style=" margin-top: 3%; margin-left: 9%; display: flex;">
+            <div>
+                <h3 style="font-size: small; margin-left: 10%; margin-top: 2%;">Tải file nhạc lên</h3>
+                <div style="margin-top: -2%; margin-left:10%;">
+                    <input type="file">
+                </div>
+            </div>
+            <div style="margin-left: 17%;">
+                <h3 style="font-size: small; margin-left: 10%; margin-top: 2%;">Tải file hình ảnh lên</h3>
+                <div style="margin-top: -2%; margin-left:10%;">
+                    <input type="file">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</p-dialog>
