@@ -3,7 +3,7 @@ const userModel = require('../schemas/user.schema');
 const app = require("express");
 const createError = require('http-errors');
 const router = app.Router();
-const {signAccessToken} = require('../configs/jwt_service');
+const {signAccessToken,verifyAccessToken} = require('../configs/jwt_service');
 const { userValidation } = require('../configs/validation');
 
 
@@ -31,6 +31,29 @@ router.get("/profile/:id", async (req, res) => {
         console.log(error);
     }
 })
+
+
+router.get('/getList', verifyAccessToken, (req,res,next)=>{
+    try {
+        const listUser = 
+        [
+            {
+                email: 'abc@gmail.com'
+            },
+            {
+                email: 'def@gmail.com'
+            }
+        ]
+        res.status(200).send(listUser);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
+
+
+
+
+
 
 
 // router.post("/register", async (req,res)=>{
@@ -127,12 +150,14 @@ router.post("/login", async (req, res) => {
         if (err && err.error != undefined) {
 
             return res.status(400).send({
-                error: err.error
+                message: err.error
             });
         }
         // console.log(_email,password);
         if (!_email || !_password) {
-            throw createError.BadGateway();
+            return res.status(400).send({
+                message: "email or password cannot be empty!"
+            })
         }
 
         const user = await userModel.findOne({email: _email});
@@ -152,11 +177,10 @@ router.post("/login", async (req, res) => {
         }
 
         const accessToken= await signAccessToken(user._id);
-        res.json(accessToken);
 
         res.status(200).send({
             message: "Login successful!",
-            data: user
+            token: accessToken
         })
 
     } catch (error) {
