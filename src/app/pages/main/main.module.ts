@@ -12,6 +12,7 @@ import { MaterialModule } from '../../shared/material.module'
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
+import { BodyLibraryComponent } from '../../Dat/Components/body-library/body-library.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {DropdownModule} from 'primeng/dropdown';
     MusicBarComponent,
     BodyComponent,
     KindOfMusicComponent,
+    BodyLibraryComponent
   ],
   imports: [
     DropdownModule,
