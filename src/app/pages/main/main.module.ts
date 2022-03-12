@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {ReactiveFormsModule} from '@angular/forms'
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { BodyComponent } from 'src/app/Dat/Components/body/body.component';
@@ -27,7 +27,8 @@ import {ButtonModule} from 'primeng/button';
     DialogModule,
     CommonModule,
     MainRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class MainModule { }

@@ -8,7 +8,7 @@ const {
 } = require("../configs/jwt_service");
 const { userValidation } = require("../configs/validation");
 
-router.get("/profile", async (req, res) => {
+router.get("/profile", async (req, res) => { // 127.0.0.1:3000/user/profile
   try {
     let user = await userModel.find();
     res.status(200).send(user);
@@ -74,7 +74,7 @@ router.get("/getList", verifyAccessToken, async (req, res, next) => {
 
 router.post("/register", async (req, res) => {
   try {
-    let body = req.body;
+    let _account = req.body.account;
     let _email = req.body.email;
     let _password = req.body.password;
     let err = userValidation(req.body);
@@ -83,10 +83,9 @@ router.post("/register", async (req, res) => {
       return console.log(err.error);
     }
     // console.log(_email,password);
-    if (!_email || !_password) {
+    if (!_email || !_password || _account) {
       throw createError.BadGateway();
     }
-
     const isExits = await userModel.findOne({ email: _email });
     if (isExits) {
       return res.send(`${_email} already taken!`);
@@ -94,7 +93,7 @@ router.post("/register", async (req, res) => {
       let _user = {
         ...body,
         displayName: "",
-        account: "",
+        account: _account,
         password: _password,
         birthday: "",
         phonenumber: "",
