@@ -1,0 +1,19 @@
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+GET http://localhost:3000
+###
+POST http://{{host}}/user/login HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "email": "huhu111@gmail.com",
+    "password": "1234567899"
+}
+###
+GET http://{{host}}/user/getList
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MjJiMGVjNTg4ZWRkMGMxM2YwYjAzNjkiLCJpYXQiOjE2NDcwNjE0MjksImV4cCI6MTY0NzA2NTAyOX0.hVhLo-FS2kco5UZDEE2FQCYAyZP2w5n7IlquYgWi3VQ
+###
+GET http://{{host}}/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjAyODRjM2ZkODI2MWRhODBhOWYwMmUiLCJpYXQiOjE2NDQzNzM5NDAsImV4cCI6MTY0NDM3NzU0MH0.9aAVSFGkToZ1pX65n7ArM19NCXRGJWQSO6q93J0OrGg
