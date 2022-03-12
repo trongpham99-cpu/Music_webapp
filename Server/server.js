@@ -5,10 +5,11 @@ const createError = require('http-errors')
 const server = express()
 server.use(cors());
 server.use(bodyParser.json());
+server.use(express.json());
 
 const exampleRouter = require('./routers/example.router');
 const userRouter = require('./routers/user.router');
-const audioRouter = require("./routers/audio.js"); 
+const audioRouter = require("./routers/audio.js");
 const artistRouter = require("./routers/artist.js");
 
 server.use("/user",userRouter);
