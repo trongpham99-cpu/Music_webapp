@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import {Audio} from '../../../models/audio.model.js'
 import { AuthService } from 'src/app/services/auth.service';
 import {ReactiveFormsModule,FormControl,FormGroup} from '@angular/forms'
 @Component({
@@ -11,7 +12,6 @@ export class NavBarComponent implements OnInit {
   displayBasic: boolean = false;
   displayRegister:boolean = false;
     value3= String;
-
     registerForm = new FormGroup({
       password: new FormControl(''),
       email: new FormControl('')
@@ -23,6 +23,14 @@ export class NavBarComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+  }
+
+  public songName! :string;
+
+  public getSearch(){
+    this.audioSV.getSearch(this.songName).subscribe((res:any)=>{
+      this.audioSV.audios = res;
+    })
   }
 
   login() {

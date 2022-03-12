@@ -8,17 +8,22 @@ import {Audio} from '../../../models/audio.model'
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent implements OnInit {
-  public audios:Array<Audio> = [] ;
   constructor(public audioSV: AudioService,  ) {
     // this.get("audio/getAll")
    }
 
   ngOnInit(): void {
     this.audioSV.getPerfectSong('audio/getAll').subscribe((res: any)=>{
-      this.audios = res;
-      console.log(this.audios)
+      this.audioSV.audios = res;
     })
   }
+  
+  public getDetail(audioId: string){
+    this.audioSV.getDetail(audioId).subscribe((res:any)=>{
+      console.log(res);
+    });
+  }
+  
   // public async get(apiPath:String){
   //   let result;
   //   await (await this.audioSV.getPerfectSong(apiPath)).subscribe(value=>console.log(value))

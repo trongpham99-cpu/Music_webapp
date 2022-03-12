@@ -1,9 +1,9 @@
 const app = require("express");
-const { async } = require("rxjs");
 const router = app.Router();
 
 const audioModel = require("../schemas/audio.schema.js");
 const artistModel = require("../schemas/artist.schema.js");
+const { async } = require("rxjs");
 
 router.get("/getAll", async (request, response) => {
   try {
@@ -23,6 +23,18 @@ router.get("/getDetail/:docId", async (request, response) => {
     response.status(500).send(err);
   }
 });
+
+router.get("/getSearch", async (request,response,next) => {
+  try {
+    let searchfield = request.query.songName;
+    await audioModel.find({songName:{$regex: searchfield,$options: '$i'}}).populate("authorId")
+    .then(data=>{
+      response.status(201).send(data)
+    })
+  } catch (err) {
+    response.status(500).send(err);
+  }
+})
 
 router.post("/add", (request, response) => {
   try {
