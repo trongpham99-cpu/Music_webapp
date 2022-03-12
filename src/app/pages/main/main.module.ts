@@ -11,6 +11,7 @@ import { SideBarComponent } from 'src/app/Dat/Components/side-bar/side-bar.compo
 import { MaterialModule } from '../../shared/material.module'
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {ButtonModule} from 'primeng/button';
     KindOfMusicComponent,
   ],
   imports: [
+    DropdownModule,
     ButtonModule,
     DialogModule,
     CommonModule,
