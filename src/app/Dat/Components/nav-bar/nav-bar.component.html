@@ -55,8 +55,9 @@
 
 </p-dialog>
 
-<p-dialog header="Đăng ký" [(visible)]="displayRegister" [style]="{width: '40vw'}">
-    <div>
+<p-dialog header="Đăng ký" [(visible)]="displayRegister" [style]="{width: '40vw'}" >
+    <div >
+        <form [formGroup]="registerForm">
         <p style="font-size: 60%; margin-left: 22%; ">Tối thiểu 8-24 ký tự</p>
         <div style=" margin-left: 22%; margin-top: -2%;" class="grid p-fluid">
             <div class="p-inputgroup">
@@ -69,24 +70,26 @@
         <div style="margin-top: -2%; margin-left: 22%;" class="grid p-fluid">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-                <input style=" width:60%" type="text" pInputText placeholder="Mật khẩu">
+                <input style=" width:60%" type="text" pInputText placeholder="Mật khẩu" formControlName="password">
             </div>
         </div>
         <p style="font-size: 60%; margin-left: 22%; margin-top: 1em; ">Tối thiểu 8-16 ký tự</p>
 
-        <div style=" margin-left: 22%; margin-top: -2%;" class="grid p-fluid">
+        <!-- <div style=" margin-left: 22%; margin-top: -2%;" class="grid p-fluid">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
                 <input style=" width:60%" type="text" pInputText placeholder="Xác nhận mật khẩu">
             </div>
-        </div>
+        </div> -->
         <div style=" margin-left: 22%; margin-top: 1.9em;">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-send"></i></span>
-                <input style=" width:60%" type="text" pInputText placeholder="Email">
+                <input style=" width:60%" type="text" pInputText placeholder="Email" formControlName="email">
             </div>
         </div>
-        <button style=" width: 55.5%; margin-left: 22%; margin-top: 10%; background-color: #FF5500" pButton pRipple type="button" label="Đăng ký"></button>
+        <p *ngIf="err" style="color: red" >{{err}}</p>
+        <button style=" width: 55.5%; margin-left: 22%; margin-top: 10%; background-color: #FF5500" pButton pRipple type="button" label="Đăng ký" (click)="onRegister()" ></button>
+    </form>
     </div>
     <p class="font-hover" style="font-size: medium; margin-top: 1%; margin-left: 60%; font-style: italic; font-weight: bold; margin-top: 1.5em;" (click)="login()">Bạn đã có tài khoản?</p>
 </p-dialog>
