@@ -288,18 +288,50 @@
         </div>
         <div style=" margin-top: 3%; margin-left: 9%; display: flex;">
             <div>
-                <h3 style="font-size: small; margin-left: 10%; margin-top: 2%;">Tải file nhạc lên</h3>
+                <h3 style="font-size: small; margin-left: 10%; margin-top: 2%;">Tải file nhạc lên:</h3>
                 <div style="margin-top: -2%; margin-left:10%;">
                     <input type="file">
                 </div>
             </div>
             <div style="margin-left: 17%;">
-                <h3 style="font-size: small; margin-left: 10%; margin-top: 2%;">Tải file hình ảnh lên</h3>
+                <h3 style="font-size: small; margin-left: 10%; margin-top: 2%;">Tải file hình ảnh lên:</h3>
                 <div style="margin-top: -2%; margin-left:10%;">
                     <input type="file">
                 </div>
             </div>
         </div>
+        <div style="display: flex; margin-top: 5%;">
+            <div class="layout">
+                <h3 style="margin-left: 36%;">Thể loại</h3>
+                <div class="custom-select" style="width:200px; margin-left: 12%; margin-top: -5%;">
+                    <select>
+                      <option value="0">Chọn thể loại:</option>
+                      <option value="1">Nhạc Việt</option>
+                      <option value="2">Nhạc Trẻ</option>
+                      <option value="3">Nhạc Rap</option>
+                      <option value="4">Nhạc Rock</option>
+                      <option value="5">Nhạc Trữ tình</option>
+                      <option value="6">Nhạc US</option>
+                      <option value="7">Nhạc UK</option>
+                      <option value="8">Nhạc K-Pop</option>
+                    </select>
+                </div>
+            </div>
+            <div style="margin-left:10%; margin-top: 4%;">
+
+                <label class="container" style="font-size: 100%;">Chế độ công khai (tất cả mọi người đều thấy)
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                      </label>
+                <label class="container" style="font-size: 100%;">Chế độ riêng tư (không ai thấy ngoài bạn)
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+        </div>
+        <button style="margin-top: 8%; margin-left: 32%; width: 40%; " mat-raised-button>
+            <mat-icon>file_upload</mat-icon>
+        </button>
 
     </div>
 </p-dialog>

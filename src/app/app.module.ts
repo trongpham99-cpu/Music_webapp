@@ -12,8 +12,7 @@ import { ThanhtoanComponent } from './Huy/components/thanhtoan/thanhtoan.compone
 @NgModule({
   declarations: [
     AppComponent,
-   
-    ThanhtoanComponent,
+    ThanhtoanComponent
   ],
   imports: [
     BrowserAnimationsModule,

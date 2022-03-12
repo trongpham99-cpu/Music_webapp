@@ -1,7 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AudioService } from 'src/app/services/audio.service';
 import {Audio} from '../../../models/audio.model.js'
-
+import { AuthService } from 'src/app/services/auth.service';
+import {ReactiveFormsModule,FormControl,FormGroup} from '@angular/forms'
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -11,8 +12,15 @@ export class NavBarComponent implements OnInit {
   displayBasic: boolean = false;
   displayRegister:boolean = false;
     value3= String;
-  
-  constructor(public audioSV: AudioService) { }
+    registerForm = new FormGroup({
+      password: new FormControl(''),
+      email: new FormControl('')
+    });
+
+  constructor(
+    public http:HttpClient,
+    public auth:AuthService
+    ) { }
 
   ngOnInit(): void {
   }
@@ -33,6 +41,16 @@ export class NavBarComponent implements OnInit {
   registration(){
     this.displayBasic = false;
     this.displayRegister = true;
+  }
+  public err!: string;
+  public onRegister(){
+    this.auth.userRegister(this.registerForm.value).subscribe((res)=>{
+      console.log(res);
+    },(err)=>{
+      console.log(err)
+      this.err = err.error.text
+      console.log(this.err)
+    })
   }
 
 }
