@@ -11,7 +11,7 @@ import { SideBarComponent } from 'src/app/Dat/Components/side-bar/side-bar.compo
 import { MaterialModule } from '../../shared/material.module'
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import {ButtonModule} from 'primeng/button';
     DialogModule,
     CommonModule,
     MainRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ]
 })
 export class MainModule { }

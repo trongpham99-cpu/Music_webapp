@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AudioService } from 'src/app/services/audio.service';
+import {Audio} from '../../../models/audio.model.js'
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,9 +11,18 @@ export class NavBarComponent implements OnInit {
   displayBasic: boolean = false;
   displayRegister:boolean = false;
     value3= String;
-  constructor() { }
+  
+  constructor(public audioSV: AudioService) { }
 
   ngOnInit(): void {
+  }
+
+  public songName! :string;
+
+  public getSearch(){
+    this.audioSV.getSearch(this.songName).subscribe((res:any)=>{
+      this.audioSV.audios = res;
+    })
   }
 
   login() {

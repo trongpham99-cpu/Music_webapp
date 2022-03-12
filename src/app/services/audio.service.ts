@@ -2,15 +2,26 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
+import { Audio } from './../models/audio.model';
 @Injectable({
   providedIn: 'root'
 })
 export class AudioService {
 
   constructor(public http: HttpClient) { }
-  public getPerfectSong(apiPath:String){
-  return this.http.get(environment.enpoint+apiPath);
+
+  public audios: Array<Audio> = [];
+
+  public getPerfectSong(apiPath: string){
+    return this.http.get(environment.enpoint+apiPath);
+  }
+
+  public getSearch(songName: string){
+    return this.http.get(environment.enpoint+ `audio/getSearch?songName=${songName}`);
+  }
+
+  public getDetail(audioId: string){
+    return this.http.get(environment.enpoint+ `audio/getDetail/${audioId}`)
   }
   // public async postData(songName: String, 
   //   authorId: string, 

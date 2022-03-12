@@ -72,8 +72,8 @@
 </div> -->
 
 <div class="product-items" >
-    <div class="product" *ngFor="let audio of audios" > 
-        <div>
+    <div class="product" *ngFor="let audio of audioSV.audios"  > 
+        <div (click) = "getDetail(audio._id)">
             <div class="product-content">
                 <div class="product-img">
                     <img [src]="audio.photoURL"

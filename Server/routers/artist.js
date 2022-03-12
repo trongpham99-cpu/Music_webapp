@@ -28,6 +28,18 @@ router.get('/getDetail/:docId', async (request,response) => {
     
 })
 
+router.get("/getSearch", async (request,response,next) => {
+    try {
+      let searchfield = request.query.artistName;
+      await artistModel.find({artistName:{$regex: searchfield,$options: '$i'}}).populate("authorId")
+      .then(data=>{
+        response.status(201).send(data)
+      })
+    } catch (err) {
+      response.status(500).send(err);
+    }
+  })
+
 router.post("/add", (request,response) => {
     try{
         let data = request.body.data;
