@@ -7,15 +7,6 @@ const { signAccessToken } = require("../configs/jwt_service");
 const { userValidation } = require("../configs/validation");
 const audioModel = require("../schemas/audio.schema.js");
 
-router.get("/profile", async (req, res) => { // 127.0.0.1:3000/user/profile
-  try {
-    let user = await userModel.find();
-    res.status(200).send(user);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 router.get("/profile/:id", async (req, res) => {
   try {
     let _id = req.params.id;
@@ -30,15 +21,11 @@ router.get("/profile/:id", async (req, res) => {
     console.log(error);
   }
 });
-
-router.get("/getList", verifyAccessToken, async (req, res, next) => {
+router.get("/allProfiles", verifyAccessToken, async (req, res, next) => {
   try {
     const payLoad = req.payLoad;
-    console.log(payLoad);
 
     let user = await userModel.findById(payLoad.userID);
-
-    console.log(user);
 
     if (user.Role == "admin") {
       let users = await userModel.find();
@@ -52,23 +39,6 @@ router.get("/getList", verifyAccessToken, async (req, res, next) => {
     res.status(500).send(error);
   }
 });
-
-// router.post("/register", async (req,res)=>{
-//     try {
-//         let body = req.body;
-
-//         let user = new userModel(body)
-//         user.save().then((value)=>{
-//             res.status(201).send(
-//                 {message:"Successful",
-//                 body: user
-//             })
-//         })
-//     } catch (error) {
-//         console.log(error);
-//     }
-// })
-
 router.post("/register", async (req, res) => {
   try {
     let _account = req.body.account;
@@ -129,54 +99,6 @@ router.post("/register", async (req, res) => {
     console.log(error);
   }
 });
-
-router.post("/login", async (req, res) => {
-  try {
-    let body = req.body;
-    let _email = req.body.email;
-    let _password = req.body.password;
-
-    let err = userValidation(req.body);
-
-    if (err && err.error != undefined) {
-      return res.status(400).send({
-        error: err.error,
-      });
-    }
-    // console.log(_email,password);
-    if (!_email || !_password) {
-      throw createError.BadGateway();
-    }
-
-    const user = await userModel.findOne({ email: _email });
-
-    if (!user) {
-      return res.status(404).send({
-        message: "User not registered!",
-      });
-    }
-
-    let isValid = await user.isCheckPassword(_password);
-
-    if (!isValid) {
-      return res.status(400).send({
-        message: `Password is incorrect!`,
-      });
-    }
-
-    const accessToken = await signAccessToken(user._id);
-    res.json(accessToken);
-
-    res.status(200).send({
-      message: "Login successful!",
-      data: user,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-//liên kết id
 router.put("/addLibrary", async (req, res) => {
   //id bai nhac
   let audioId = req.body.audioId;
@@ -197,7 +119,6 @@ router.put("/addLibrary", async (req, res) => {
   );
   //return
 });
-
 router.put("/likeSong", async (req, res) => {
   //id bai nhac
   let audioId = req.body.audioId;
@@ -220,7 +141,6 @@ router.put("/likeSong", async (req, res) => {
     .populate("audioId");
   //return
 });
-
 router.put("/addFollow", async (req, res) => {
   //id bai nhac
   let artistId = req.body.artistId;
@@ -263,59 +183,8 @@ router.put("/addFollow", async (req, res) => {
 
   //return
 });
-
-    if (!_email || !_password || _account) {
-      throw createError.BadGateway();
-    }
-    const isExits = await userModel.findOne({ email: _email });
-    if (isExits) {
-      return res.send(`${_email} already taken!`);
-    } else {
-      let _user = {
-        ...body,
-        displayName: "",
-        account: _account,
-        password: _password,
-        birthday: "",
-        phonenumber: "",
-        email: _email,
-        country: "",
-        photo: "",
-        Gender: "",
-        createDate: "",
-        musicType: "",
-        updateDate: "",
-        Role: "",
-        library: [],
-        likeSong: [],
-        Follow: [],
-      };
-      let user = new userModel(_user);
-      user.save().then((value) => {
-        res.status(201).send({
-          message: "Successful",
-          data: value,
-        });
-      });
-    }
-
-    // const isCreate = await userModel.create({
-    //     email: _email,
-    //     password: _password
-    // })
-
-    // return res.status(201).send(
-    //     {message:"Successful",
-    //     body: user
-    //      })
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 router.post("/login", async (req, res) => {
   try {
-    let body = req.body;
     let _email = req.body.email;
     let _password = req.body.password;
 
@@ -326,7 +195,6 @@ router.post("/login", async (req, res) => {
         message: err.error,
       });
     }
-    // console.log(_email,password);
     if (!_email || !_password) {
       return res.status(400).send({
         message: "email or password cannot be empty!",
