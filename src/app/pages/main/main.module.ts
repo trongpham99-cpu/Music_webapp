@@ -33,7 +33,7 @@ import { BodyLibraryComponent } from '../../Dat/Components/body-library/body-lib
     CommonModule,
     MainRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
     ReactiveFormsModule
   ]
 })

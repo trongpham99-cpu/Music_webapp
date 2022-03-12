@@ -3,10 +3,9 @@ const app = require("express");
 const createError = require("http-errors");
 const router = app.Router();
 
-const { signAccessToken } = require("../configs/jwt_service");
+const { signAccessToken, verifyAccessToken } = require("../configs/jwt_service");
 const { userValidation } = require("../configs/validation");
 const audioModel = require("../schemas/audio.schema.js");
-
 router.get("/profile/:id", async (req, res) => {
   try {
     let _id = req.params.id;

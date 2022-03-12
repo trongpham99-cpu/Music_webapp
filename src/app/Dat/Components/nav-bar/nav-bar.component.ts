@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {Audio} from '../../../models/audio.model.js'
 import { AuthService } from 'src/app/services/auth.service';
 import {ReactiveFormsModule,FormControl,FormGroup} from '@angular/forms'
+import { AudioService } from '../../../services/audio.service';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -19,7 +20,8 @@ export class NavBarComponent implements OnInit {
 
   constructor(
     public http:HttpClient,
-    public auth:AuthService
+    public auth:AuthService,
+    public audioSV:AudioService
     ) { }
 
   ngOnInit(): void {
