@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminMusicManageComponent implements OnInit {
   displayUpLoad: boolean = false;
+
+  
   constructor() { }
 
   ngOnInit(): void {
