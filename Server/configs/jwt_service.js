@@ -18,17 +18,14 @@ const signAccessToken = async (userID)=>{
 }
 
 const verifyAccessToken = (req,res,next)=>{
-    console.log(req.header['authorization']);
-    if (!req.header['authorization']){
+    const authHeader = req.headers['authorization'];
+    if (!authHeader){
         return res.status(403).send({
             message: `Unauthorized`
         })
     }
-    const authHeader = req.header['authorization'];
     const bearerToken = authHeader.split(' ');
     const token = bearerToken[1];
-
-    console.log(token);
 
     JWT.verify(token, key.ACCESS_TOKEN_SECRET, (err,payLoad)=>{
         if (err){
