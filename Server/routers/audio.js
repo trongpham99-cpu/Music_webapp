@@ -1,9 +1,30 @@
 const app = require("express");
 const router = app.Router();
-
+const userModel = require('../schemas/user.schema');
 const audioModel = require("../schemas/audio.schema.js");
 const artistModel = require("../schemas/artist.schema.js");
-const { async } = require("rxjs");
+const { verifyAccessToken } = require('../configs/jwt_service');
+
+router.get("/getMusicForUserVip", verifyAccessToken ,async (req, res)=>{
+  try {
+
+    const payLoad = req.payLoad;
+
+    const _user = await userModel.findById(payLoad.userID);
+
+    if(_user.Role == "user-vip" || _user.Role == "admin"){
+      let audios = await audioModel.find({status: "vip"});
+      return res.status(200).send(audios);
+    }else{
+      return res.status(403).send({
+        message: `Bạn không có quyền truy cập vào đường dân này!`
+      })
+    }
+
+  } catch (error) {
+    res.status(500).send(error);
+  }
+})
 
 router.get("/getAll", async (request, response) => {
   try {
@@ -72,23 +93,34 @@ router.put("/updateData", (request, response) => {
   }
 });
 
-router.delete("/deleteAll", async (request, response) => {
+router.delete("/deleteAll", verifyAccessToken , async (request, response) => {
   try {
+
+    const payLoad = request.payLoad;
     let docId = request.body.docId;
 
-    let result = await audioModel.findByIdAndDelete(docId);
-    console.log(result);
-    if (result == null) {
-      response.status(400).send({
-        message: `Tìm không được id ${docId} này!!!`,
-      });
-    } else {
-      response.status(200).send({
-        message: "Xoa thanh cong!!!",
-      });
+    const _user = await userModel.findById(payLoad.userID);
+
+    if(_user.Role == "admin"){
+      let result = await audioModel.findByIdAndDelete(docId);
+      if (result == null) {
+        return response.status(400).send({
+          message: `Tìm không được id ${docId} này!!!`,
+        });
+      } else {
+        return response.status(200).send({
+          message: "Xoa thanh cong!!!",
+        });
+      }
+    }else{
+      return response.status(403).send({
+        message: "Bạn không có quyền xóa bài này!"
+      })
     }
+
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    response.status(500).send(error);
   }
 });
 

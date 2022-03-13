@@ -3,9 +3,13 @@ const app = require("express");
 const createError = require("http-errors");
 const router = app.Router();
 
-const { signAccessToken, verifyAccessToken } = require("../configs/jwt_service");
+const {
+  signAccessToken,
+  verifyAccessToken,
+} = require("../configs/jwt_service");
 const { userValidation } = require("../configs/validation");
 const audioModel = require("../schemas/audio.schema.js");
+
 router.get("/profile/:id", async (req, res) => {
   try {
     let _id = req.params.id;
@@ -29,10 +33,10 @@ router.get("/allProfiles", verifyAccessToken, async (req, res, next) => {
     if (user.Role == "admin") {
       let users = await userModel.find();
       res.status(200).send(users);
-    }else{
+    } else {
       res.status(400).send({
-        message: "Bạn không thể truy cập vào!"
-      })
+        message: "Bạn không thể truy cập vào!",
+      });
     }
   } catch (error) {
     res.status(500).send(error);
@@ -40,9 +44,10 @@ router.get("/allProfiles", verifyAccessToken, async (req, res, next) => {
 });
 router.post("/register", async (req, res) => {
   try {
-    let _account = req.body.account;
+
     let _email = req.body.email;
     let _password = req.body.password;
+
     let err = userValidation(req.body);
 
     if (err && err.error != undefined) {
@@ -71,7 +76,7 @@ router.post("/register", async (req, res) => {
         createDate: "",
         musicType: "",
         updateDate: "",
-        Role: "",
+        Role: "user",
         library: [],
         likeSong: [],
         Follow: [],
@@ -140,47 +145,96 @@ router.put("/likeSong", async (req, res) => {
     .populate("audioId");
   //return
 });
-router.put("/addFollow", async (req, res) => {
-  //id bai nhac
-  let artistId = req.body.artistId;
-  //id user
-  let userId = req.body.userId;
-  //check isExits
-  let user = await userModel.findById(userId);
+// router.put("/addFollow", async (req, res) => {
+//   //id bai nhac
+//   let artistId = req.body.artistId;
+//   //id user
+//   let userId = req.body.userId;
+//   //check isExits
+//   let user = await userModel.findById(userId);
 
-  for (let i = 0; i < user.library.length; i++) {
-    if (user.Follow[i] == artistId) {
+//   for (let i = 0; i < user.library.length; i++) {
+//     if (user.Follow[i] == artistId) {
+//       userModel.findByIdAndUpdate(
+//         userId,
+//         {
+//           $pull: { Follow: { $elemMatch: artistId } },
+//         },
+//         (err, success) => {
+//           if (!err) {
+//             return res.status(201).send({
+//               message: `dislike !!!`,
+//               data: success,
+//             });
+//           }
+//         }
+//       );
+//     }
+//   }
+//   userModel.findByIdAndUpdate(
+//     userId,
+//     {
+//       $push: { Follow: artistId },
+//     },
+//     (err, success) => {
+//       return res.status(201).send({
+//         message: `like !!!`,
+//         data: success,
+//       });
+//     }
+//   );
+// });
+
+router.put("/follow", async (req, res) => {
+  try {
+
+    const _artistId = req.body.artistId;
+    const _userId = req.body.userId;
+
+    let _user = await userModel.findById(_userId);
+
+    if (_user.Follow.length === 0) {
       userModel.findByIdAndUpdate(
-        userId,
-        {
-          $pull: { Follow: { $elemMatch: artistId } },
-        },
-        (err, success) => {
-          if (!err) {
-            return res.status(201).send({
-              message: `dislike !!!`,
-              data: success,
-            });
+        _userId,
+        { $push: { Follow: _artistId } },
+        (err, result) => {
+          if (err) {
+            return res.status(400).send(err);
           }
+          return res.status(200).send({ message: `add follow` });
+        }
+      );
+      return;
+    } else {
+      for (let i = 0; i < _user.Follow.length; i++) {
+        if (_user.Follow[i] === _artistId) {
+          const index = _user.Follow.indexOf(_artistId);
+          if (index > -1) {
+            _user.Follow.splice(index, 1);
+          }
+          userModel.findByIdAndUpdate(_userId, _user, (err, result) => {
+            if (err) {
+              return res.status(400).send(err);
+            }
+            return res.status(200).send({ message: `unfollow` });
+          });
+          return;
+        }
+      }
+      userModel.findByIdAndUpdate(
+        _userId,
+        { $push: { Follow: _artistId } },
+        (err, result) => {
+          if (err) {
+            return res.status(400).send(err);
+          }
+          return res.status(200).send({ message: `add more follow` });
         }
       );
     }
+  } catch (error) {
+    res.status(500).send(error);
   }
-
-  userModel.findByIdAndUpdate(
-    userId,
-    {
-      $push: { Follow: artistId },
-    },
-    (err, success) => {
-      return res.status(201).send({
-        message: `like !!!`,
-        data: success,
-      });
-    }
-  );
-
-  //return
 });
 router.post("/login", async (req, res) => {
   try {

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const audioSchema = new mongoose.Schema({
     songName: String,
-    authorId: 
+    authorId:
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "artist"
@@ -16,7 +16,8 @@ const audioSchema = new mongoose.Schema({
     album: String,
     submmitted: Number,
     liked: Number,
-    listened: Number
+    listened: Number,
+    status: String
 })
 
 const audioModel = mongoose.model('audio', audioSchema);
