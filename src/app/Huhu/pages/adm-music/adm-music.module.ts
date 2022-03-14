@@ -7,6 +7,7 @@ import { AdminMusicManageComponent } from '../../../Huhu/components/admin-music-
 import { AdminVideoManageComponent } from '../../../Huhu/components/admin-video-manage/admin-video-manage.component';
 import {DialogModule} from 'primeng/dialog';
 import {TreeSelectModule} from 'primeng/treeselect';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AdmMusicComponent,
@@ -19,6 +20,7 @@ import {TreeSelectModule} from 'primeng/treeselect';
     MaterialModule,
     DialogModule,
     TreeSelectModule,
+    ReactiveFormsModule
   ]
 })
 export class AdmMusicModule { }
