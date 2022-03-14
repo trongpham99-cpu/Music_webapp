@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "perfectsong-3effa": {
+      "hosting": {
+        "PerfectSong": [
+          "perfectsong-3effa"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "perfectsong-3effa"
+  }
+}

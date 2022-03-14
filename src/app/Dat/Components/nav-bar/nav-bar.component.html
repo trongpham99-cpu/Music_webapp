@@ -16,11 +16,11 @@
     <mat-icon (click)="getSearch()" class="icon" aria-hidden="false" aria-label="Example home icon">search</mat-icon>
 
     <span class="example-spacer"></span>
-    <button class="upgrade">Nâng cấp</button>
+    <button style="margin-right: 15px;" class="upgrade">Nâng cấp</button>
     <button (click)="login()" class="login">Đăng nhập</button>
 </mat-toolbar>
 
-<p-dialog header="Đăng nhập" [(visible)]="displayBasic" [style]="{width: '40vw'}">
+<p-dialog [draggable]=false header="Đăng nhập" [(visible)]="displayBasic" [style]="{width: '40vw'}">
     <div>
         <div style=" margin-left: 22%;" class="grid p-fluid">
             <div class="p-inputgroup">
@@ -31,7 +31,7 @@
         <div style="margin-top: 1em; margin-left: 22%;" class="grid p-fluid">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-                <input style=" width:60%" type="text" pInputText placeholder="Mật khẩu">
+                <input style=" width:60%" type="password" pInputText placeholder="Mật khẩu">
             </div>
         </div>
         <p style="font-size: small; margin-top: 1%; margin-left: 60%; font-style: italic;">Quên mật khẩu?</p>
@@ -55,7 +55,7 @@
 
 </p-dialog>
 
-<p-dialog header="Đăng ký" [(visible)]="displayRegister" [style]="{width: '40vw'}" >
+<p-dialog [draggable]=false header="Đăng ký" [(visible)]="displayRegister" [style]="{width: '40vw'}" >
     <div >
         <form [formGroup]="registerForm">
         <p style="font-size: 60%; margin-left: 22%; ">Tối thiểu 8-24 ký tự</p>
@@ -70,17 +70,17 @@
         <div style="margin-top: -2%; margin-left: 22%;" class="grid p-fluid">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-                <input style=" width:60%" type="text" pInputText placeholder="Mật khẩu" formControlName="password">
+                <input style=" width:60%" type="password" pInputText placeholder="Mật khẩu" formControlName="password">
             </div>
         </div>
         <p style="font-size: 60%; margin-left: 22%; margin-top: 1em; ">Tối thiểu 8-16 ký tự</p>
 
-        <!-- <div style=" margin-left: 22%; margin-top: -2%;" class="grid p-fluid">
+        <div style=" margin-left: 22%; margin-top: -2%;" class="grid p-fluid">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-                <input style=" width:60%" type="text" pInputText placeholder="Xác nhận mật khẩu">
+                <input style=" width:60%" type="password" pInputText placeholder="Xác nhận mật khẩu">
             </div>
-        </div> -->
+        </div>
         <div style=" margin-left: 22%; margin-top: 1.9em;">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-send"></i></span>

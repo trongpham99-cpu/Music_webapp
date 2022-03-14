@@ -8,6 +8,11 @@ import { SharedModule } from 'primeng/api';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ThanhtoanComponent } from './Huy/components/thanhtoan/thanhtoan.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,11 @@ import { ThanhtoanComponent } from './Huy/components/thanhtoan/thanhtoan.compone
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ],
   providers: [],
   bootstrap: [AppComponent]
