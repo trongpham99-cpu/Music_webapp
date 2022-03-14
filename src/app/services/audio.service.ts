@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Audio } from './../models/audio.model';
 @Injectable({
@@ -21,7 +20,14 @@ export class AudioService {
   }
 
   public getDetail(audioId: string){
-    return this.http.get(environment.enpoint+ `audio/getDetail/${audioId}`)
+    return this.http.get(environment.enpoint+ `audio/getDetail/${audioId}`);
+  }
+
+  public postData(audioForm: any){
+    const _audio = {
+      data: audioForm
+    }
+    return this.http.post(environment.enpoint+ `audio/add`, _audio);
   }
   // public async postData(songName: String, 
   //   authorId: string, 

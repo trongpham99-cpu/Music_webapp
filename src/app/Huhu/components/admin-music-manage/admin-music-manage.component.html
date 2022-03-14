@@ -271,18 +271,21 @@
 
 <p-dialog header="Tải nhạc lên" [(visible)]="displayUpLoad" [style]="{width: '50vw'}">
     <p>Đóng góp thêm phần đa dạng cho âm nhạc</p>
-    <div class="">
+    <div class="" [formGroup]="audioForm">
         <div style="display: flex; justify-content: space-between;">
             <div style="margin-left: 10%;" class="col-12 md:col-4">
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-angle-right"></i></span>
-                    <input type="text" pInputText placeholder="Tên bài hát">
+                    <input type="text" pInputText placeholder="Tên bài hát" formControlName="songName">
                 </div>
             </div>
             <div style="margin-right: 10%; float: right; " class="col-12 md:col-4 ">
                 <div class="p-inputgroup ">
-                    <span class="p-inputgroup-addon "><i class="pi pi-angle-right "></i></span>
-                    <input type="text " pInputText placeholder="Tên ca sĩ ">
+                    <select formControlName="authorId">
+                        <option value="0">Select artistname:</option>
+                        <option *ngFor="let artist of artists" value="{{artist._id}}">{{artist.artistName}}</option>
+                        
+                      </select>
                 </div>
             </div>
         </div>
@@ -329,9 +332,9 @@
                   </label>
             </div>
         </div>
-        <button style="margin-top: 8%; margin-left: 32%; width: 40%; " mat-raised-button>
-            <mat-icon>file_upload</mat-icon>
+        <button  (click)="postData()" style="margin-top: 8%; margin-left: 32%; width: 40%;"  >
+            <mat-icon mat-raised-button >file_upload</mat-icon>
         </button>
-
+        
     </div>
 </p-dialog>
