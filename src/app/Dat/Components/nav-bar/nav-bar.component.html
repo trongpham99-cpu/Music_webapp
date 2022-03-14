@@ -16,7 +16,7 @@
     <mat-icon (click)="getSearch()" class="icon" aria-hidden="false" aria-label="Example home icon">search</mat-icon>
 
     <span class="example-spacer"></span>
-    <button style="margin-right: 15px;" class="upgrade">Nâng cấp</button>
+    <button [routerLink]="['/upgrade']" routerLinkActive="router-link-active"  style="margin-right: 15px;" class="upgrade">Nâng cấp</button>
     <button (click)="login()" class="login">Đăng nhập</button>
 </mat-toolbar>
 
