@@ -113,15 +113,6 @@
     //     margin-bottom: 30px;
     //     border: 2px solid;
     // }
-    .layout {
-        margin-left: 10%;
-        margin-top: 3%;
-        width: 30%;
-        height: 15%;
-        border: 1.5px solid black;
-        border-radius: 10%;
-    }
-    
     .hover:hover {
         text-decoration: underline #000000;
     }
@@ -197,4 +188,8 @@
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
+    }
+    
+    .upload-music {
+        margin-top: 3%;
     }

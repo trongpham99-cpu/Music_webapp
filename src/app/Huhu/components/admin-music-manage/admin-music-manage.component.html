@@ -269,72 +269,56 @@
 </div>
 
 
-<p-dialog [draggable]=false header="Tải nhạc lên" [(visible)]="displayUpLoad" [style]="{width: '50vw'}">
+<p-dialog header="Tải nhạc lên" [(visible)]="displayUpLoad" [style]="{width: '50vw'}">
     <p>Đóng góp thêm phần đa dạng cho âm nhạc</p>
     <div class="" [formGroup]="audioForm">
-        <div style="display: flex; justify-content: space-between;">
-            <div style="margin-left: 10%;" class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-angle-right"></i></span>
-                    <input type="text" pInputText placeholder="Tên bài hát" formControlName="songName">
-                </div>
-            </div>
-            <div style="margin-right: 10%; float: right; " class="col-12 md:col-4 ">
-                <div class="p-inputgroup ">
-                    <select formControlName="authorId">
-                        <option value="0">Select artistname:</option>
-                        <option *ngFor="let artist of artists" value="{{artist._id}}">{{artist.artistName}}</option>
-                        
-                      </select>
-                </div>
+        <div style="" class="col-12 md:col-4">
+            <div class="p-inputgroup" style=" margin-left: 10%">
+                <span class="p-inputgroup-addon"><i class="pi pi-angle-right"></i></span>
+                <input style="width: 70%;" type="text" pInputText placeholder="Tên bài hát" formControlName="songName">
             </div>
         </div>
-        <div style=" margin-top: 3%; margin-left: 9%; display: flex;">
-            <div>
-                <h3 style="font-size: small; margin-left: 10%; margin-top: 2%;">Tải file nhạc lên:</h3>
-                <div style="margin-top: -2%; margin-left:10%;">
-                    <input type="file">
-                </div>
-            </div>
-            <div style="margin-left: 17%;">
-                <h3 style="font-size: small; margin-left: 10%; margin-top: 2%;">Tải file hình ảnh lên:</h3>
-                <div style="margin-top: -2%; margin-left:10%;">
-                    <input type="file">
-                </div>
+        <div style="margin-top: 1%;" class="col-12 md:col-4 ">
+            <div class="p-inputgroup ">
+                <select style="width: 76.5%; margin-left: 10% " formControlName="authorId">
+                    <option value="0">Chọn nghệ sĩ:</option>
+                    <option *ngFor="let artist of artists" value="{{artist._id}}">{{artist.artistName}}</option>
+                </select>
             </div>
         </div>
-        <div style="display: flex; margin-top: 5%;">
-            <div class="layout">
-                <h3 style="margin-left: 36%;">Thể loại</h3>
-                <div class="custom-select" style="width:200px; margin-left: 12%; margin-top: -5%;">
-                    <select>
-                      <option value="0">Chọn thể loại:</option>
-                      <option value="1">Nhạc Việt</option>
-                      <option value="2">Nhạc Trẻ</option>
-                      <option value="3">Nhạc Rap</option>
-                      <option value="4">Nhạc Rock</option>
-                      <option value="5">Nhạc Trữ tình</option>
-                      <option value="6">Nhạc US</option>
-                      <option value="7">Nhạc UK</option>
-                      <option value="8">Nhạc K-Pop</option>
+        <div class="custom-select" style="margin-left: 10%; width: 95.6%;">
+            <select>
+                        <option value="0">Chọn thể loại nhạc:</option>
+                        <option *ngFor="let type of types" value="{{type._id}}">{{type.name_type}}</option>
                     </select>
-                </div>
-            </div>
-            <div style="margin-left:10%; margin-top: 4%;">
+        </div>
+        <div style="margin-left:10%; margin-top: 4%;">
 
-                <label class="container" style="font-size: 100%;">Chế độ công khai (tất cả mọi người đều thấy)
+            <label class="container" style="font-size: 100%;">Chế độ công k ai (tất cả mọi người đều thấy)
                     <input type="checkbox" checked="checked">
                     <span class="checkmark"></span>
-                      </label>
-                <label class="container" style="font-size: 100%;">Chế độ riêng tư (không ai thấy ngoài bạn)
+            </label>
+            <label class="container" style="font-size: 100%;">Chế độ riêng tư (không ai thấy ngoài bạn)
                     <input type="checkbox">
                     <span class="checkmark"></span>
-                  </label>
+            </label>
+        </div>
+        <div style="display: flex;">
+            <h3 style="font-size: medium; margin-left: 10%; margin-top: 2%;">Tải file nhạc lên:</h3>
+            <div style="margin-top: 2.5%; margin-left: 1%">
+                <input type="file">
             </div>
         </div>
-        <button  (click)="postData()" style="margin-top: 8%; margin-left: 32%; width: 40%;"  >
+        <div style="display: flex;">
+            <h3 style="font-size: medium; margin-left: 10%; margin-top: 1.%;">Tải file hình ảnh lên:</h3>
+            <div style="margin-top: 2.5%; margin-left: 1%">
+                <input type="file">
+            </div>
+        </div>
+
+        <button (click)="postData()" style="margin-top: 8%; margin-left: 32%; width: 40%;">
             <mat-icon mat-raised-button >file_upload</mat-icon>
         </button>
-        
+
     </div>
 </p-dialog>
