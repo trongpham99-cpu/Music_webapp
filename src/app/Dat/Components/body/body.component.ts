@@ -19,9 +19,10 @@ export class BodyComponent implements OnInit {
   }
   
   public getDetail(audioId: string){
-    this.audioSV.getDetail(audioId).subscribe((res:any)=>{
-      console.log(res);
-    });
+    // this.audioSV.getDetail(audioId).subscribe((res:any)=>{
+    //   console.log(res);
+    // });
+    this.audioSV._audioId.next(audioId);
   }
   
   // public async get(apiPath:String){
