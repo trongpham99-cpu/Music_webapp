@@ -1,26 +1,26 @@
 <div class="container">
     <div style="border-bottom:10px; color: azure;">
-        <img class="logo" src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.15752-9/273767919_1314140092395473_6242307230584882306_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=ae9488&_nc_ohc=5dLD8fo4Q5UAX_4k0yQ&_nc_ht=scontent.fsgn5-3.fna&oh=03_AVKeeNbsbQKmqchs4VIejTKGE74uq4OK2uWksMhfMAJGlQ&oe=623D0C05"
+        <img [routerLink]="['/']" routerLinkActive="router-link-active"  class="logo" src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.15752-9/273767919_1314140092395473_6242307230584882306_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=ae9488&_nc_ohc=5dLD8fo4Q5UAX_4k0yQ&_nc_ht=scontent.fsgn5-3.fna&oh=03_AVKeeNbsbQKmqchs4VIejTKGE74uq4OK2uWksMhfMAJGlQ&oe=623D0C05"
             alt="">
         <div style="display: flex; margin-left: 2rem;">
             <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-            <a class="name-icon">Trang chủ</a>
+            <a [routerLink]="['/']" class="name-icon">Trang chủ</a>
         </div>
         <div style="display: flex; margin-left: 2rem; margin-top: 1rem;">
             <mat-icon aria-hidden="false" aria-label="Example home icon">library_music</mat-icon>
-            <a class="name-icon">Thư viện</a>
+            <a [routerLink]="['/library']" class="name-icon">Thư viện</a>
         </div>
         <div style="display: flex; margin-left: 2rem; margin-top: 1rem;">
             <mat-icon aria-hidden="false" aria-label="Example home icon">queue_music</mat-icon>
-            <a class="name-icon">Tạo playplist</a>
+            <a [routerLink]="['/']" class="name-icon">Tạo playplist</a>
         </div>
         <div style="display: flex; margin-left: 2rem; margin-top: 1rem;">
             <mat-icon aria-hidden="false" aria-label="Example home icon">favorite_border</mat-icon>
-            <a class="name-icon">Bài hát yêu thích</a>
+            <a [routerLink]="['/']" class="name-icon">Bài hát yêu thích</a>
         </div>
         <div style="display: flex; margin-left: 2rem; margin-top: 1rem;">
             <mat-icon aria-hidden="false" aria-label="Example home icon">manage_accounts</mat-icon>
-            <a class="name-icon">Quản lý</a>
+            <a [routerLink]="['/admin/music']" class="name-icon">Quản lý</a>
         </div>
     </div>
     <hr>

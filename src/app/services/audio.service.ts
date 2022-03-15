@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Audio } from './../models/audio.model';
 @Injectable({
@@ -8,6 +9,8 @@ import { Audio } from './../models/audio.model';
 export class AudioService {
 
   constructor(public http: HttpClient) { }
+
+  public _audioId = new BehaviorSubject<string>('622b63792f1e198b5961e07e');
 
   public audios: Array<Audio> = [];
 
