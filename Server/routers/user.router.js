@@ -7,9 +7,20 @@ const {
   signAccessToken,
   verifyAccessToken,
 } = require("../configs/jwt_service");
-const { userValidation } = require("../configs/validation");
+const { userValidation,loginValidation } = require("../configs/validation");
 const audioModel = require("../schemas/audio.schema.js");
+const { access } = require("fs");
 
+router.get("/profileWToken", verifyAccessToken, async (req, res)=>{
+  try {
+    const payload = req.payLoad;
+    
+    let _user = await userModel.findById(payload.userID);
+    res.status(200).send(_user)
+  } catch (error) {
+    res.status(500).send(error);
+  }
+})
 router.get("/profile/:id", async (req, res) => {
   try {
     let _id = req.params.id;
@@ -44,28 +55,29 @@ router.get("/allProfiles", verifyAccessToken, async (req, res, next) => {
 });
 router.post("/register", async (req, res) => {
   try {
-
-    let _email = req.body.email;
+    let body = req.body;
+    let _account = req.body.account;
     let _password = req.body.password;
-
+    let _email = req.body.email;
     let err = userValidation(req.body);
 
     if (err && err.error != undefined) {
       return console.log(err.error);
     }
     // console.log(_email,password);
-    if (!_email || !_password) {
+    if (!_email || !_password || !_account) {
       throw createError.BadGateway();
     }
 
-    const isExits = await userModel.findOne({ email: _email });
+    const isExits = await userModel.findOne({ email: _email, account: _account });
     if (isExits) {
-      return res.send(`${_email} already taken!`);
-    } else {
+      return res.send(`${_email,_account} already taken!`);
+    } else
+      {
       let _user = {
         ...body,
         displayName: "",
-        account: "",
+        account: _account,
         password: _password,
         birthday: "",
         phonenumber: "",
@@ -73,9 +85,9 @@ router.post("/register", async (req, res) => {
         country: "",
         photo: "",
         Gender: "",
-        createDate: "",
+        createDate: Date.now().toString(),
         musicType: "",
-        updateDate: "",
+        updateDate: Date.now().toString(),
         Role: "user",
         library: [],
         likeSong: [],
@@ -238,23 +250,24 @@ router.put("/follow", async (req, res) => {
 });
 router.post("/login", async (req, res) => {
   try {
-    let _email = req.body.email;
+    let _account = req.body.account;
     let _password = req.body.password;
+    console.log(req.body);
+    let err = loginValidation(req.body);
 
-    let err = userValidation(req.body);
-
-    if (err && err.error != undefined) {
+    if (err && err.error != undefined){
+    console.log(err.error) 
       return res.status(400).send({
         message: err.error,
       });
     }
-    if (!_email || !_password) {
+    if (!_password || !_account) {
       return res.status(400).send({
-        message: "email or password cannot be empty!",
+        message: "account or password cannot be empty!",
       });
     }
 
-    const user = await userModel.findOne({ email: _email });
+    const user = await userModel.findOne({ account: _account });
 
     if (!user) {
       return res.status(404).send({
@@ -271,7 +284,7 @@ router.post("/login", async (req, res) => {
     }
 
     const accessToken = await signAccessToken(user._id);
-
+    console.log(accessToken);
     res.status(200).send({
       message: "Login successful!",
       token: accessToken,
