@@ -18,6 +18,7 @@ export class NavBarComponent implements OnInit {
     registerForm = new FormGroup({
       account: new FormControl(''),
       password: new FormControl(''),
+      displayName: new FormControl(''),
       email: new FormControl('')
     });
 
@@ -35,12 +36,22 @@ export class NavBarComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    if(this.auth._token){
+    // if(this.auth._token){
+    //   this.auth.getProfile()?.subscribe((res:any)=>{
+    //     console.log(res);
+    //     this.user = res;
+    //   })
+    // }
+    this.auth._user.subscribe((token)=>{
+      console.log(token)
+      if(token){
+        this.auth._token = token
+      }
       this.auth.getProfile()?.subscribe((res:any)=>{
         console.log(res);
         this.user = res;
       })
-    }
+    })
   }
 
   public songName! :string;
@@ -73,8 +84,10 @@ export class NavBarComponent implements OnInit {
 
   public onLogin(){
    this.auth.userLogin(this.loginForm.value).subscribe((res:any)=>{
+     this.displayBasic = false;
      localStorage.setItem('_token', res.token);
-     window.location.reload();
+     this.auth._user.next(res.token)
+    //  window.location.reload();
    },(err)=>{
      console.log(err);
    })

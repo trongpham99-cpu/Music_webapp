@@ -58,6 +58,7 @@ router.post("/register", async (req, res) => {
     let body = req.body;
     let _account = req.body.account;
     let _password = req.body.password;
+    let _name = req.body.displayName;
     let _email = req.body.email;
     let err = userValidation(req.body);
 
@@ -65,18 +66,18 @@ router.post("/register", async (req, res) => {
       return console.log(err.error);
     }
     // console.log(_email,password);
-    if (!_email || !_password || !_account) {
+    if (!_email || !_password || !_account || !_name) {
       throw createError.BadGateway();
     }
 
     const isExits = await userModel.findOne({ email: _email, account: _account });
     if (isExits) {
-      return res.send(`${_email,_account} already taken!`);
+      return res.send(`This ${_email,_account} already taken!`);
     } else
       {
       let _user = {
         ...body,
-        displayName: "",
+        displayName: _name,
         account: _account,
         password: _password,
         birthday: "",

@@ -1,7 +1,7 @@
 export interface User{
     _id: string,
     account: string,
-    displayname: string,
+    displayName: string,
     password: string,
     birthday: string,
     phonenumber: string,

@@ -20,7 +20,7 @@
         class="upgrade">Nâng cấp</button>
     <div *ngIf="user!=null">
         <div class="dropdown">
-            <span>{{user.email}}</span>
+            <span>{{user.displayName}}</span>
             <div class="dropdown-content">
                 <p>Hồ sơ</p>
                 <p *ngIf="user.Role == 'admin'" >Quản lý âm nhạc</p>
@@ -30,9 +30,7 @@
         </div>
     </div>
 
-    <div *ngIf="user==null">
-        <button (click)="login()" class="login">Đăng nhập</button>
-    </div>
+    <button *ngIf="user==null" (click)="login()" class="login">Đăng nhập</button>
 </mat-toolbar>
 
 <p-dialog [draggable]=false header="Đăng nhập" [(visible)]="displayBasic" [style]="{width: '40vw'}">
@@ -105,10 +103,10 @@
             <p style="font-size: 60%; margin-left: 22%; margin-top: 1em; ">Tối thiểu 8-16 ký tự</p>
 
             <div style=" margin-left: 22%; margin-top: -2%;" class="grid p-fluid">
-                <!-- <div class="p-inputgroup">
+                <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-                <input style=" width:60%" type="password" pInputText placeholder="Xác nhận mật khẩu">
-            </div> -->
+                <input style=" width:60%" type="text" pInputText placeholder="Nhập tên" formControlName="displayName">
+            </div>
             </div>
             <div style=" margin-left: 22%; margin-top: 1.9em;">
                 <div class="p-inputgroup">

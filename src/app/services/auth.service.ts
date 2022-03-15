@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +18,9 @@ export class AuthService {
   // }
 
   public _token = localStorage.getItem('_token')
+
+  public _user = new BehaviorSubject<string>('');
+
 
   public userRegister(userForm: any){
     return this.http.post(environment.enpoint+'user/register', userForm);
