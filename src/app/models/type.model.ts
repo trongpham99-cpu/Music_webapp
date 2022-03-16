@@ -1,3 +1,5 @@
+import { Audio } from "./audio.model";
+
 export interface Type{
     _id: string,
     name_type: string,
@@ -5,5 +7,5 @@ export interface Type{
     description: string,
     dateAdd: string,
     photo: string,
-    audios:[],
+    audios:Array<Audio>,
 }

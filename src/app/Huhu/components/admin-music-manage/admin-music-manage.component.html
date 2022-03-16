@@ -75,192 +75,23 @@
             <th></th>
         </tr>
 
-        <tr>
+        <tr *ngFor="let audio of audioSV.audios">
             <td>
-                <p>Muộn rôi mà sao còn</p>
+                <p>{{audio.songName}}</p>
             </td>
             <td>
-                <p>Sơn tùng-MTP</p>
+                <p>{{audio.authorId?.artistName}}</p>
             </td>
             <td id="count">
                 <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
+                <p>{{audio.listened}}</p>
             </td>
             <td>
                 <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
+                <mat-icon style="padding-left:10px;" (click)="_deleteAudio(audio._id)" >delete</mat-icon>
             </td>
         </tr>
 
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <p>Muộn rôi mà sao còn</p>
-            </td>
-            <td>
-                <p>Sơn tùng-MTP</p>
-            </td>
-            <td id="count">
-                <mat-icon style="padding-right:30px;">headset_mic</mat-icon>
-                <p>232,567</p>
-            </td>
-            <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon style="padding-left:10px;">delete</mat-icon>
-            </td>
-        </tr>
     </table>
 </div>
 
@@ -287,14 +118,13 @@
             </div>
         </div>
         <div class="custom-select" style="margin-left: 10%; width: 95.6%;">
-            <select>
+            <select formControlName="category"> 
                         <option value="0">Chọn thể loại nhạc:</option>
                         <option *ngFor="let type of types" value="{{type._id}}">{{type.name_type}}</option>
                     </select>
         </div>
         <div style="margin-left:10%; margin-top: 4%;">
-
-            <label class="container" style="font-size: 100%;">Chế độ công k ai (tất cả mọi người đều thấy)
+            <label class="container" style="font-size: 100%;">Chế độ công khai (tất cả mọi người đều thấy)
                     <input type="checkbox" checked="checked">
                     <span class="checkmark"></span>
             </label>
@@ -310,14 +140,14 @@
             </div>
         </div>
         <div style="display: flex;">
-            <h3 style="font-size: medium; margin-left: 10%; margin-top: 1.%;">Tải file hình ảnh lên:</h3>
+            <h3 style="font-size: medium; margin-left: 10%; margin-top: 2%;">Tải file hình ảnh lên:</h3>
             <div style="margin-top: 2.5%; margin-left: 1%">
-                <input type="file">
+                <input type="File"  (change)="onSelect($event)">
             </div>
         </div>
 
         <button (click)="postData()" style="margin-top: 8%; margin-left: 32%; width: 40%;">
-            <mat-icon mat-raised-button >file_upload</mat-icon>
+            <mat-icon mat-raised-button style="color: black;" >file_upload</mat-icon>
         </button>
 
     </div>

@@ -12,4 +12,10 @@ export class TypeService {
   public getAllType(){
     return this.http.get(environment.enpoint + "type/getAll")
   }
+  public postData(audioType: any){
+    const _type = {
+      data: audioType
+    }
+    return this.http.post(environment.enpoint+ `type/add`, _type);
+  }
 }

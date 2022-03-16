@@ -12,12 +12,14 @@ const userRouter = require('./routers/user.router');
 const audioRouter = require("./routers/audio.js");
 const artistRouter = require("./routers/artist.js");
 const typeAudioRouter = require("./routers/type-audio.js")
+const itemRouter = require("./routers/item.router");
 
 server.use("/user", userRouter);
 server.use("/api", exampleRouter);
 server.use("/audio", audioRouter);
 server.use("/artist", artistRouter);
 server.use("/type", typeAudioRouter);
+server.use("/item", itemRouter)
 
 server.use((req, res, next) => {
     next(createError.NotFound(`This route does not exits`))
