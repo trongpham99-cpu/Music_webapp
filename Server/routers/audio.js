@@ -90,32 +90,29 @@ router.put("/updateData", (request, response) => {
     }
 });
 
-router.delete("/deleteAll", verifyAccessToken, async(request, response) => {
-    try {
-        const payLoad = request.payLoad;
-        let docId = request.body.docId;
+router.delete("/deleteAll/:docId", verifyAccessToken ,async (request, response) => {
+  try {
 
-        const _user = await userModel.findById(payLoad.userID);
+    const payLoad = request.payLoad;
+    let docId = request.params.docId;
 
-        if (_user.Role == "admin") {
-            let result = await audioModel.findByIdAndDelete(docId);
-            if (result == null) {
-                return response.status(400).send({
-                    message: `Tìm không được id ${docId} này!!!`,
-                });
-            } else {
-                return response.status(200).send({
-                    message: "Xoa thanh cong!!!",
-                });
-            }
-        } else {
-            return response.status(403).send({
-                message: "Bạn không có quyền xóa bài này!",
-            });
-        }
-    } catch (error) {
-        // console.log(error);
-        response.status(500).send(error);
+    const _user = await userModel.findById(payLoad.userID);
+
+    if(_user.Role == "admin"){
+      let result = await audioModel.findByIdAndDelete(docId);
+      if (result == null) {
+        return response.status(400).send({
+          message: `Tìm không được id ${docId} này!!!`,
+        });
+      } else {
+        return response.status(200).send({
+          message: "Xoa thanh cong!!!",
+        });
+      }
+    }else{
+      return response.status(403).send({
+        message: "Bạn không có quyền xóa bài này!"
+      })
     }
 });
 
