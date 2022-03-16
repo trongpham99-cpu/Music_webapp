@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 
-
 const typeAudioSchema = mongoose.Schema({
     name_type: String,
-    album: String,
     description: String,
     dateAdd: String,
     photo: String,
-    audios: [],
+    audios: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "audio",
+    }],
 
 })
 
