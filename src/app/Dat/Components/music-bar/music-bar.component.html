@@ -31,8 +31,8 @@
                 <mat-icon>repeat</mat-icon>
             </button>
         </div>
-        <div class="progress">
-            <mat-progress-bar class="progress-bar" mode="determinate" value="{{this.progress}}" step="1" min="0" max="100" ></mat-progress-bar>
+        <div class="progress" #process>
+            <mat-progress-bar (click)="changeTime($event)" class="progress-bar" mode="determinate" value="{{this.progress}}" step="1" min="0" max="100" ></mat-progress-bar>
         </div>
     </div>
 
