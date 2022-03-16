@@ -15,14 +15,13 @@ router.get('/getAll', async (req, res)=>{
 })
 
 router.get('/getDetail/:id', async (req, res)=>{
+    try {
+        let itemdetail = await itemModel.find();
+        res.status(200).send(itemdetail)
+    } catch (error) {
+        res.status(500).send(error)
+    }
 })
-try {
-    let itemdetail = await itemModel.find();
-    res.status(200).send(itemdetail)
-} catch (error) {
-    res.status(500).send(error)
-}
-
 
 router.post('/add', async (req, res)=>{
     try {

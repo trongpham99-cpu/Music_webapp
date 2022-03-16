@@ -12,7 +12,7 @@
 </div> -->
 
 <mat-toolbar>
-    <input [(ngModel)]="songName" class="search" type="text" placeholder="Tìm bài hát, nghệ sĩ,...">
+    <input #box (keyup.enter)="getSearch()" [(ngModel)]="songName" class="search" type="text" placeholder="Tìm bài hát, nghệ sĩ,...">
     <mat-icon (click)="getSearch()" class="icon" aria-hidden="false" aria-label="Example home icon">search</mat-icon>
 
     <span class="example-spacer"></span>

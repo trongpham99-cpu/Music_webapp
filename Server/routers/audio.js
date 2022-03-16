@@ -114,6 +114,9 @@ router.delete("/deleteAll/:docId", verifyAccessToken ,async (request, response) 
         message: "Bạn không có quyền xóa bài này!"
       })
     }
-});
+    } catch (error){
+        res.status(500).send(error);
+    }   
+})
 
 module.exports = router;
