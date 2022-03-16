@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { on } from 'cluster';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Audio } from 'src/app/models/audio.model';
 import { AudioService } from 'src/app/services/audio.service';
 @Component({
@@ -17,7 +16,9 @@ export class MusicBarComponent implements OnInit {
   public i = 0;
   public isLoop= false;
   public isPlay= false; 
+  public speak = 100;
   public songs:any = [];
+public isMute=false;
 
   ngOnInit(): void {
     this.audioSV._audioId.subscribe((_id: string) => {
@@ -64,7 +65,8 @@ export class MusicBarComponent implements OnInit {
       this.Audio.src = path;
       this.Audio.load();
       this.Audio.play();
-      this.isPlaying = true;
+
+      this.isPlay = true;
       this.Audio.addEventListener('timeupdate', (currentTime) => {
         //console.log(this.Audio.currentTime);
         this.durationTime();
@@ -98,9 +100,51 @@ export class MusicBarComponent implements OnInit {
     }
   }
 
-  public adjustVolume(){
+  public adjustVolume(e:any){
+    console.log(e)
+    this.speak = e.value;
+    if(e.value == 0){
+      this.isMute = true;
+    }else if (e.value>0){
+      this.isMute = false;
+    }
     
+    this.Audio.volume = e.value/100;
   }
 
+  public muteVolume(){
+    if (this.isMute==false){
+      this.Audio.muted=true;
+      this.isMute=true;
+      console.log("Muted")
+    }else if (this.isMute==true){
+      this.Audio.muted=false;
+      this.isMute=false;
+      console.log("unmuted");
+    }
+  }
+
+  @ViewChild('process') processRef!: ElementRef;
+
+  public _endTime = 0;
+  public _currentTime = 0;
+  public _time = 0;
+
+  changeTime(event: any) {
+    let left = this.processRef.nativeElement.getBoundingClientRect().left;
+    let right = this.processRef.nativeElement.getBoundingClientRect().right;
+    let point = event.clientX;
+    let percent = (point - left) / (right - left);
+    let value = Math.floor(percent*100)
+    this.Audio.currentTime = (value * this.Audio.duration) / 100;
+    this._endTime = parseFloat((this.Audio.duration / 60).toFixed(2));
+    this.Audio.addEventListener('timeupdate', (currentTime) => {
+      this._currentTime = Math.floor(
+        (this.Audio.currentTime / this.Audio.duration) * 100
+      );
+      this._time = parseFloat((this.Audio.currentTime / 60).toFixed(2));
+    });
+    console.log(this._currentTime);
+  }
 
 }

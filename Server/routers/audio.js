@@ -33,9 +33,9 @@ router.get("/getAll", async(request, response) => {
     }
 });
 
-router.get("/getDetail/:docId", async(request, response) => {
+router.get("/getDetail", async(request, response) => {
     try {
-        let params = request.params.docId;
+        let params = request.query.docId;
         let audio = await audioModel.findById(params).populate("authorId").populate("category");
         response.status(200).send(audio);
     } catch (err) {

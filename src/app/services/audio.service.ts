@@ -11,7 +11,7 @@ export class AudioService {
 
   constructor(public http: HttpClient, public authSV:AuthService) { }
 
-  public _audioId = new BehaviorSubject<string>('622c1005afffea551be1f76c');
+  public _audioId = new BehaviorSubject<any>(null);
 
   public audios: Array<Audio> = [];
 
@@ -24,7 +24,7 @@ export class AudioService {
   }
 
   public getDetail(audioId: string){
-    return this.http.get(environment.enpoint+ `audio/getDetail/${audioId}`);
+    return this.http.get(environment.enpoint+ `audio/getDetail?docId=${audioId}`);
   }
 
   public postData(audioForm: any){

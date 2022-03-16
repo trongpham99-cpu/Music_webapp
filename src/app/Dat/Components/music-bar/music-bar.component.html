@@ -40,8 +40,8 @@
             </button>
 
         </div>
-        <div class="progress">
-            <mat-progress-bar class="progress-bar" mode="determinate" value="{{this.progress}}" step="1" min="0" max="100" ></mat-progress-bar>
+        <div class="progress" #process>
+            <mat-progress-bar (click)="changeTime($event)" class="progress-bar" mode="determinate" value="{{this.progress}}" step="1" min="0" max="100" ></mat-progress-bar>
         </div>
     </div>
 
@@ -53,10 +53,13 @@
             <button mat-icon-button>
                 <mat-icon>lyrics</mat-icon>
             </button>
-            <button mat-icon-button>
+            <button  *ngIf="!isMute" (click)="muteVolume()" mat-icon-button>
                 <mat-icon>volume_up</mat-icon>
             </button>
-            <mat-slider [value]="100" aria-label="unit(s)" step="1" min="0" max="100"></mat-slider>
+            <button  *ngIf="isMute" (click)="muteVolume()" mat-icon-button>
+                <mat-icon>volume_off</mat-icon>
+            </button>
+            <mat-slider (change)="adjustVolume($event)" [value]="speak" aria-label="unit(s)" step="1" min="0" max="100"></mat-slider>
         </div>
     </div>
 
