@@ -4,31 +4,35 @@
         <p>{{ _audio.songName }}</p>
     </div>
 
+    <div *ngIf="!_audio" class="layout">
+        <p>Chưa chọn bài hát !</p>
+    </div>
+
     <div class="play-music">
         <div class="container-play-music">
             <button mat-icon-button class="example-icon favorite-icon "
                 aria-label="Example icon-button with heart icon ">
                 <mat-icon>shuffle</mat-icon>
             </button>
-            <button mat-icon-button class="example-icon favorite-icon "
+            <button (click)="changeSong('previous')" mat-icon-button class="example-icon favorite-icon "
                 aria-label="Example icon-button with heart icon ">
                 <mat-icon>skip_previous</mat-icon>
             </button>
             <button mat-icon-button class="example-icon favorite-icon " 
-                aria-label="Example icon-button with heart icon " (click)="playSong()">
+                aria-label="Example icon-button with heart icon ">
                 <mat-icon>play_circle</mat-icon>
             </button>
             <button mat-icon-button class="example-icon favorite-icon "
-                aria-label="Example icon-button with heart icon ">
+                aria-label="Example icon-button with heart icon " (click)="changeSong('next')">
                 <mat-icon>skip_next</mat-icon>
             </button>
-            <button mat-icon-button class="example-icon favorite-icon "
+            <button (click)="loopSong()" mat-icon-button class="example-icon favorite-icon "
                 aria-label="Example icon-button with heart icon ">
                 <mat-icon>repeat</mat-icon>
             </button>
         </div>
         <div class="progress">
-            <mat-progress-bar class="progress-bar" mode="determinate" value="40"></mat-progress-bar>
+            <mat-progress-bar class="progress-bar" mode="determinate" value="{{this.progress}}" step="1" min="0" max="100" ></mat-progress-bar>
         </div>
     </div>
 
