@@ -33,23 +33,24 @@ export class AdminMusicManageComponent implements OnInit {
     category: new FormControl(''),
   });
   public async postData(){
-    let _path = await this.uploadImage(); 
-    const _audio = {
-      ...this.audioForm.value,
-      photoURL:_path,
-      datesubmit: Date.now().toString(),
-      submmitted: 0,
-      liked: 0,
-      listened: 0,
-      sugesstion: '',
-      authorCreate: 'admin',
+    
+    // let _path = await this.uploadImage(); 
+    // const _audio = {
+    //   ...this.audioForm.value,
+    //   photoURL:_path,
+    //   datesubmit: Date.now().toString(),
+    //   submmitted: 0,
+    //   liked: 0,
+    //   listened: 0,
+    //   sugesstion: '',
+    //   authorCreate: 'admin',
       
 
-    }
-    console.log(_audio)
-    this.audioSV.postData(_audio).subscribe((res:any) => {
-      console.log(res)
-    })
+    // }
+    // console.log(_audio)
+    // this.audioSV.postData(_audio).subscribe((res:any) => {
+    //   console.log(res)
+    // })
   }
   file!: File
   uploadPercent!: any;

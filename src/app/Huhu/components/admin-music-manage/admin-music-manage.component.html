@@ -77,7 +77,7 @@
 
         <tr *ngFor="let audio of audioSV.audios">
             <td>
-                <p>{{audio.songName}}</p>
+                <p [routerLink]="['/detailmusic']" >{{audio.songName}}</p>
             </td>
             <td>
                 <p>{{audio.authorId?.artistName}}</p>
