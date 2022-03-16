@@ -93,11 +93,11 @@ router.put("/updateData", (request, response) => {
   }
 });
 
-router.delete("/deleteAll", verifyAccessToken , async (request, response) => {
+router.delete("/deleteAll/:docId", verifyAccessToken ,async (request, response) => {
   try {
 
     const payLoad = request.payLoad;
-    let docId = request.body.docId;
+    let docId = request.params.docId;
 
     const _user = await userModel.findById(payLoad.userID);
 

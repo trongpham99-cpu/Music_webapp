@@ -1,16 +1,17 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Audio } from './../models/audio.model';
+import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AudioService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public authSV:AuthService) { }
 
-  public _audioId = new BehaviorSubject<string>('622b63792f1e198b5961e07e');
+  public _audioId = new BehaviorSubject<string>('622c1005afffea551be1f76c');
 
   public audios: Array<Audio> = [];
 
@@ -32,6 +33,19 @@ export class AudioService {
     }
     return this.http.post(environment.enpoint+ `audio/add`, _audio);
   }
+
+  public deleteAudio(audioId: string){
+    if(!this.authSV._token) {
+      console.log(`chua co token`);
+      return;
+    };
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${this.authSV._token}`)
+    }
+    return this.http.delete(environment.enpoint+ `audio/deleteAll/${audioId}`, header);
+  }
+
   // public async postData(songName: String, 
   //   authorId: string, 
   //   dateSubmit: String, 
