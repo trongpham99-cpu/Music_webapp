@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-
+  public isAuthorized = false;
   constructor(public http: HttpClient) { }
   
   // public userLogin(apiPath:String)
@@ -21,7 +21,6 @@ export class AuthService {
   public _token = localStorage.getItem('_token')
 
   public _user = new BehaviorSubject<string>('');
-
 
   public userRegister(userForm: any){
     return this.http.post(environment.enpoint+'user/register', userForm);

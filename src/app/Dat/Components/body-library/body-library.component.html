@@ -8,9 +8,9 @@
             <h1 style="font-size: 400%;">Bài hát đã thích</h1>
             <div style="display:flex">
                 <mat-icon aria-hidden="false" aria-label="Example home icon" style="font-size: 300%;">account_circle</mat-icon>
-                <p style="margin-left: 2em; margin-top: 0.75em;">"User Name"</p>
+                <p style="margin-left: 2em; margin-top: 0.75em;">{{ user?.displayName }}</p>
                 <p style="margin-left: 0.15em; margin-top: 0.1em; font-size: xx-large;">.</p>
-                <p style="margin-left: 0.4em; margin-top: 0.75em;">1 Bài hát</p>
+                <p style="margin-left: 0.4em; margin-top: 0.75em;">{{user?.library?.length}} Bài hát</p>
             </div>
         </div>
     </div>
