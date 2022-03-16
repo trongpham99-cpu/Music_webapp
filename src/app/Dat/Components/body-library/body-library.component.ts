@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from '../../../services/auth.service';
 export interface PeriodicElement {
   position: number;
   name: string;
@@ -39,9 +41,16 @@ export class BodyLibraryComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'album', 'dateAdd', 'time', 'favorite'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+  constructor(
+    private authSV:AuthService
+  ) { }
 
+  public user!:User
   ngOnInit(): void {
+    this.authSV.getProfile()?.subscribe((res: any)=>{
+      console.log(res);
+      this.user = res;
+    })
   }
 
 }
