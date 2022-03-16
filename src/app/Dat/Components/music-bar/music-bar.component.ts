@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { on } from 'cluster';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Audio } from 'src/app/models/audio.model';
 import { AudioService } from 'src/app/services/audio.service';
 @Component({
@@ -87,6 +86,29 @@ export class MusicBarComponent implements OnInit {
       
     }
     
+  }
+
+  @ViewChild('process') processRef!: ElementRef;
+
+  public _endTime = 0;
+  public _currentTime = 0;
+  public _time = 0;
+
+  changeTime(event: any) {
+    let left = this.processRef.nativeElement.getBoundingClientRect().left;
+    let right = this.processRef.nativeElement.getBoundingClientRect().right;
+    let point = event.clientX;
+    let percent = (point - left) / (right - left);
+    let value = Math.floor(percent*100)
+    this.Audio.currentTime = (value * this.Audio.duration) / 100;
+    this._endTime = parseFloat((this.Audio.duration / 60).toFixed(2));
+    this.Audio.addEventListener('timeupdate', (currentTime) => {
+      this._currentTime = Math.floor(
+        (this.Audio.currentTime / this.Audio.duration) * 100
+      );
+      this._time = parseFloat((this.Audio.currentTime / 60).toFixed(2));
+    });
+    console.log(this._currentTime);
   }
 
 }
