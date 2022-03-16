@@ -18,18 +18,27 @@
                 aria-label="Example icon-button with heart icon ">
                 <mat-icon>skip_previous</mat-icon>
             </button>
-            <button mat-icon-button class="example-icon favorite-icon " 
-                aria-label="Example icon-button with heart icon ">
+            <button *ngIf="!isPlay" mat-icon-button class="example-icon favorite-icon " 
+                aria-label="Example icon-button with heart icon "(click)="PlayandPause()">
                 <mat-icon>play_circle</mat-icon>
+            </button>
+            <button *ngIf="isPlay" mat-icon-button class="example-icon favorite-icon " 
+                aria-label="Example icon-button with heart icon "(click)="PlayandPause()">
+                <mat-icon>pause_circle_filled</mat-icon>
             </button>
             <button mat-icon-button class="example-icon favorite-icon "
                 aria-label="Example icon-button with heart icon " (click)="changeSong('next')">
                 <mat-icon>skip_next</mat-icon>
             </button>
-            <button (click)="loopSong()" mat-icon-button class="example-icon favorite-icon "
+            <button *ngIf="!isLoop" (click)="loopSong()" mat-icon-button class="example-icon favorite-icon "
                 aria-label="Example icon-button with heart icon ">
                 <mat-icon>repeat</mat-icon>
             </button>
+            <button *ngIf="isLoop" (click)="loopSong()" mat-icon-button class="example-icon favorite-icon "
+                aria-label="Example icon-button with heart icon ">
+                <mat-icon>repeat_one</mat-icon>
+            </button>
+
         </div>
         <div class="progress">
             <mat-progress-bar class="progress-bar" mode="determinate" value="{{this.progress}}" step="1" min="0" max="100" ></mat-progress-bar>
@@ -47,7 +56,7 @@
             <button mat-icon-button>
                 <mat-icon>volume_up</mat-icon>
             </button>
-            <mat-slider [value]="100" aria-label="unit(s)"></mat-slider>
+            <mat-slider [value]="100" aria-label="unit(s)" step="1" min="0" max="100"></mat-slider>
         </div>
     </div>
 

@@ -16,7 +16,7 @@ export class MusicBarComponent implements OnInit {
   public progress: any;
   public i = 0;
   public isLoop= false;
-
+  public isPlay= false; 
   public songs:any = [];
 
   ngOnInit(): void {
@@ -64,7 +64,6 @@ export class MusicBarComponent implements OnInit {
       this.Audio.src = path;
       this.Audio.load();
       this.Audio.play();
-      this.audio.volume = 0.2;
       this.isPlaying = true;
       this.Audio.addEventListener('timeupdate', (currentTime) => {
         //console.log(this.Audio.currentTime);
@@ -78,15 +77,30 @@ export class MusicBarComponent implements OnInit {
 
   }
 
+  public PlayandPause(){
+    if (this.isPlay==false){
+      this.isPlay=true;
+      this.Audio.play();
+    }else if (this.isPlay==true){
+      this.Audio.pause();
+      this.isPlay=false;
+    }
+    
+
+  }
+
+
   public loopSong(){
     this.isLoop= !this.isLoop;
     if (this.isLoop == true){
       this.Audio.loop = this.isLoop;
-      this.Audio.load();
-      this.Audio.play();
-      
+      console.log("It's loop");
     }
+  }
+
+  public adjustVolume(){
     
   }
+
 
 }
