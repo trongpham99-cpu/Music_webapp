@@ -15,8 +15,10 @@ export class MusicBarComponent implements OnInit {
   public progress: any;
   public i = 0;
   public isLoop= false;
-
+  public isPlay= false; 
+  public speak = 100;
   public songs:any = [];
+public isMute=false;
 
   ngOnInit(): void {
     this.audioSV._audioId.subscribe((_id: string) => {
@@ -63,8 +65,8 @@ export class MusicBarComponent implements OnInit {
       this.Audio.src = path;
       this.Audio.load();
       this.Audio.play();
-      this.audio.volume = 0.2;
-      this.isPlaying = true;
+
+      this.isPlay = true;
       this.Audio.addEventListener('timeupdate', (currentTime) => {
         //console.log(this.Audio.currentTime);
         this.durationTime();
@@ -77,15 +79,49 @@ export class MusicBarComponent implements OnInit {
 
   }
 
+  public PlayandPause(){
+    if (this.isPlay==false){
+      this.isPlay=true;
+      this.Audio.play();
+    }else if (this.isPlay==true){
+      this.Audio.pause();
+      this.isPlay=false;
+    }
+    
+
+  }
+
+
   public loopSong(){
     this.isLoop= !this.isLoop;
     if (this.isLoop == true){
       this.Audio.loop = this.isLoop;
-      this.Audio.load();
-      this.Audio.play();
-      
+      console.log("It's loop");
+    }
+  }
+
+  public adjustVolume(e:any){
+    console.log(e)
+    this.speak = e.value;
+    if(e.value == 0){
+      this.isMute = true;
+    }else if (e.value>0){
+      this.isMute = false;
     }
     
+    this.Audio.volume = e.value/100;
+  }
+
+  public muteVolume(){
+    if (this.isMute==false){
+      this.Audio.muted=true;
+      this.isMute=true;
+      console.log("Muted")
+    }else if (this.isMute==true){
+      this.Audio.muted=false;
+      this.isMute=false;
+      console.log("unmuted");
+    }
   }
 
   @ViewChild('process') processRef!: ElementRef;
