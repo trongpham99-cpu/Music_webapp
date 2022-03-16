@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import {ButtonModule} from 'primeng/button';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -14,7 +15,8 @@ import {ButtonModule} from 'primeng/button';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    ButtonModule
+    ButtonModule,
+    FormsModule
   ]
 })
 export class ProfileModule { }

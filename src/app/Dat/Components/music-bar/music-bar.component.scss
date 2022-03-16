@@ -1,48 +1,85 @@
 .container {
-    width: 100%;
-    // height: 60%;
-    height: 15%;
-    background: #131212;
-    color: white;
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    justify-content: space-between;
+  width: 100%;
+  // height: 60%;
+  height: 15%;
+  background: #131212;
+  color: white;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  justify-content: space-between;
 }
 
-img {
-    margin: 1rem;
-    width: 13%;
-    height: 13%;
-    border: solid white;
+.layout {
+  width: 20%;
+  .image {
+    width: 100px;
+    float: right;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  p {
+    font-size: 14pt;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 .play-music {
-    margin-top: 2.5em;
-    margin-left: -15em;
+  width: 60%;
+  .container-play-music {
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+  .progress {
+    width: 80%;
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    ::ng-deep .mat-progress-bar-fill::after {
+        background-color: #ffffff;
+      }
+      
+      ::ng-deep .mat-progress-bar-buffer {
+        background: #000000;
+      }
+      
+      ::ng-deep .mat-progress-bar {
+        border-radius: 0.5px;
+      }
+      .progress-bar:hover{
+          cursor: pointer;
+      }
+  }
 }
 
 #myBar {
-    width: 40%;
-    height: 30px;
-    background-color: #04AA6D;
-    text-align: center;
-    /* To center it horizontally (if you want) */
-    line-height: 30px;
-    /* To center it vertically */
-    color: white;
+  width: 40%;
+  height: 30px;
+  background-color: #04aa6d;
+  text-align: center;
+  /* To center it horizontally (if you want) */
+  line-height: 30px;
+  /* To center it vertically */
+  color: white;
 }
 
 .add-more-item {
-    float: right;
-    margin-top: 2.5em;
-    margin-right: 5rem;
+  width: 20%;
+  .body-more-item {
+    padding-top: 45px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
 }
 
-// .time-of-item {
-//     width: 10%;
-//     margin-top: 0.75%;
-// }
 mat-slider {
-    width: 50px;
+  width: 50px;
 }

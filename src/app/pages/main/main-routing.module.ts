@@ -15,7 +15,7 @@ const routes: Routes = [
       { path: 'video', loadChildren: () => import('../../Huy/pages/video/video.module').then(m => m.VideoModule) },
       { path: 'detailmusic', loadChildren: () => import('../../Quy/Pages/detailmusic/detailmusic.module').then(m => m.DetailmusicModule) }, 
       { path: 'profile', loadChildren: () => import('../../Quy/Pages/profile/profile.module').then(m => m.ProfileModule) },
-      { path: 'thanhtoan', component: ThanhtoanComponent },
+      { path: 'upgrade', component: ThanhtoanComponent },
       { path: 'library', component:  BodyLibraryComponent}
     ]
   }

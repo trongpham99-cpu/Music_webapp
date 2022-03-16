@@ -2,7 +2,7 @@ import { Artist } from "./artist.model"
 export interface Audio{
     _id: string,
     songName: string,
-    authorId: Artist,
+    authorId?: Artist,
     dateSubmit: string,
     authorCreate: string,
     path: string,

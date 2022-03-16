@@ -8,11 +8,15 @@ import { AdminVideoManageComponent } from '../../../Huhu/components/admin-video-
 import {DialogModule} from 'primeng/dialog';
 import {TreeSelectModule} from 'primeng/treeselect';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminArtistManageComponent } from '../../../Huhu/components/admin-artist-manage/admin-artist-manage.component';
+
+
 @NgModule({
   declarations: [
     AdmMusicComponent,
     AdminMusicManageComponent,
-    AdminVideoManageComponent
+    AdminVideoManageComponent,
+    AdminArtistManageComponent
   ],
   imports: [
     CommonModule,

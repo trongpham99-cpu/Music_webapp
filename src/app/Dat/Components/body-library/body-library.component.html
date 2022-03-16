@@ -1,20 +1,68 @@
 <div class="container">
     <div style="display: flex;">
         <div class="logo">
-            <mat-icon aria-hidden="false" aria-label="Example home icon">favorite_border</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-left: 25px; margin-top: 25px; font-size: 80px;">favorite_border</mat-icon>
         </div>
-        <div>
-            <h4>Playlist</h4>
-            <h1>Bài hát đã thích</h1>
+        <div class="title-content">
+            <h4 style="font-size: 125%;">Playlist</h4>
+            <h1 style="font-size: 400%;">Bài hát đã thích</h1>
             <div style="display:flex">
-                <p>logo</p>
-                <p>"User Name"</p>
-                <p>.</p>
-                <p>1 Bài hát</p>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" style="font-size: 300%;">account_circle</mat-icon>
+                <p style="margin-left: 2em; margin-top: 0.75em;">"User Name"</p>
+                <p style="margin-left: 0.15em; margin-top: 0.1em; font-size: xx-large;">.</p>
+                <p style="margin-left: 0.4em; margin-top: 0.75em;">1 Bài hát</p>
             </div>
         </div>
     </div>
-    <p>play-logo</p>
-    <p>table</p>
+    <div class="example-button-container">
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" style="margin-left: 7.5%; margin-top: 2%; background-color: #039AEF;">
+          <mat-icon style="color: black; font-size: xxx-large; margin-left: -100%; margin-top: -100%;">play_arrow</mat-icon>
+        </button>
+    </div>
+    <table style="margin-top: 3%; background-color:#202020 ;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Tựa đề</th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="album">
+            <th mat-header-cell *matHeaderCellDef> Album </th>
+            <td mat-cell *matCellDef="let element"> {{element.album}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateAdd">
+            <th mat-header-cell *matHeaderCellDef> Ngày thêm </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateAdd}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">schedule</mat-icon>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="favorite">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+
+                <mat-icon aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
 </div>

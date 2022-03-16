@@ -8,7 +8,7 @@ const signAccessToken = async (userID)=>{
         }
         const secret = key.ACCESS_TOKEN_SECRET;
         const option = {
-            expiresIn: '1h'
+            expiresIn: '24h'
         }
         JWT.sign(payLoad,secret,option,(err,token)=>{
             if (err) reject(err)

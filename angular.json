@@ -39,7 +39,6 @@
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/lara-light-indigo/theme.css",
               "node_modules/primeng/resources/primeng.min.css"
-
             ],
             "scripts": []
           },
@@ -111,6 +110,16 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "PerfectSong:build:production",
+            "firebaseProject": "perfectsong-3effa",
+            "firebaseHostingSite": "perfectsong-3effa"
           }
         }
       }
