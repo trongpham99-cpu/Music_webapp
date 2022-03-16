@@ -1,4 +1,5 @@
 import { Artist } from "./artist.model"
+import { Type } from "./type.model"
 export interface Audio{
     _id: string,
     songName: string,
@@ -8,7 +9,7 @@ export interface Audio{
     path: string,
     sugesstion: string,
     photoURL: string,
-    category: string,
+    category: Type,
     album: string,
     submmitted: number,
     liked: number,

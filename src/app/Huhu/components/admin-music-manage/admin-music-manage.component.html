@@ -124,8 +124,7 @@
                     </select>
         </div>
         <div style="margin-left:10%; margin-top: 4%;">
-
-            <label class="container" style="font-size: 100%;">Chế độ công k ai (tất cả mọi người đều thấy)
+            <label class="container" style="font-size: 100%;">Chế độ công khai (tất cả mọi người đều thấy)
                     <input type="checkbox" checked="checked">
                     <span class="checkmark"></span>
             </label>
@@ -141,14 +140,14 @@
             </div>
         </div>
         <div style="display: flex;">
-            <h3 style="font-size: medium; margin-left: 10%; margin-top: 1.%;">Tải file hình ảnh lên:</h3>
+            <h3 style="font-size: medium; margin-left: 10%; margin-top: 2%;">Tải file hình ảnh lên:</h3>
             <div style="margin-top: 2.5%; margin-left: 1%">
                 <input type="File"  (change)="onSelect($event)">
             </div>
         </div>
 
         <button (click)="postData()" style="margin-top: 8%; margin-left: 32%; width: 40%;">
-            <mat-icon mat-raised-button >file_upload</mat-icon>
+            <mat-icon mat-raised-button style="color: black;" >file_upload</mat-icon>
         </button>
 
     </div>
