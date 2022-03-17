@@ -13,6 +13,7 @@ const audioRouter = require("./routers/audio.js");
 const artistRouter = require("./routers/artist.js");
 const typeAudioRouter = require("./routers/type-audio.js")
 const itemRouter = require("./routers/item.router");
+server.use(express.static('public'));
 
 server.use("/user", userRouter);
 server.use("/api", exampleRouter);

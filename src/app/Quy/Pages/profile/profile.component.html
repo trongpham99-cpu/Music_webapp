@@ -1,6 +1,7 @@
 <div class="layout-profile" >
     <div class="container-profile" >
-        <img class="image" [src]="user?.photo">
+        <img *ngIf="user?.photo" class="image" [src]="user?.photo">
+        <img *ngIf="!user?.photo" class="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0nuD5Rv6FV-35aHcgmvyYlldqJbjdJsYQ3NKM4xVLPsLhKvxjET5BrI8bmCAr75WY5Tw&usqp=CAU">
         <div class="edit">
             <p style="font-size: 25px;padding-top: 7%;">{{user?.displayName}}</p>
         </div>

@@ -9,7 +9,7 @@ router.get("/getAll", async(request, response) => {
         let typeAudio = await typeAudioModel.find().populate("audios");
         response.status(200).send(typeAudio);
     } catch (err) {
-        console.log(err);
+        response.status(500).json({ message: err.toString() })
     }
 });
 

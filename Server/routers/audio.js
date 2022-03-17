@@ -5,6 +5,8 @@ const audioModel = require("../schemas/audio.schema.js");
 const artistModel = require("../schemas/artist.schema.js");
 const { verifyAccessToken } = require("../configs/jwt_service");
 const typeAudioModel = require('../schemas/type-audio.schema');
+const storage = require('../services/ffmpeg.service');
+
 router.get("/getMusicForUserVip", verifyAccessToken, async(req, res) => {
     try {
         const payLoad = req.payLoad;
@@ -29,7 +31,8 @@ router.get("/getAll", async(request, response) => {
         let audio = await audioModel.find().populate("authorId");
         response.send(audio);
     } catch (err) {
-        console.log(err);
+        response.status(500).send(err)
+
     }
 });
 
@@ -46,6 +49,7 @@ router.get("/getDetail", async(request, response) => {
 router.get("/getSearch", async(request, response, next) => {
     try {
         let searchfield = request.query.songName;
+        // console.log(searchfield)
         await audioModel
             .find({ songName: { $regex: searchfield, $options: "$i" } })
             .populate("authorId")
@@ -57,10 +61,27 @@ router.get("/getSearch", async(request, response, next) => {
     }
 });
 
-router.post("/add", (request, response) => {
+router.post("/add", verifyAccessToken ,storage ,async (req, res) => {
     try {
-        let data = request.body.data;
-        let audio = new audioModel(data);
+
+        let payLoad = req.payLoad;
+
+        
+        let _user = await userModel.findById(payLoad.userID);
+
+        if(_user.Role != "admin") return;
+
+        let data = req.body;
+        const id = req.file.originalname.split(".")[0];
+        const path = `http://localhost:3000/audios/${id}/${id}.m3u8`
+        const newAudio = {
+            ...data,
+            path: path,
+            dateSubmit: Date.now().toString(),
+            album: "Implements later",
+            submmitted: 0
+        }
+        let audio = new audioModel(newAudio);
         audio.save(async(err, value) => {
             if (!err) {
                 await artistModel.findByIdAndUpdate(
@@ -69,13 +90,13 @@ router.post("/add", (request, response) => {
                 await typeAudioModel.findByIdAndUpdate(
                     audio.category, { $push: { audios: audio._id } }
                 );
-                response.status(201).send({
+                res.status(201).send({
                     message: `Add successful`
                 })
             }
         });
     } catch (err) {
-        response.status(404).json({ message: err.toString() });
+        res.status(404).json({ message: err.toString() });
     }
 });
 
@@ -84,7 +105,7 @@ router.put("/updateData", (request, response) => {
         let body = request.body;
         let data = body.data;
         let docId = body.docId;
-        console.log(data);
+        // console.log(data);
     } catch (err) {
         response.status(404).json({ message: err.toString() });
     }

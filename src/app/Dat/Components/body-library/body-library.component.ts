@@ -1,37 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Audio } from 'src/app/models/audio.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from '../../../services/auth.service';
-export interface PeriodicElement {
-  position: number;
-  name: string;
-  album: number;
-  dateAdd: string;
-  time: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  {position: 2,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  {position: 3,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  {position: 4,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  {position: 5,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  {position: 6,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  {position: 7,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  {position: 8,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  {position: 9,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  {position: 10,  name: 'Hydrogen', album: 1, dateAdd: 'H', time: 10, },
-  // {position: 2,  name: 'Helium', album: 4, dateAdd: 'He', time: 10},
-  // {position: 3, name: 'Lithium', album: 6.941, dateAdd: 'Li', time: 10},
-  // {position: 4, name: 'Beryllium', album: 9.0122, dateAdd: 'Be', time: 10},
-  // {position: 5, name: 'Boron', album: 10.811, dateAdd: 'B', time: 10},
-  // {position: 6, name: 'Carbon', album: 12.0107, dateAdd: 'C', time: 10},
-  // {position: 7, name: 'Nitrogen', album: 14.0067, dateAdd: 'N', time: 10},
-  // {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  // {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  // {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
-
+import { AudioService } from '../../../services/audio.service';
 @Component({
   selector: 'app-body-library',
   templateUrl: './body-library.component.html',
@@ -39,18 +10,27 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class BodyLibraryComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'album', 'dateAdd', 'time', 'favorite'];
-  dataSource = ELEMENT_DATA;
+  public audios:Audio[] = []
+  displayedColumns: string[] = ['name', 'artist', 'dateAdd', 'time'];
   constructor(
-    private authSV:AuthService
+    private authSV:AuthService,
+    private _AudioService:AudioService
   ) { }
 
   public user!:User
   ngOnInit(): void {
     this.authSV.getProfile()?.subscribe((res: any)=>{
-      console.log(res);
       this.user = res;
     })
+    this.authSV.getLibrary()?.subscribe((res:any)=>{
+      this.audios = res;
+      console.log(res)
+    })
+  }
+
+  changeSong(audioId: string, i: number){
+    this._AudioService._audioId.next(audioId);
+    this._AudioService._indexAudio.next(i);
   }
 
 }

@@ -2,32 +2,26 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
-
+import { endPoint } from '../../environments/config'
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   public isAuthorized = false;
-  constructor(public http: HttpClient) { }
-  
-  // public userLogin(apiPath:String)
-  // {
-  //   this.http.post(environment.enpoint+apiPath,{
-  //     "email":"huhu111@gmail.com",
-  //     "password": "1234567899"
-  //   })
-  // }
+  constructor(public http: HttpClient) {
+
+  }
 
   public _token = localStorage.getItem('_token')
 
   public _user = new BehaviorSubject<string>('');
 
   public userRegister(userForm: any){
-    return this.http.post(environment.enpoint+'user/register', userForm);
+    return this.http.post(endPoint+'user/register', userForm);
   }
 
   public userLogin(userForm: any){
-    return this.http.post(environment.enpoint+"user/login",userForm);
+    return this.http.post(endPoint+"user/login",userForm);
   }
 
   public getProfile(){
@@ -36,6 +30,27 @@ export class AuthService {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${this._token}`)
     }
-    return this.http.get(environment.enpoint + "user/profileWToken", header);
+    return this.http.get(endPoint + "user/profileWToken", header);
+  }
+
+  public getLibrary(){
+    if(!this._token) return;
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${this._token}`),
+      
+    }
+    return this.http.get(endPoint + "user/getLibrary", header);
+  }
+  
+  public addLibrary(audioId: string){
+    console.log(audioId);
+    if(!this._token) return;
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${this._token}`),
+      
+    }
+    return this.http.put(endPoint + "user/addLibrary", { audioId: audioId }, header)
   }
 }

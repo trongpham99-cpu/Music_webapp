@@ -14,8 +14,8 @@ const routes: Routes = [
       { path: 'admin', canActivate: [AuthGuard] , loadChildren: () => import('../../Huhu/pages/adm-music/adm-music.module').then(m => m.AdmMusicModule) },
       { path: 'hotmusic', loadChildren: () => import('../../Huy/pages/hot-music/hot-music.module').then(m => m.HotMusicModule) }, 
       { path: 'video', loadChildren: () => import('../../Huy/pages/video/video.module').then(m => m.VideoModule) },
-      { path: 'detailmusic', loadChildren: () => import('../../Quy/Pages/detailmusic/detailmusic.module').then(m => m.DetailmusicModule) }, 
-      { path: 'profile', loadChildren: () => import('../../Quy/Pages/profile/profile.module').then(m => m.ProfileModule) },
+      { path: 'detailmusic/:audioId', loadChildren: () => import('../../Quy/Pages/detailmusic/detailmusic.module').then(m => m.DetailmusicModule) }, 
+      { path: 'profile',canActivate: [AuthGuard] ,loadChildren: () => import('../../Quy/Pages/profile/profile.module').then(m => m.ProfileModule) },
       { path: 'upgrade', component: ThanhtoanComponent },
       { path: 'library', canActivate: [AuthGuard], component:  BodyLibraryComponent}
     ]

@@ -34,7 +34,7 @@ export class NavBarComponent implements OnInit {
     ) {
       
      }
-
+  public err!: string;
   ngOnInit(): void {
     // if(this.auth._token){
     //   this.auth.getProfile()?.subscribe((res:any)=>{
@@ -43,12 +43,12 @@ export class NavBarComponent implements OnInit {
     //   })
     // }
     this.auth._user.subscribe((token)=>{
-      console.log(token)
+      // console.log(token)
       if(token){
         this.auth._token = token
       }
       this.auth.getProfile()?.subscribe((res:any)=>{
-        console.log(res);
+        // console.log(res);
         this.user = res;
       })
     })
@@ -65,13 +65,15 @@ export class NavBarComponent implements OnInit {
   login() {
     this.displayRegister = false;
     this.displayBasic = true;
+    this._err = ''
   }
 
   registration(){
     this.displayBasic = false;
     this.displayRegister = true;
+    this._err = ''
   }
-  public err!: string;
+  public _err!: string;
   public onRegister(){
     this.auth.userRegister(this.registerForm.value).subscribe((res)=>{
       console.log(res);
@@ -88,8 +90,10 @@ export class NavBarComponent implements OnInit {
      localStorage.setItem('_token', res.token);
      this.auth._user.next(res.token)
     //  window.location.reload();
+    this._err = ''
    },(err)=>{
-     console.log(err);
+     console.log(err)
+     this._err = err.error.message;
    })
   }
    

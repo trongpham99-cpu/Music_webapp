@@ -18,11 +18,12 @@ export class BodyComponent implements OnInit {
     })
   }
   
-  public getDetail(audioId: string){
+  public getDetail(audioId: string, index: number){
     // this.audioSV.getDetail(audioId).subscribe((res:any)=>{
     //   console.log(res);
     // });
     this.audioSV._audioId.next(audioId);
+    this.audioSV._indexAudio.next(index)
   }
   
   // public async get(apiPath:String){

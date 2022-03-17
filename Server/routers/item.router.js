@@ -27,7 +27,7 @@ router.post('/add', async (req, res)=>{
     try {
         let body = req.body;
         let items = new itemModel(body)
-        console.log(items)
+        // console.log(items)
         res.status(200).send(items)
     } catch (error) {
         res.status(500).send(error)

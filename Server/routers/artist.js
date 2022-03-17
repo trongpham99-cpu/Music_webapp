@@ -62,9 +62,9 @@ router.put("/updateData", (request,response) => {
         let body = request.body;
         let data = body.data;
         let docId = body.docId;
-        console.log(data)
+        // console.log(data)
         artistModel.findByIdAndUpdate(docId,data,(err,value,res)=>{
-            console.log(err,value,res);
+            // console.log(err,value,res);
             response.status(200).json({
                 message: "sửa thành công",
                 // data:value,
@@ -81,7 +81,7 @@ router.delete("/deleteAll", async (request,response) => {
         let docId = request.body.docId;
 
         let result = await artistModel.findByIdAndDelete(docId);
-        console.log(result)
+        // console.log(result)
         if(result == null){
             response.status(404).send({
                 message: `Tìm không được id ${docId} này!!!`
@@ -93,7 +93,7 @@ router.delete("/deleteAll", async (request,response) => {
         }
 
     } catch (error) {
-        console.log(error);
+        response.status(500).send(error)
     }
     
 })

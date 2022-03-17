@@ -7,20 +7,20 @@ const {
   signAccessToken,
   verifyAccessToken,
 } = require("../configs/jwt_service");
-const { userValidation,loginValidation } = require("../configs/validation");
+const { userValidation, loginValidation } = require("../configs/validation");
 const audioModel = require("../schemas/audio.schema.js");
 const { access } = require("fs");
 
-router.get("/profileWToken", verifyAccessToken, async (req, res)=>{
+router.get("/profileWToken", verifyAccessToken, async (req, res) => {
   try {
     const payload = req.payLoad;
-    
+
     let _user = await userModel.findById(payload.userID);
-    res.status(200).send(_user)
+    res.status(200).send(_user);
   } catch (error) {
     res.status(500).send(error);
   }
-})
+});
 router.get("/profile/:id", async (req, res) => {
   try {
     let _id = req.params.id;
@@ -32,7 +32,7 @@ router.get("/profile/:id", async (req, res) => {
     }
   } catch (error) {
     res.status(500).send({ message: error });
-    console.log(error);
+    // console.log(error);
   }
 });
 router.get("/allProfiles", verifyAccessToken, async (req, res, next) => {
@@ -70,11 +70,13 @@ router.post("/register", async (req, res) => {
       throw createError.BadGateway();
     }
 
-    const isExits = await userModel.findOne({ email: _email, account: _account });
+    const isExits = await userModel.findOne({
+      email: _email,
+      account: _account,
+    });
     if (isExits) {
-      return res.send(`This ${_email,_account} already taken!`);
-    } else
-      {
+      return res.send(`This ${(_email, _account)} already taken!`);
+    } else {
       let _user = {
         ...body,
         displayName: _name,
@@ -113,28 +115,77 @@ router.post("/register", async (req, res) => {
     //     body: user
     //      })
   } catch (error) {
-    console.log(error);
+    res.status(500).send(error);
   }
 });
-router.put("/addLibrary", async (req, res) => {
+router.put("/addLibrary", verifyAccessToken, async (req, res) => {
   //id bai nhac
-  let audioId = req.body.audioId;
+  let _audioId = req.body.audioId;
   //id user
-  let userId = req.body.userId;
-  //push id => library
-  userModel.findByIdAndUpdate(
-    userId,
-    {
-      $push: { library: audioId },
-    },
-    (err, success) => {
-      return res.status(201).send({
-        message: `Add successfully !!!`,
-        data: success,
-      });
+  let payLoad = req.payLoad;
+  let _userId = payLoad.userID;
+
+  let _user = await userModel.findById(_userId);
+
+  if (_user.library.length === 0) {
+    userModel.findByIdAndUpdate(
+      _userId,
+      { $push: { library: _audioId } },
+      (err, result) => {
+        if (err) {
+          return res.status(400).send(err);
+        }
+        return res.status(200).send({ message: `add audio` });
+      }
+    );
+    return;
+  } else {
+    for (let i = 0; i < _user.library.length; i++) {
+      if (_user.library[i] === _audioId) {
+        const index = _user.library.indexOf(_audioId);
+        if (index > -1) {
+          _user.library.splice(index, 1);
+        }
+        userModel.findByIdAndUpdate(_userId, _user, (err, result) => {
+          if (err) {
+            return res.status(400).send(err);
+          }
+          return res.status(200).send({ message: `remove audio` });
+        });
+        return;
+      }
     }
-  );
-  //return
+    userModel.findByIdAndUpdate(
+      _userId,
+      { $push: { library: _audioId } },
+      (err, result) => {
+        if (err) {
+          return res.status(400).send(err);
+        }
+        return res.status(200).send({ message: `add more audio` });
+      }
+    );
+  }
+});
+router.get("/getLibrary", verifyAccessToken, async (req, res) => {
+  try {
+    //id bai nhac
+    let _audioId = req.body.audioId;
+    //id user
+    let payLoad = req.payLoad;
+    let _userId = payLoad.userID;
+
+    let _user = await userModel.findById(_userId);
+    if(!_user) return;
+
+    let library = await audioModel.find({
+      '_id': { $in: _user.library}
+    }).populate("authorId")
+    res.status(200).send(library);
+
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 router.put("/likeSong", async (req, res) => {
   //id bai nhac
@@ -158,49 +209,8 @@ router.put("/likeSong", async (req, res) => {
     .populate("audioId");
   //return
 });
-// router.put("/addFollow", async (req, res) => {
-//   //id bai nhac
-//   let artistId = req.body.artistId;
-//   //id user
-//   let userId = req.body.userId;
-//   //check isExits
-//   let user = await userModel.findById(userId);
-
-//   for (let i = 0; i < user.library.length; i++) {
-//     if (user.Follow[i] == artistId) {
-//       userModel.findByIdAndUpdate(
-//         userId,
-//         {
-//           $pull: { Follow: { $elemMatch: artistId } },
-//         },
-//         (err, success) => {
-//           if (!err) {
-//             return res.status(201).send({
-//               message: `dislike !!!`,
-//               data: success,
-//             });
-//           }
-//         }
-//       );
-//     }
-//   }
-//   userModel.findByIdAndUpdate(
-//     userId,
-//     {
-//       $push: { Follow: artistId },
-//     },
-//     (err, success) => {
-//       return res.status(201).send({
-//         message: `like !!!`,
-//         data: success,
-//       });
-//     }
-//   );
-// });
-
 router.put("/follow", async (req, res) => {
   try {
-
     const _artistId = req.body.artistId;
     const _userId = req.body.userId;
 
@@ -253,13 +263,12 @@ router.post("/login", async (req, res) => {
   try {
     let _account = req.body.account;
     let _password = req.body.password;
-    console.log(req.body);
     let err = loginValidation(req.body);
 
-    if (err && err.error != undefined){
-    console.log(err.error) 
+    if (err && err.error != undefined) {
+      // console.log(err.error);
       return res.status(400).send({
-        message: err.error,
+        message: err.error.details[0].message,
       });
     }
     if (!_password || !_account) {
@@ -285,13 +294,13 @@ router.post("/login", async (req, res) => {
     }
 
     const accessToken = await signAccessToken(user._id);
-    console.log(accessToken);
+
     res.status(200).send({
       message: "Login successful!",
       token: accessToken,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).send(error);
   }
 });
 

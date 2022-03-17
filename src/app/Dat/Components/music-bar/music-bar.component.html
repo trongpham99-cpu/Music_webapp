@@ -47,16 +47,16 @@
 
     <div class="add-more-item">
         <div class="body-more-item">
-            <button mat-icon-button>
+            <button (click)="_addLibrary(_audio._id)" matTooltip="Thêm nhạc" mat-icon-button>
                 <mat-icon>menu</mat-icon>
             </button>
-            <button mat-icon-button>
+            <button matTooltip="Lời bài hát" mat-icon-button>
                 <mat-icon>lyrics</mat-icon>
             </button>
-            <button  *ngIf="!isMute" (click)="muteVolume()" mat-icon-button>
+            <button matTooltip="Tắt âm" *ngIf="!isMute" (click)="muteVolume()" mat-icon-button>
                 <mat-icon>volume_up</mat-icon>
             </button>
-            <button  *ngIf="isMute" (click)="muteVolume()" mat-icon-button>
+            <button matTooltip="Mở âm" *ngIf="isMute" (click)="muteVolume()" mat-icon-button>
                 <mat-icon>volume_off</mat-icon>
             </button>
             <mat-slider (change)="adjustVolume($event)" [value]="speak" aria-label="unit(s)" step="1" min="0" max="100"></mat-slider>

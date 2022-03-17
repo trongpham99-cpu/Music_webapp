@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-
+import { endPoint } from '../../environments/config';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +10,12 @@ export class TypeService {
 
   constructor(public http: HttpClient) { }
   public getAllType(){
-    return this.http.get(environment.enpoint + "type/getAll")
+    return this.http.get(endPoint + "type/getAll")
   }
   public postData(audioType: any){
     const _type = {
       data: audioType
     }
-    return this.http.post(environment.enpoint+ `type/add`, _type);
+    return this.http.post(endPoint+ `type/add`, _type);
   }
 }

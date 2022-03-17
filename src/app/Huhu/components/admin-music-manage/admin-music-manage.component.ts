@@ -29,35 +29,37 @@ export class AdminMusicManageComponent implements OnInit {
   public audioForm = new FormGroup({
     songName: new FormControl(''),
     authorId: new FormControl(''),
-    path: new FormControl(''),
     category: new FormControl(''),
   });
   public async postData(){
     
-    // let _path = await this.uploadImage(); 
-    // const _audio = {
-    //   ...this.audioForm.value,
-    //   photoURL:_path,
-    //   datesubmit: Date.now().toString(),
-    //   submmitted: 0,
-    //   liked: 0,
-    //   listened: 0,
-    //   sugesstion: '',
-    //   authorCreate: 'admin',
+    let _path = await this.uploadImage(); 
+    const _audio = {
+      ...this.audioForm.value,
+      photoURL:_path,
+      datesubmit: Date.now().toString(),
+      submmitted: 0,
+      liked: 0,
+      listened: 0,
+      sugesstion: '',
+      authorCreate: 'admin',
       
 
-    // }
-    // console.log(_audio)
-    // this.audioSV.postData(_audio).subscribe((res:any) => {
-    //   console.log(res)
-    // })
+    }
+    this.audioSV.postData(_audio, this.fileAudio).subscribe((res:any) => {
+      window.location.reload()      
+    })
   }
   file!: File
+  fileAudio!: File
   uploadPercent!: any;
   public _name!: string;
  
   onSelect(event:any){
     this.file = event.target.files[0];
+  }
+  onSelectAudio(event:any){
+    this.fileAudio = event.target.files[0];
   }
 
   async uploadImage(){
@@ -101,7 +103,9 @@ export class AdminMusicManageComponent implements OnInit {
   }
 
   public _deleteAudio(audioId:string){
-    this.audioSV.deleteAudio(audioId)?.subscribe((res)=>{console.log(res)})
+    this.audioSV.deleteAudio(audioId)?.subscribe((res)=>{
+      window.location.reload()      
+    })
   }
 
 }

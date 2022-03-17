@@ -20,12 +20,12 @@
         class="upgrade">Nâng cấp</button>
     <div *ngIf="user!=null">
         <div class="dropdown">
-            <span>{{user.displayName}}</span>
+            <span style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" >{{user.displayName}}</span>
             <div class="dropdown-content">
-                <p>Hồ sơ</p>
-                <p *ngIf="user.Role == 'admin'" >Quản lý âm nhạc</p>
-                <p *ngIf="user.Role == 'admin'" >Quản lý video</p>
-                <p (click)="onLogout()">Đăng xuất</p>
+                <p [routerLink]="['/profile']" routerLinkActive="router-link-active"  style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" >Hồ sơ</p>
+                <!-- <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" *ngIf="user.Role == 'admin'" >Quản lý âm nhạc</p> -->
+                <!-- <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" *ngIf="user.Role == 'admin'" >Quản lý video</p> -->
+                <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" (click)="onLogout()">Đăng xuất</p>
             </div>
         </div>
     </div>
@@ -48,9 +48,14 @@
                     <input style=" width:60%" type="password" pInputText placeholder="Mật khẩu"
                         formControlName="password">
                 </div>
-            </div>
+                <div *ngIf="!_err" style="padding: 10px;" >
 
-            <p style="font-size: small; margin-top: 1%; margin-left: 60%; font-style: italic;">Quên mật khẩu?</p>
+                </div>
+                <div *ngIf="_err" style="padding-top: 10px;">
+                    <p-tag icon="pi pi-times" severity="danger" [value]="_err"></p-tag>
+                </div>
+            </div>
+          
             <button style="width: 55.5%; margin-left: 22%; margin-top: 1%; background-color: #FF5500" pButton pRipple
                 type="button" label="Đăng nhập" (click)="onLogin()"></button>
         </form>

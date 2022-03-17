@@ -9,8 +9,14 @@ export class SideBarComponent implements OnInit {
 
   constructor(public authSV:AuthService) { }
 
+  displayBasic!: boolean;
+
   ngOnInit(): void {
     
+  }
+
+  showBasicDialog(){
+    this.displayBasic = true;
   }
 
 }

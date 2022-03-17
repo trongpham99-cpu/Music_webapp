@@ -1,6 +1,6 @@
 <div class="product-items" >
-    <div class="product" *ngFor="let audio of audioSV.audios"  > 
-        <div (click) = "getDetail(audio._id)">
+    <div class="product" *ngFor="let audio of this.audioSV.audios; index as i"  > 
+        <div (click) = "getDetail(audio._id, i)">
             <div class="product-content">
                 <div class="product-img">
                     <img [src]="audio.photoURL" alt="" />

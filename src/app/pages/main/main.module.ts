@@ -14,7 +14,7 @@ import {ButtonModule} from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 import { BodyLibraryComponent } from '../../Dat/Components/body-library/body-library.component';
-
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { BodyLibraryComponent } from '../../Dat/Components/body-library/body-lib
     MainRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TagModule
   ]
 })
 export class MainModule { }
