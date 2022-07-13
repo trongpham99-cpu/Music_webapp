@@ -7,13 +7,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/main/main.module').then((m) => m.MainModule),
   },
-  {
-    path: 'adm-video',
-    loadChildren: () =>
-      import('./Huhu/pages/adm-video/adm-video.module').then(
-        (m) => m.AdmVideoModule
-      ),
-  }
 ];
 
 @NgModule({

@@ -1,0 +1,110 @@
+<mat-toolbar>
+    <input #box (keyup.enter)="getSearch()" [(ngModel)]="songName" class="search" type="text"
+        placeholder="Tìm bài hát, nghệ sĩ,...">
+    <mat-icon (click)="getSearch()" class="icon" aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+
+    <span class="example-spacer"></span>
+
+    <span class="name">trong.phamtranduc@gmail.com</span>
+    <button pTooltip="Đăng nhập với Google" (click)="loginWithGoogle()" mat-icon-button
+        class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <i class="pi pi-google"></i>
+    </button>
+</mat-toolbar>
+
+<p-dialog [draggable]=false header="Đăng nhập" [(visible)]="displayBasic" [style]="{width: '50%'}">
+    <div>
+        <form [formGroup]="loginForm">
+            <div style=" margin-left: 22%;" class="grid p-fluid">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input style="width:60%;" type="text" pInputText placeholder="Tài khoản" formControlName="account">
+                </div>
+            </div>
+            <div style="margin-top: 1em; margin-left: 22%;" class="grid p-fluid">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+                    <input style=" width:60%" type="password" pInputText placeholder="Mật khẩu"
+                        formControlName="password">
+                </div>
+                <div *ngIf="!_err" style="padding: 10px;">
+
+                </div>
+                <div *ngIf="_err" style="padding-top: 10px;">
+                    <p-tag icon="pi pi-times" severity="danger" [value]="_err"></p-tag>
+                </div>
+            </div>
+
+            <button style="width: 55.5%; margin-left: 22%; margin-top: 1%; background-color: #FF5500" pButton pRipple
+                type="button" label="Đăng nhập" (click)="onLogin()"></button>
+        </form>
+    </div>
+    <div class="spec-text">
+        <p class="display" style="text-align:center">Hoặc</p>
+    </div>
+    <div style="display: flex; margin-top: 2em;">
+        <button style="margin-left: 24%; background-color: black;" pButton pRipple type="button"
+            icon="pi pi-apple"></button>
+        <button style="margin-left: 7%; background-color: #FFC107;" pButton pRipple type="button"
+            icon="pi pi-google"></button>
+        <button style="margin-left: 7%; background-color: #699BF7;" pButton pRipple type="button"
+            icon="pi pi-facebook"></button>
+        <button style="margin-left: 7%; background-color: #55ACEE;" pButton pRipple type="button"
+            icon="pi pi-twitter"></button>
+    </div>
+    <div style="display: flex; margin-top: 1em;">
+        <p
+            style="font-size: medium; margin-top: 1%; margin-left: 40%; font-style: italic; font-weight: bold; margin-top: 1.5em;">
+            Bạn không có tài khoản?</p>
+        <p class="font-hover"
+            style="margin-top: 4.25%; margin-left: 2%; font-weight: bold; font-size: small; font-style: italic;"
+            (click)="registration()">Đăng ký ngay.</p>
+    </div>
+
+
+
+</p-dialog>
+
+<p-dialog [draggable]=false header="Đăng ký" [(visible)]="displayRegister" [style]="{width: '40vw'}">
+    <div>
+        <form [formGroup]="registerForm">
+            <p style="font-size: 60%; margin-left: 22%; ">Tối thiểu 8-24 ký tự</p>
+            <div style=" margin-left: 22%; margin-top: -2%;" class="grid p-fluid">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input style="width:60%;" type="text" pInputText placeholder="Tài khoản" formControlName="account">
+                </div>
+            </div>
+            <p style="font-size: 60%; margin-left: 22%; margin-top: 1em;">Tối thiểu 8-16 ký tự</p>
+
+            <div style="margin-top: -2%; margin-left: 22%;" class="grid p-fluid">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+                    <input style=" width:60%" type="password" pInputText placeholder="Mật khẩu"
+                        formControlName="password">
+                </div>
+            </div>
+            <p style="font-size: 60%; margin-left: 22%; margin-top: 1em; ">Tối thiểu 8-16 ký tự</p>
+
+            <div style=" margin-left: 22%; margin-top: -2%;" class="grid p-fluid">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+                    <input style=" width:60%" type="text" pInputText placeholder="Nhập tên"
+                        formControlName="displayName">
+                </div>
+            </div>
+            <div style=" margin-left: 22%; margin-top: 1.9em;">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-send"></i></span>
+                    <input style=" width:60%" type="text" pInputText placeholder="Email" formControlName="email">
+                </div>
+            </div>
+            <p *ngIf="err" style="color: red">{{err}}</p>
+            <button style=" width: 55.5%; margin-left: 22%; margin-top: 10%; background-color: #FF5500" pButton pRipple
+                type="button" label="Đăng ký" (click)="onRegister()"></button>
+        </form>
+    </div>
+    <p class="font-hover"
+        style="font-size: medium; margin-top: 1%; margin-left: 60%; font-style: italic; font-weight: bold; margin-top: 1.5em;"
+        (click)="login()">Bạn đã có tài khoản?</p>
+</p-dialog>

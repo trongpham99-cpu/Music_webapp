@@ -10,23 +10,27 @@ import { AuthService } from '../services/auth.service';
 })
 export class AudioService {
 
-  constructor(public http: HttpClient, public authSV:AuthService) { }
+  constructor(public http: HttpClient, public authSV: AuthService) { }
 
   public _audioId = new BehaviorSubject<any>(null);
   public _indexAudio = new BehaviorSubject<number>(0);
 
   public audios: Array<Audio> = [];
 
-  public getPerfectSong(apiPath: string){
-    return this.http.get(endPoint+apiPath);
+  public getPerfectSong(apiPath: string) {
+    return this.http.get(endPoint + apiPath);
   }
 
-  public getSearch(songName: string){
-    return this.http.get(endPoint+ `audio/getSearch?songName=${songName}`);
+  public getAudios() {
+    return this.http.get(endPoint + `audio/getAll`);
   }
 
-  public getDetail(audioId: string){
-    return this.http.get(endPoint+ `audio/getDetail?docId=${audioId}`);
+  public getSearch(songName: string) {
+    return this.http.get(endPoint + `audio/getSearch?songName=${songName}`);
+  }
+
+  public getDetail(audioId: string) {
+    return this.http.get(endPoint + `audio/getDetail?docId=${audioId}`);
   }
 
   private header = {
@@ -34,7 +38,7 @@ export class AudioService {
       .set('Authorization', `Bearer ${this.authSV._token}`)
   }
 
-  public postData(audioForm: any, file:any){
+  public postData(audioForm: any, file: any) {
     const formData: any = new FormData();
     formData.append('track', file)
     formData.append('songName', audioForm.songName)
@@ -45,11 +49,11 @@ export class AudioService {
     formData.append('listened', audioForm.listened)
     formData.append('sugesstion', audioForm.sugesstion)
     formData.append('authorCreate', audioForm.authorCreate)
-    return this.http.post(endPoint+ `audio/add`, formData, this.header);
+    return this.http.post(endPoint + `audio/add`, formData, this.header);
   }
 
-  public deleteAudio(audioId: string){
-    if(!this.authSV._token) {
+  public deleteAudio(audioId: string) {
+    if (!this.authSV._token) {
       console.log(`chua co token`);
       return;
     };
@@ -57,36 +61,7 @@ export class AudioService {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${this.authSV._token}`)
     }
-    return this.http.delete(endPoint+ `audio/deleteAll/${audioId}`, header);
+    return this.http.delete(endPoint + `audio/deleteAll/${audioId}`, header);
   }
 
-  // public async postData(songName: String, 
-  //   authorId: string, 
-  //   dateSubmit: String, 
-  //   authorCreate: String, 
-  //   path: String, 
-  //   sugesstion: String, 
-  //   photoURL: String, 
-  //   category: String, 
-  //   album: String, 
-  //   submmitted: Number, 
-  //   liked: Number, 
-  //   listened: Number){
-  //   let result = await this.http.post(endPoint+'audio',{
-  //     data: {songName:songName, 
-  //       authorId: authorId,
-  //       dateSubmit: dateSubmit,
-  //       authorCreate: authorCreate,
-  //       path: path,
-  //       sugesstion: sugesstion,
-  //       photoURL: photoURL,
-  //       category: category,
-  //       album: album,
-  //       submmitted: submmitted,
-  //       liked: liked,
-  //       listened: listened
-  //     }
-  //   });
-  //   return result;
-  // }
 }

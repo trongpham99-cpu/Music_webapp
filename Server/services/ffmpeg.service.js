@@ -1,7 +1,7 @@
 const multer = require("multer");
 const ffmpeg = require("fluent-ffmpeg");
 var fs = require("fs");
-const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 var storage = multer.diskStorage({
@@ -21,8 +21,7 @@ var storage = multer.diskStorage({
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
-    await cutAudio(name, id)
-
+    await cutAudio(name, id);
   },
 });
 
@@ -50,10 +49,10 @@ function cutAudio(name, id) {
         console.log("Spawned Ffmpeg with command: " + commandLine);
       })
       .on("error", function (err, stdout, stderr) {
-        console.log('An error occurred: ' + err.message, err, stderr);
+        console.log("An error occurred: " + err.message, err, stderr);
       })
       .on("progress", function (progress) {
-        console.log('Processing: ' + progress.percent + '% done')
+        console.log("Processing: " + progress.percent + "% done");
       })
       .on("end", function (err, stdout, stderr) {
         console.log("Finished processing!" /*, err, stdout, stderr*/);

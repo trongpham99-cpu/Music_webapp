@@ -1,0 +1,51 @@
+.container {
+    background: #000000;
+    color: white;
+    height: 100%;
+    width: 18%;
+    position: fixed;
+}
+
+.logo {
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+.logo:hover {
+    cursor: pointer;
+}
+
+.name-icon {
+    font-size: 17px;
+    margin-top: 1%;
+    margin-left: 8%;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+a,
+h4 {
+    color: white;
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+hr {
+    margin-top: 20%;
+    width: 70%;
+    background-color: #C4C4C4;
+}
+
+.name-list {
+    display: grid;
+    margin-left: 12%;
+    margin-top: 20%;
+    border-top: white;
+}

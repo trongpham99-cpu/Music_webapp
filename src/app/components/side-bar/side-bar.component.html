@@ -1,0 +1,38 @@
+<div class="container">
+    <div style="border-bottom:10px; color: azure;">
+        <img [routerLink]="['/']" routerLinkActive="router-link-active" class="logo"
+            src="../../../../assets/logo_rmbg.png" alt="">
+        <div style="display: flex; margin-left: 2rem;">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+            <a [routerLink]="['/']" class="name-icon">Trang chủ</a>
+        </div>
+        <div style="display: flex; margin-left: 2rem; margin-top: 1rem;">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">library_music</mat-icon>
+            <a [routerLink]="['/library']" class="name-icon">Thư viện</a>
+        </div>
+        <div style="display: flex; margin-left: 2rem; margin-top: 1rem;">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">queue_music</mat-icon>
+            <a (click)="showBasicDialog()" class="name-icon">Tạo playplist</a>
+        </div>
+        <div style="display: flex; margin-left: 2rem; margin-top: 1rem;">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">favorite_border</mat-icon>
+            <a (click)="showBasicDialog()" class="name-icon">Bài hát yêu thích</a>
+        </div>
+        <div style="display: flex; margin-left: 2rem; margin-top: 1rem;">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">manage_accounts</mat-icon>
+            <a [routerLink]="['/admin/music']" class="name-icon">Quản lý</a>
+        </div>
+    </div>
+    <hr>
+    <div class="name-list">
+        <h4 style="margin-top: -2rem;">Danh sách phát của tôi #1</h4>
+        <h4 style="margin-top: -0.5rem; ">Danh sách phát của tôi #2</h4>
+    </div>
+</div>
+
+<p-dialog header="Thông báo" [(visible)]="displayBasic" [style]="{width: '50vw'}">
+    <p style="text-align: center;">Chức năng đang phát triển !!! <i class="pi pi-exclamation-triangle"></i></p>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayBasic=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
