@@ -40,6 +40,7 @@ export class MusicBarComponent implements OnInit {
     this.audioSV.getPerfectSong('audio/getAll').subscribe((res: any) => {
       this.songs = res;
     });
+
   }
   public getDetail(audioId: string) {
     this.audioSV.getDetail(audioId).subscribe((res: any) => {
@@ -71,7 +72,6 @@ export class MusicBarComponent implements OnInit {
 
   public playSong(path: string) {
     // if (this.isPlaying == false) {
-
     if (Hls.isSupported()) {
       var hls = new Hls();
       hls.loadSource(path);
@@ -90,11 +90,6 @@ export class MusicBarComponent implements OnInit {
       }
       this.durationTime();
     });
-    // } else {
-    //   this.isPlaying = false;
-    //   this.Audio.pause();
-    //   //this.Audio.currentTime;
-    // }
   }
 
   public PlayandPause() {

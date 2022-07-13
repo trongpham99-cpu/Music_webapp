@@ -44,38 +44,45 @@ router.get("/getSearch", async (request, response, next) => {
   }
 });
 
-router.post("/add", verifyAccessToken, storage, async (req, res) => {
+router.post("/add-new", storage, async (req, res) => {
   try {
-    let payLoad = req.payLoad;
+    // let payLoad = req.payLoad;
 
-    let _user = await userModel.findById(payLoad.userID);
+    // let _user = await userModel.findById(payLoad.userID);
 
-    if (_user.Role != "admin") return;
+    // if (_user.Role != "admin") return;
 
     let data = req.body;
-    const id = req.file.originalname.split(".")[0];
-    const path = `http://localhost:3000/audios/${id}/${id}.m3u8`;
-    const newAudio = {
-      ...data,
-      path: path,
-      dateSubmit: Date.now().toString(),
-      album: "Implements later",
-      submmitted: 0,
-    };
-    let audio = new audioModel(newAudio);
-    audio.save(async (err, value) => {
-      if (!err) {
-        await artistModel.findByIdAndUpdate(audio.authorId, {
-          $push: { songs: audio._id },
-        });
-        await typeAudioModel.findByIdAndUpdate(audio.category, {
-          $push: { audios: audio._id },
-        });
-        res.status(201).send({
-          message: `Add successful`,
-        });
-      }
-    });
+    // const id = req.file.originalname.split(".")[0];
+
+    const files = req.files;
+    // console.log(files);
+    console.log(data);
+
+    // const path = `http://localhost:3000/audios/${id}/${id}.m3u8`;
+
+    // const newAudio = {
+    //   ...data,
+    //   path: path,
+    //   dateSubmit: Date.now().toString(),
+    //   album: "Implements later",
+    //   submmitted: 0,
+    // };
+    // let audio = new audioModel(newAudio);
+
+    // audio.save(async (err, value) => {
+    //   if (!err) {
+    //     await artistModel.findByIdAndUpdate(audio.authorId, {
+    //       $push: { songs: audio._id },
+    //     });
+    //     await typeAudioModel.findByIdAndUpdate(audio.category, {
+    //       $push: { audios: audio._id },
+    //     });
+    //     res.status(201).send({
+    //       message: `Add successful`,
+    //     });
+    //   }
+    // });
   } catch (err) {
     res.status(404).json({ message: err.toString() });
   }

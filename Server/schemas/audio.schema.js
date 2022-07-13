@@ -1,26 +1,56 @@
 const mongoose = require("mongoose");
 
-const audioSchema = new mongoose.Schema({
-    songName: String,
-    authorId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "artist"
+const audioSchema = new mongoose.Schema(
+  {
+    audioName: {
+      type: String,
+      required: true,
     },
-    dateSubmit: String,
-    authorCreate: String,
-    path: String,
-    sugesstion: String,
-    photoURL: String,
-    category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "typeAudio",
-    },
-    album: String,
-    submmitted: Number,
-    liked: Number,
-    listened: Number,
-    status: String
-})
 
-const audioModel = mongoose.model('audio', audioSchema);
+    artistId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "artist",
+    },
+
+    authorCreated: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+    },
+
+    path: {
+      type: String,
+      required: true,
+    },
+
+    photoURL: {
+      type: String,
+      required: true,
+    },
+
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "categories",
+    },
+
+    liked: {
+      type: Number,
+      default: 0,
+    },
+
+    listened: {
+      type: Number,
+      default: 0,
+    },
+    status: {
+      type: String,
+      default: "active",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const audioModel = mongoose.model("audio", audioSchema);
+
 module.exports = audioModel;
