@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { AudioListing } from 'src/states/audio.state';
+import { Audio } from 'src/app/models/audio.model';
+import { AudioDetail, AudioListing } from 'src/states/audio.state';
 import * as audioAction from '../actions/audio.action';
 
 export const initialState = 0;
@@ -35,3 +36,43 @@ export const audioListingReducer = createReducer(
         }
     }),
 );
+
+export const audioDetailReducer = createReducer(
+    <AudioDetail>{},
+    on(audioAction.audioDetail, (state) => {
+        return {
+            ...state,
+            audio: <Audio>{},
+            error: "",
+            isFetching: false,
+            isSuccess: false
+        }
+    }),
+    on(audioAction.fetchAudioDetail, (state, { id }) => {
+        return {
+            ...state,
+            audio: <Audio>{},
+            error: "",
+            isFetching: true,
+            isSuccess: false
+        }
+    }),
+    on(audioAction.fetchAudioDetailSuccess, (state, { audio }) => {
+        return {
+            ...state,
+            audio: <Audio>audio,
+            error: "",
+            isFetching: false,
+            isSuccess: true
+        }
+    }),
+    on(audioAction.fetchAudioDetailFailure, (state, { error }) => {
+        return {
+            ...state,
+            audio: <Audio>{},
+            error: error,
+            isFetching: false,
+            isSuccess: false
+        }
+    })
+)

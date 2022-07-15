@@ -3,7 +3,7 @@ import { AudioService } from 'src/app/services/audio.service';
 import { Audio } from '../../models/audio.model'
 import { Store } from '@ngrx/store';
 import * as audioAction from '../../../actions/audio.action';
-import { AudioListing } from '../../../states/audio.state'
+import { AudioDetail, AudioListing } from '../../../states/audio.state'
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-body',
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class BodyComponent implements OnInit {
   constructor(
     public audioSV: AudioService,
-    private store: Store<{ listingAudio: AudioListing }>
+    private store: Store<{ listingAudio: AudioListing, audioDetail: AudioDetail }>
   ) {
     this.audioListing$ = this.store.select(state => state.listingAudio);
   }
@@ -22,7 +22,7 @@ export class BodyComponent implements OnInit {
   public isSuccess = false;
   ngOnInit(): void {
 
-    this.store.dispatch({ type: '[Audio Component] fetchAudio' })
+    this.store.dispatch(audioAction.fetchAudio());
 
     this.audioListing$.subscribe(res => {
       if (res.isSuccess) {
@@ -37,6 +37,8 @@ export class BodyComponent implements OnInit {
   public getDetail(audioId: string, index: number) {
     this.audioSV._audioId.next(audioId);
     this.audioSV._indexAudio.next(index)
+    this.store.dispatch(audioAction.fetchAudioDetail({ id: audioId }));
+
   }
 
 }

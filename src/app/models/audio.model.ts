@@ -1,17 +1,16 @@
 import { Artist } from "./artist.model"
 import { Type } from "./type.model"
-export interface Audio{
+export interface Audio {
     _id: string,
-    songName: string,
-    authorId?: Artist,
-    dateSubmit: string,
-    authorCreate: string,
+    audioName: string,
+    artistId: Artist,
+    authorCreated: string,
     path: string,
-    sugesstion: string,
     photoURL: string,
-    category: Type,
-    album: string,
-    submmitted: number,
+    typeId: Type,
     liked: number,
-    listened: number
+    listened: number,
+    status: string,
+    createdAt: string,
+    updatedAt: string
 }

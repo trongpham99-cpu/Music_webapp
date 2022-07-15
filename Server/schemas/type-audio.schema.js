@@ -1,16 +1,25 @@
 const mongoose = require("mongoose");
 
-const typeAudioSchema = mongoose.Schema({
+const typeAudioSchema = mongoose.Schema(
+  {
     name_type: String,
     description: String,
-    dateAdd: String,
-    photo: String,
-    audios: [{
+    photoURL: String,
+    audios: [
+      {
         type: mongoose.Schema.Types.ObjectId,
         ref: "audio",
-    }],
+      },
+    ],
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-})
-
-const typeAudioModel = mongoose.model('typeAudio', typeAudioSchema);
+const typeAudioModel = mongoose.model("categories", typeAudioSchema);
 module.exports = typeAudioModel;

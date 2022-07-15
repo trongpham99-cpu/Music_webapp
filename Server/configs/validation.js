@@ -1,25 +1,14 @@
-const joi = require('joi');
+const Joi = require("joi");
 
-const userValidation = data=>{
-    const userSchema = joi.object({
-        displayName: joi.string().required(),
-        account: joi.string().lowercase().required(),
-        email: joi.string().email().lowercase().required(),
-        password: joi.string().min(8).max(16).required().alphanum()
-    });
-    return userSchema.validate(data);
-}
+const userValidate = (email, password) => {
+  const userSchema = Joi.object({
+    email: Joi.string().lowercase().required(),
+    password: Joi.string().min(4).max(32).required(),
+  });
 
-const loginValidation = data=>{
-    const userSchema = joi.object({
-        account: joi.string().lowercase().required(),
-        password: joi.string().min(8).max(16).required().alphanum()
-    });
-    return userSchema.validate(data);
-}
-
-module.exports ={
-    userValidation,
-    loginValidation
+  return userSchema.validate(data);
 };
 
+module.exports = {
+  userValidate,
+};

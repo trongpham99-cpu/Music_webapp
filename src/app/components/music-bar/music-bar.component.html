@@ -1,7 +1,7 @@
 <div class="container">
     <div *ngIf="_audio" class="layout">
-        <img class="image" [src]="_audio.photoURL" [alt]="_audio.songName">
-        <p>{{ _audio.songName }}</p>
+        <img class="image" [src]="_audio.photoURL" [alt]="_audio.audioName">
+        <p>{{ _audio.audioName }}</p>
     </div>
 
     <div *ngIf="!_audio" class="layout">
@@ -18,12 +18,12 @@
                 aria-label="Example icon-button with heart icon ">
                 <mat-icon>skip_previous</mat-icon>
             </button>
-            <button *ngIf="!isPlay" mat-icon-button class="example-icon favorite-icon " 
-                aria-label="Example icon-button with heart icon "(click)="PlayandPause()">
+            <button *ngIf="!isPlay" mat-icon-button class="example-icon favorite-icon "
+                aria-label="Example icon-button with heart icon " (click)="PlayandPause()">
                 <mat-icon>play_circle</mat-icon>
             </button>
-            <button *ngIf="isPlay" mat-icon-button class="example-icon favorite-icon " 
-                aria-label="Example icon-button with heart icon "(click)="PlayandPause()">
+            <button *ngIf="isPlay" mat-icon-button class="example-icon favorite-icon "
+                aria-label="Example icon-button with heart icon " (click)="PlayandPause()">
                 <mat-icon>pause_circle_filled</mat-icon>
             </button>
             <button mat-icon-button class="example-icon favorite-icon "
@@ -41,7 +41,8 @@
 
         </div>
         <div class="progress" #process>
-            <mat-progress-bar (click)="changeTime($event)" class="progress-bar" mode="determinate" value="{{this.progress}}" step="1" min="0" max="100" ></mat-progress-bar>
+            <mat-progress-bar (click)="changeTime($event)" class="progress-bar" mode="determinate"
+                value="{{this.progress}}" step="1" min="0" max="100"></mat-progress-bar>
         </div>
     </div>
 
@@ -59,7 +60,8 @@
             <button matTooltip="Mở âm" *ngIf="isMute" (click)="muteVolume()" mat-icon-button>
                 <mat-icon>volume_off</mat-icon>
             </button>
-            <mat-slider (change)="adjustVolume($event)" [value]="speak" aria-label="unit(s)" step="1" min="0" max="100"></mat-slider>
+            <mat-slider (change)="adjustVolume($event)" [value]="speak" aria-label="unit(s)" step="1" min="0" max="100">
+            </mat-slider>
         </div>
     </div>
 

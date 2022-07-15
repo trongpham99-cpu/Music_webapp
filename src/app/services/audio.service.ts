@@ -30,7 +30,7 @@ export class AudioService {
   }
 
   public getDetail(audioId: string) {
-    return this.http.get(endPoint + `audio/getDetail?docId=${audioId}`);
+    return this.http.get(endPoint + `audio/getDetail/${audioId}`);
   }
 
   private header = {

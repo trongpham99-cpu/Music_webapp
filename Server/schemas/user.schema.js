@@ -1,79 +1,67 @@
-const mongoose = require ('mongoose');
-const bcrypt = require ("bcrypt");
-const { debug } = require('console');
-const userSchema = new mongoose.Schema(
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const userSchema = new mongoose.Schema({
+  displayName: {
+    type: String,
+    required: true,
+  },
+
+  password: {
+    type: String,
+    default: null,
+  },
+
+  email: {
+    type: String,
+    lowercase: true,
+    unique: true,
+    required: true,
+  },
+
+  photoURL: {
+    type: String,
+    default: "https://innostudio.de/fileuploader/images/default-avatar.png",
+  },
+
+  role: {
+    type: String,
+    default: "user",
+  },
+
+  library: [
     {
-        displayName:{
-            type: String,
-            required: true
-        },
-        account:{
-            type:String,
-            lowercase: true,
-            unique: true,
-            required: true            
-        }, 
-        password:{
-            type:String,
-            require: true,
-        }, 
-        birthday: String,
-        phonenumber:{
-            type: String,
-            unique: true,
-            
-        },
-        email:{
-            type:String,
-            lowercase: true,
-            unique: true,
-            required: true
-        },
-        country: String,
-        photo: String,
-        Gender: String,
-        createDate: String,
-        musicType: String,
-        updateDate: String,
-        Role: String,
-        library:Array,
-        likeSong:Array,
-        Follow: Array
-
-    }
-);
-
-// userSchema.pre("save", async (next)=>{
-//     try {
-//         console.log("Email pass la: ",this.email,this.password)
-//         const salt = await bcrypt.genSalt(10);
-//         const hashPassword = await bcrypt.hash(this.password,salt);
-//         this.password = hashPassword;
-//         next();
-//     } catch (error) {
-//         next(error);
-//     }
-// })
-
-userSchema.pre('save', async function(next){
-    try {
-    const salt = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(this.password, salt )
-        this.password = hashPassword;
-        // console.log(hashPassword);
-        next();
-    } catch (error) {
-        console.log(error)
-    }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "audios",
+      default: Array,
+    },
+  ],
+  likeSong: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "audios",
+      default: Array,
+    },
+  ],
 });
 
-userSchema.methods.isCheckPassword = async function(password){
-    try {
-        return await bcrypt.compare(password, this.password);
-    } catch (error) {
-        next(error);
-    }
-}
+userSchema.pre("save", async function (next) {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashPassword;
+    next();
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-const userModel = mongoose.model('users',userSchema);
+userSchema.methods.isCheckPassword = async function (password) {
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const userModel = mongoose.model("users", userSchema);
 module.exports = userModel;

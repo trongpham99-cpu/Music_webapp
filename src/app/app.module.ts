@@ -13,7 +13,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { audioListingReducer } from 'src/reducers/audio.reducer';
+import { audioListingReducer, audioDetailReducer } from 'src/reducers/audio.reducer';
 import { AudioEffects } from 'src/effects/audio.effect';
 
 @NgModule({
@@ -33,7 +33,8 @@ import { AudioEffects } from 'src/effects/audio.effect';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     StoreModule.forRoot({
-      listingAudio: audioListingReducer
+      listingAudio: audioListingReducer,
+      audioDetail: audioDetailReducer
     }, {}),
     EffectsModule.forRoot([
       AudioEffects

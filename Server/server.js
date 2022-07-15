@@ -6,21 +6,19 @@ const server = express();
 server.use(cors());
 server.use(bodyParser.json());
 server.use(express.json());
-
-const exampleRouter = require("./routers/example.router");
+server.use(bodyParser.urlencoded());
+// in latest body-parser use like below.
+server.use(bodyParser.urlencoded({ extended: true }));
 const userRouter = require("./routers/user.router");
 const audioRouter = require("./routers/audio.js");
 const artistRouter = require("./routers/artist.js");
 const typeAudioRouter = require("./routers/type-audio.js");
-const itemRouter = require("./routers/item.router");
 server.use(express.static(__dirname));
 
 server.use("/user", userRouter);
-server.use("/api", exampleRouter);
 server.use("/audio", audioRouter);
 server.use("/artist", artistRouter);
 server.use("/type", typeAudioRouter);
-server.use("/item", itemRouter);
 
 server.use((req, res, next) => {
   next(createError.NotFound(`This route does not exits`));

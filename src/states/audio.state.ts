@@ -5,3 +5,10 @@ export interface AudioListing {
     isFetching: boolean,
     error: string,
 }
+
+export interface AudioDetail {
+    audio: Audio,
+    isSuccess: boolean,
+    isFetching: boolean,
+    error: string
+}

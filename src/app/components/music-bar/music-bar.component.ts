@@ -3,7 +3,10 @@ import { Audio } from 'src/app/models/audio.model';
 import { AudioService } from 'src/app/services/audio.service';
 import { AuthService } from 'src/app/services/auth.service';
 import Hls from 'hls.js';
-
+import { Store } from '@ngrx/store';
+import { AudioDetail, AudioListing } from 'src/states/audio.state';
+import { Observable } from 'rxjs';
+import * as audioAction from '../../../actions/audio.action';
 @Component({
   selector: 'app-music-bar',
   templateUrl: './music-bar.component.html',
@@ -12,10 +15,13 @@ import Hls from 'hls.js';
 export class MusicBarComponent implements OnInit {
   constructor(
     public audioSV: AudioService,
-    private _AuthService: AuthService
-  ) { }
+    private _AuthService: AuthService,
+    private store: Store<{ audioDetail: AudioDetail, listingAudio: AudioListing }>
+  ) {
+    this.audioDetail$ = this.store.select(state => state.audioDetail);
+    this.audioListing$ = this.store.select(state => state.listingAudio);
+  }
   public _audio!: Audio;
-  private audio = new Audio();
   public isPlaying = false;
   public Audio = new Audio();
   public progress: any;
@@ -23,37 +29,37 @@ export class MusicBarComponent implements OnInit {
   public isLoop = false;
   public isPlay = false;
   public speak = 100;
-  public songs: any = [];
+  public songs: Array<Audio> = [];
   public isMute = false;
 
-  ngOnInit(): void {
-    this.audioSV._audioId.subscribe((_id: string) => {
-      if (!_id) return;
-      this.audioSV.getDetail(_id).subscribe((audio: any) => {
-        this._audio = audio;
-        if (audio) {
-          this.playSong(audio.path);
-        }
-      });
-    });
-    this.audioSV._indexAudio.subscribe(index => this.i = index);
-    this.audioSV.getPerfectSong('audio/getAll').subscribe((res: any) => {
-      this.songs = res;
-    });
+  public audioDetail$: Observable<AudioDetail>;
+  public audioListing$: Observable<AudioListing>;
 
-  }
-  public getDetail(audioId: string) {
-    this.audioSV.getDetail(audioId).subscribe((res: any) => {
-      console.log(res);
-    });
+  ngOnInit(): void {
+    this.store.dispatch(audioAction.audioDetail())
+
+    this.audioSV._indexAudio.subscribe(index => this.i = index);
+
+    this.audioSV.getPerfectSong('audio/getAll').subscribe(
+      res => {
+        this.songs = <Array<Audio>>res;
+      });
+
+    this.audioDetail$.subscribe(res => {
+      if (res.isSuccess) {
+        this._audio = res.audio;
+        this.playSong(res.audio.path)
+      }
+    })
+
   }
 
   public durationTime() {
+    if (!this.Audio) return;
     if (this.Audio.duration) {
       let progressPercent = Math.floor(
         (this.Audio.currentTime / this.Audio.duration) * 100
       );
-      // console.log(progressPercent)
       this.progress = progressPercent;
     }
   }
@@ -86,6 +92,7 @@ export class MusicBarComponent implements OnInit {
         this.i++;
         let _audio = this.songs[this.i];
         this.audioSV._audioId.next(_audio._id)
+        this.store.dispatch(audioAction.fetchAudioDetail({ id: _audio._id }))
         this.playSong(_audio.path);
       }
       this.durationTime();
@@ -111,7 +118,7 @@ export class MusicBarComponent implements OnInit {
   }
 
   public adjustVolume(e: any) {
-    console.log(e);
+    if (!this.Audio) return;
     this.speak = e.value;
     if (e.value == 0) {
       this.isMute = true;
@@ -123,6 +130,8 @@ export class MusicBarComponent implements OnInit {
   }
 
   public muteVolume() {
+    if (!this.Audio) return;
+
     if (this.isMute == false) {
       this.Audio.muted = true;
       this.isMute = true;
@@ -141,6 +150,7 @@ export class MusicBarComponent implements OnInit {
   public _time = 0;
 
   changeTime(event: any) {
+    if (!this.Audio) return;
     let left = this.processRef.nativeElement.getBoundingClientRect().left;
     let right = this.processRef.nativeElement.getBoundingClientRect().right;
     let point = event.clientX;

@@ -7,44 +7,48 @@ const { verifyAccessToken } = require("../configs/jwt_service");
 const typeAudioModel = require("../schemas/type-audio.schema");
 const storage = require("../services/ffmpeg.service");
 
-router.get("/getAll", async (request, response) => {
+router.get("/getAll", async (req, res, next) => {
   try {
-    let audio = await audioModel.find().populate("authorId");
-    response.status(200).send(audio);
+    let audios = await audioModel
+      .find()
+      .populate("artistId")
+      .populate("authorCreated", "-password -role -library -likeSong")
+      .populate("typeId");
+    return res.status(200).send(audios);
   } catch (err) {
-    response.status(500).send(err);
+    next(err);
   }
 });
 
-router.get("/getDetail", async (request, response) => {
+router.get("/getDetail/:id", async (req, res, next) => {
   try {
-    let params = request.query.docId;
+    let params = req.params.id;
     let audio = await audioModel
       .findById(params)
-      .populate("authorId")
-      .populate("category");
-    response.status(200).send(audio);
+      .populate("artistId")
+      .populate("authorCreated", "-password -role -library -likeSong")
+      .populate("typeId");
+    return res.status(200).send(audio);
   } catch (err) {
-    response.status(500).send(err);
+    next(err);
   }
 });
 
-router.get("/getSearch", async (request, response, next) => {
+router.get("/getSearch", async (req, res, next) => {
   try {
-    let searchfield = request.query.songName;
-    // console.log(searchfield)
-    await audioModel
+    let searchfield = req.query.songName;
+    let audios = await audioModel
       .find({ songName: { $regex: searchfield, $options: "$i" } })
-      .populate("authorId")
-      .then((data) => {
-        response.status(201).send(data);
-      });
+      .populate("artistId")
+      .populate("authorCreated", "-password -role -library -likeSong")
+      .populate("typeId");
+    return res.status(200).send(audios);
   } catch (err) {
-    response.status(500).send(err);
+    next(err);
   }
 });
 
-router.post("/add-new", storage, async (req, res) => {
+router.post("/add-new", storage, async (req, res, next) => {
   try {
     // let payLoad = req.payLoad;
 
@@ -53,38 +57,40 @@ router.post("/add-new", storage, async (req, res) => {
     // if (_user.Role != "admin") return;
 
     let data = req.body;
-    // const id = req.file.originalname.split(".")[0];
 
     const files = req.files;
-    // console.log(files);
-    console.log(data);
 
-    // const path = `http://localhost:3000/audios/${id}/${id}.m3u8`;
+    const id = files[0].originalname.split(".")[0];
 
-    // const newAudio = {
-    //   ...data,
-    //   path: path,
-    //   dateSubmit: Date.now().toString(),
-    //   album: "Implements later",
-    //   submmitted: 0,
-    // };
-    // let audio = new audioModel(newAudio);
+    const path = `http://localhost:3000/public/files/${id}/${id}.m3u8`;
 
-    // audio.save(async (err, value) => {
-    //   if (!err) {
-    //     await artistModel.findByIdAndUpdate(audio.authorId, {
-    //       $push: { songs: audio._id },
-    //     });
-    //     await typeAudioModel.findByIdAndUpdate(audio.category, {
-    //       $push: { audios: audio._id },
-    //     });
-    //     res.status(201).send({
-    //       message: `Add successful`,
-    //     });
-    //   }
-    // });
+    const photoURL = "http://example.png";
+
+    const _audio = {
+      ...data,
+      path,
+      photoURL,
+    };
+
+    let newAudio = new audioModel(_audio);
+
+    console.log(newAudio);
+
+    await Promise.all([
+      artistModel.findByIdAndUpdate(newAudio.artistId, {
+        $push: { audios: newAudio._id },
+      }),
+      typeAudioModel.findByIdAndUpdate(newAudio.typeId, {
+        $push: { audios: newAudio._id },
+      }),
+      newAudio.save(),
+    ]);
+
+    res.status(201).send({
+      message: `Created Audio`,
+    });
   } catch (err) {
-    res.status(404).json({ message: err.toString() });
+    next(err);
   }
 });
 

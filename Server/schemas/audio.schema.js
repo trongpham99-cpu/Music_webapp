@@ -9,7 +9,7 @@ const audioSchema = new mongoose.Schema(
 
     artistId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "artist",
+      ref: "artists",
     },
 
     authorCreated: {
@@ -27,7 +27,7 @@ const audioSchema = new mongoose.Schema(
       required: true,
     },
 
-    category: {
+    typeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "categories",
     },
@@ -51,6 +51,6 @@ const audioSchema = new mongoose.Schema(
   }
 );
 
-const audioModel = mongoose.model("audio", audioSchema);
+const audioModel = mongoose.model("audios", audioSchema);
 
 module.exports = audioModel;
