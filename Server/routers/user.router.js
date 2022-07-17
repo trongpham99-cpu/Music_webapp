@@ -10,14 +10,28 @@ const {
 const { userValidate } = require("../configs/validation");
 const audioModel = require("../schemas/audio.schema.js");
 
-router.get("/get-all", async (req, res, next)=>{
+router.get("/get-all", async (req, res, next) => {
   try {
     let users = await userModel.find({}, "-password");
-    res.status(200).json(users)
+    res.status(200).json(users);
   } catch (error) {
     next(error);
   }
-})
+});
+
+router.get("/my-profile", verifyAccessToken, async (req, res, next) => {
+  try {
+    const payLoad = req.payLoad;
+
+    if (!payLoad) return;
+
+    const user = await userModel.findById(payLoad.userID);
+
+    res.status(200).send(user);
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.post("/register", async (req, res, next) => {
   try {

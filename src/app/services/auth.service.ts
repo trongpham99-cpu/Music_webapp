@@ -16,10 +16,9 @@ export class AuthService {
 
   public _token = localStorage.getItem('_token')
 
-  public _user = new BehaviorSubject<string>('');
+  public _user$ = new BehaviorSubject<string>('');
 
   public userRegister(registerForm: registerForm) {
-    console.log(registerForm);
     return this.http.post(endPoint + 'user/register', registerForm);
   }
 
@@ -36,7 +35,7 @@ export class AuthService {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${this._token}`)
     }
-    return this.http.get(endPoint + "user/profileWToken", header);
+    return this.http.get(endPoint + "user/my-profile", header);
   }
 
   public getLibrary() {
@@ -69,7 +68,7 @@ export class AuthService {
     }
   }
 
-  public getUsers(){
+  public getUsers() {
     return this.http.get(endPoint + "user/get-all");
   }
 

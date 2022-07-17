@@ -41,10 +41,10 @@ export class AuthEffects {
       ),
       catchError((err) => {
         console.log(err);
-        return of(authAction.registerFailuare({ error: err.error.message }));
+        return of(authAction.registerFailure({ error: err.error.message }));
       })
     )
   );
 
-  constructor(private actions$: Actions, private AuthService: AuthService) {}
+  constructor(private actions$: Actions, private AuthService: AuthService) { }
 }

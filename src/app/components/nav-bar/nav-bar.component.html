@@ -1,96 +1,54 @@
 <p-toast></p-toast>
 <mat-toolbar>
-  <input
-    #box
-    (keyup.enter)="getSearch()"
-    [(ngModel)]="songName"
-    class="search"
-    type="text"
-    placeholder="Tìm bài hát, nghệ sĩ,..."
-  />
-  <mat-icon
-    (click)="getSearch()"
-    class="icon"
-    aria-hidden="false"
-    aria-label="Example home icon"
-    >search</mat-icon
-  >
+  <input #box (keyup.enter)="getSearch()" [(ngModel)]="songName" class="search" type="text"
+    placeholder="Tìm bài hát, nghệ sĩ,..." />
+  <mat-icon (click)="getSearch()" class="icon" aria-hidden="false" aria-label="Example home icon">search</mat-icon>
 
   <span class="example-spacer"></span>
 
-  <span class="name">trong.phamtranduc@gmail.com</span>
-  <button
-    pTooltip="Đăng nhập với Google"
-    (click)="loginWithGoogle()"
-    mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <i class="pi pi-google"></i>
-  </button>
+  <span *ngIf="user">
+    <span style="margin-right: 20px" class="name">{{ user.displayName }}</span>
+    <span class="name">Đăng xuất</span>
+  </span>
 
-  <button
-    pTooltip="Đăng nhập"
-    (click)="login()"
-    mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <i class="pi pi-google"></i>
-  </button>
+  <span *ngIf="!user">
+    <!-- <button pTooltip="Đăng nhập với Google" (click)="loginWithGoogle()" mat-icon-button
+      class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <i class="pi pi-google"></i>
+    </button>
 
-  <button
-  pTooltip="Đăng ký"
-  (click)="registration()"
-  mat-icon-button
-  class="example-icon favorite-icon"
-  aria-label="Example icon-button with heart icon"
->
-  <i class="pi pi-google"></i>
-</button>
+    <button pTooltip="Đăng nhập" (click)="login()" mat-icon-button class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon">
+      <i class="pi pi-google"></i>
+    </button>
+
+    <button pTooltip="Đăng ký" (click)="registration()" mat-icon-button class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon">
+      <i class="pi pi-google"></i>
+    </button> -->
+    <span style="margin-right: 20px;" (click)="login()" class="name">Đăng xuất</span>
+    <span style="margin-right: 20px;" (click)="registration()" class="name">Đăng xuất</span>
+
+  </span>
+
 </mat-toolbar>
 
-<p-dialog
-  [draggable]="false"
-  header="Đăng nhập"
-  [(visible)]="displayBasic"
-  [style]="{ width: '50%' }"
->
+<p-dialog [draggable]="false" header="Đăng nhập" [(visible)]="displayBasic" [style]="{ width: '50%' }">
   <div>
     <form [formGroup]="loginForm">
-      <input
-        autocomplete="off"
-        class="input-info"
-        type="text"
-        pInputText
-        placeholder="Email"
-        formControlName="email"
-      />
+      <input autocomplete="off" class="input-info" type="text" pInputText placeholder="Email" formControlName="email" />
 
-      <input
-        autocomplete="off"
-        class="input-info"
-        type="password"
-        pInputText
-        placeholder="Mật khẩu"
-        formControlName="password"
-      />
+      <input autocomplete="off" class="input-info" type="password" pInputText placeholder="Mật khẩu"
+        formControlName="password" />
     </form>
     <div style="margin-top: 10px">
-      <button
-        style="
+      <button style="
           width: 85%;
           background-color: #ff5500;
           display: block;
           margin: 0 auto;
           padding: 10px;
-        "
-        pButton
-        pRipple
-        type="button"
-        label="Đăng nhập"
-        (click)="onLogin()"
-      ></button>
+        " pButton pRipple type="button" label="Đăng nhập" (click)="onLogin()"></button>
     </div>
   </div>
   <div class="spec-text">
@@ -99,110 +57,53 @@
   <div class="hub">
     <div style="width: 50%; margin: 0 auto; display: flex">
       <div class="hub-button">
-        <button
-          class="button-icon"
-          style="background-color: black"
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-apple"
-        ></button>
+        <button class="button-icon" style="background-color: black" pButton pRipple type="button"
+          icon="pi pi-apple"></button>
       </div>
       <div class="hub-button">
-        <button
-          class="button-icon"
-          style="background-color: #ffc107"
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-google"
-        ></button>
+        <button (click)="loginWithGoogle()" class="button-icon" style="background-color: #ffc107" pButton pRipple
+          type="button" icon="pi pi-google"></button>
       </div>
       <div class="hub-button">
-        <button
-          class="button-icon"
-          style="background-color: #699bf7"
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-facebook"
-        ></button>
+        <button class="button-icon" style="background-color: #699bf7" pButton pRipple type="button"
+          icon="pi pi-facebook"></button>
       </div>
       <div class="hub-button">
-        <button
-          class="button-icon"
-          style="background-color: #55acee"
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-twitter"
-        ></button>
+        <button class="button-icon" style="background-color: #55acee" pButton pRipple type="button"
+          icon="pi pi-twitter"></button>
       </div>
     </div>
   </div>
-  <p
-    style="
+  <p style="
       font-size: medium;
       margin-top: 2em;
       text-align: center;
       font-style: italic;
       font-weight: bold;
-    "
-  >
+    ">
     Bạn không có tài khoản?
   </p>
 </p-dialog>
 
-<p-dialog
-  [draggable]="false"
-  header="Đăng ký"
-  [(visible)]="displayRegister"
-  [style]="{ width: '50%' }"
->
+<p-dialog [draggable]="false" header="Đăng ký" [(visible)]="displayRegister" [style]="{ width: '50%' }">
   <div>
     <form [formGroup]="registerForm">
-      <input
-        autocomplete="off"
-        class="input-info"
-        type="text"
-        pInputText
-        placeholder="Email"
-        formControlName="email"
-      />
+      <input autocomplete="off" class="input-info" type="text" pInputText placeholder="Email" formControlName="email" />
 
-      <input
-        autocomplete="off"
-        class="input-info"
-        type="password"
-        pInputText
-        placeholder="Mật khẩu"
-        formControlName="password"
-      />
+      <input autocomplete="off" class="input-info" type="password" pInputText placeholder="Mật khẩu"
+        formControlName="password" />
 
-      <input
-      autocomplete="off"
-      class="input-info"
-      type="text"
-      pInputText
-      placeholder="Họ và Tên"
-      formControlName="displayName"
-    />
+      <input autocomplete="off" class="input-info" type="text" pInputText placeholder="Họ và Tên"
+        formControlName="displayName" />
     </form>
     <div style="margin-top: 10px">
-      <button
-        style="
+      <button style="
           width: 85%;
           background-color: #ff5500;
           display: block;
           margin: 0 auto;
           padding: 10px;
-        "
-        pButton
-        pRipple
-        type="button"
-        label="Đăng ký"
-        (click)="onRegister()"
-      ></button>
+        " pButton pRipple type="button" label="Đăng ký" (click)="onRegister()"></button>
     </div>
   </div>
   <div class="spec-text">
@@ -211,56 +112,30 @@
   <div class="hub">
     <div style="width: 50%; margin: 0 auto; display: flex">
       <div class="hub-button">
-        <button
-          class="button-icon"
-          style="background-color: black"
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-apple"
-        ></button>
+        <button class="button-icon" style="background-color: black" pButton pRipple type="button"
+          icon="pi pi-apple"></button>
       </div>
       <div class="hub-button">
-        <button
-          class="button-icon"
-          style="background-color: #ffc107"
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-google"
-        ></button>
+        <button class="button-icon" style="background-color: #ffc107" pButton pRipple type="button"
+          icon="pi pi-google"></button>
       </div>
       <div class="hub-button">
-        <button
-          class="button-icon"
-          style="background-color: #699bf7"
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-facebook"
-        ></button>
+        <button class="button-icon" style="background-color: #699bf7" pButton pRipple type="button"
+          icon="pi pi-facebook"></button>
       </div>
       <div class="hub-button">
-        <button
-          class="button-icon"
-          style="background-color: #55acee"
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-twitter"
-        ></button>
+        <button class="button-icon" style="background-color: #55acee" pButton pRipple type="button"
+          icon="pi pi-twitter"></button>
       </div>
     </div>
   </div>
-  <p
-    style="
+  <p style="
       font-size: medium;
       margin-top: 2em;
       text-align: center;
       font-style: italic;
       font-weight: bold;
-    "
-  >
+    ">
     Bạn đã có tài khoản?
   </p>
 </p-dialog>

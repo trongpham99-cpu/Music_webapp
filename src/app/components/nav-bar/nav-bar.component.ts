@@ -47,12 +47,13 @@ export class NavBarComponent implements OnInit {
   }
   public err!: string;
   ngOnInit(): void {
-    this.auth._user.subscribe((token) => {
+    this.auth._user$.subscribe((token) => {
       if (token) {
         this.auth._token = token;
       }
-      this.auth.getProfile()?.subscribe((res: any) => {
-        this.user = res;
+      this.auth.getProfile()?.subscribe((res) => {
+        this.user = <User>res;
+        console.log(res)
       });
     });
     this.authState$.subscribe((res) => {
@@ -65,9 +66,18 @@ export class NavBarComponent implements OnInit {
         });
         return;
       }
+      if (res.isLogin) {
+        localStorage.setItem('_token', res.token);
+        this.auth._user$.next(res.token)
+        this.auth._token = res.token;
+        this.auth.getProfile()?.subscribe((res) => {
+          console.log(res);
+          this.user = <User>res;
+        });
+      }
     });
     this.register$.subscribe(
-      res=>{
+      res => {
         console.log(res)
       }
     )
@@ -100,20 +110,10 @@ export class NavBarComponent implements OnInit {
   }
 
   public onRegister() {
-    this.store.dispatch(authAction.register( { registerForm: this.registerForm.value } ))
+    this.store.dispatch(authAction.register({ registerForm: this.registerForm.value }))
   }
 
   public onLogin() {
-    // this.auth.userLogin(this.loginForm.value).subscribe((res: any) => {
-    //   this.displayBasic = false;
-    //   localStorage.setItem('_token', res.token);
-    //   this.auth._user.next(res.token)
-    //   //  window.location.reload();
-    //   this._err = ''
-    // }, (err) => {
-    //   console.log(err)
-    //   this._err = err.error.message;
-    // })
     if (!this.loginForm.value.email || !this.loginForm.value.password) return;
     this.store.dispatch(
       authAction.authLogin({

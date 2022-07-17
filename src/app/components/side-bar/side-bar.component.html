@@ -20,9 +20,9 @@
             <mat-icon aria-hidden="false" aria-label="Example home icon">favorite_border</mat-icon>
             <a (click)="showBasicDialog()" class="name-icon">Bài hát yêu thích</a>
         </div>
-        <div style="display: flex; margin-left: 2rem; margin-top: 1rem;">
+        <div *ngIf="isAdmin" style="display: flex; margin-left: 2rem; margin-top: 1rem;">
             <mat-icon aria-hidden="false" aria-label="Example home icon">manage_accounts</mat-icon>
-            <a [routerLink]="['/admin/music']" class="name-icon">Quản lý</a>
+            <a [routerLink]="['/admin/users']" class="name-icon">Quản lý</a>
         </div>
     </div>
     <hr>
