@@ -2,15 +2,15 @@ const app = require("express");
 const router = app.Router();
 const artistModel = require("../schemas/artist.schema.js");
 
-router.get("/get-all", async (request, response) => {
+router.get("/get-all", async (req, res, next) => {
   try {
     let artist = await artistModel
       .find()
-      .populate("songs")
+      .populate("audios")
       .populate("createdBy", "-password -role -library -likeSong");
-    response.status(200).send(artist);
+    res.status(200).send(artist);
   } catch (err) {
-    response.status(500).send(err);
+    next(err);
   }
 });
 

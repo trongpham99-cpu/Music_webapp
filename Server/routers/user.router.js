@@ -10,9 +10,18 @@ const {
 const { userValidate } = require("../configs/validation");
 const audioModel = require("../schemas/audio.schema.js");
 
+router.get("/get-all", async (req, res, next)=>{
+  try {
+    let users = await userModel.find({}, "-password");
+    res.status(200).json(users)
+  } catch (error) {
+    next(error);
+  }
+})
+
 router.post("/register", async (req, res, next) => {
   try {
-    const { email, password, displayName, photoURL } = req.body;
+    const { email, password, displayName } = req.body;
 
     const isExits = await userModel.findOne({
       email: email,
@@ -26,7 +35,6 @@ router.post("/register", async (req, res, next) => {
       email,
       password,
       displayName,
-      photoURL,
     });
 
     await user.save();
@@ -61,7 +69,8 @@ router.post("/login", async (req, res, next) => {
     }
     const accessToken = await signAccessToken(user._id);
 
-    res.json({
+    res.status(200).json({
+      status: 200,
       accessToken,
     });
   } catch (error) {

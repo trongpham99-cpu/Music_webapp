@@ -1,0 +1,34 @@
+<h1>Danh sách quản lý</h1>
+<app-loading *ngIf="!isFetching" ></app-loading>
+<div *ngIf="isFetching" class="body">
+  <p-table [value]="users" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>#</th>
+        <th>Hình ảnh</th>
+        <th>Email</th>
+        <th>Họ Tên</th>
+        <th>Chức vụ</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>1</td>
+        <td>
+          <img [src]="user.photoURL" alt="">
+        </td>
+        <td>{{user.email}}</td>
+        <td>{{user.displayName}}</td>
+        <td>{{user.role}}</td>
+        <td>
+          <button pButton pRipple type="button" icon="pi pi-user-edit"  class="p-button-rounded"></button>
+        </td>
+        <td>
+          <button style="background-color: red; border: none;" pButton pRipple type="button" icon="pi pi-trash"  class="p-button-rounded"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

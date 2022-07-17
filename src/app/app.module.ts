@@ -15,10 +15,14 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { audioListingReducer, audioDetailReducer } from 'src/reducers/audio.reducer';
 import { AudioEffects } from 'src/effects/audio.effect';
+import { userListingReducer } from 'src/reducers/user.reducer';
+import { UserEffects } from 'src/effects/user.effect';
+import { authLoginReducer, registerReducer } from 'src/reducers/auth.reducer';
+import { AuthEffects } from 'src/effects/auth.effect';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -34,10 +38,15 @@ import { AudioEffects } from 'src/effects/audio.effect';
     provideStorage(() => getStorage()),
     StoreModule.forRoot({
       listingAudio: audioListingReducer,
-      audioDetail: audioDetailReducer
+      audioDetail: audioDetailReducer,
+      userListing: userListingReducer,
+      authLogin: authLoginReducer,
+      register: registerReducer
     }, {}),
     EffectsModule.forRoot([
-      AudioEffects
+      AudioEffects,
+      UserEffects,
+      AuthEffects
     ])
   ],
   providers: [],

@@ -7,6 +7,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/main/main.module').then((m) => m.MainModule),
   },
+  { path: 'admin', loadChildren: () => import('./pages/main/modules/admin/admin.module').then(m => m.AdminModule) }
+
 ];
 
 @NgModule({

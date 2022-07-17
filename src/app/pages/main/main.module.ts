@@ -16,6 +16,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BodyLibraryComponent } from '../../components/body-library/body-library.component';
 import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
+import {ToastModule} from 'primeng/toast';
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -36,7 +38,8 @@ import { TooltipModule } from 'primeng/tooltip';
     TooltipModule,
     FormsModule,
     ReactiveFormsModule,
-    TagModule
+    TagModule,
+    ToastModule
   ]
 })
 export class MainModule { }

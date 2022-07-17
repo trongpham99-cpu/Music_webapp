@@ -11,7 +11,6 @@ const routes: Routes = [
     children: [
       { path: '', component: BodyComponent },
       { path: 'library', canActivate: [AuthGuard], component: BodyLibraryComponent },
-      { path: 'admin', loadChildren: () => import('../../pages/main/modules/admin/admin.module').then(m => m.AdminModule) }
     ]
   }
 ];

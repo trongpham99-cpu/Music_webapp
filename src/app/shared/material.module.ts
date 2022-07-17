@@ -43,8 +43,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { LoadingComponent } from '../components/loading/loading.component';
+
 
 @NgModule({
+  declarations: [
+    LoadingComponent
+  ],
   exports: [
     A11yModule,
     CdkAccordionModule,
@@ -91,6 +96,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
     OverlayModule,
     PortalModule,
     ScrollingModule,
+    LoadingComponent
   ]
 })
 export class MaterialModule {}

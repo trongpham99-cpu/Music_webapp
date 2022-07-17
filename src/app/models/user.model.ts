@@ -1,19 +1,11 @@
+import { Audio } from "./audio.model";
+
 export interface User{
     _id: string,
-    account?: string,
-    displayName?: string,
-    password: string,
-    birthday: string,
-    phonenumber: string,
+    displayName: string,
     email: string,
-    country: string,
-    photo?: string,
-    Gender: string,
-    createDate: string,
-    musicType: string,
-    updateDate: string,
-    Role: string,
-    library: [],
-    likeSong: [],
-    follow: [],
+    photoURL: string,
+    role: string,
+    library: Array<Audio>,
+    likeSong: Array<Audio>
 }

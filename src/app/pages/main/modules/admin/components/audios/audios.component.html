@@ -1,0 +1,43 @@
+<h1>Quản lý bài hát</h1>
+<app-loading *ngIf="!isFetching" ></app-loading>
+
+<div *ngIf="isFetching" class="body">
+  <p-table [value]="audios" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>#</th>
+        <th>Tên bài hát</th>
+        <th>Hình ảnh</th>
+        <th>Nghệ sĩ</th>
+        <th>Danh mục</th>
+        <th>Người thêm</th>
+        <th>Trang thái</th>
+        <th>Ngày thêm</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-audio>
+      <tr>
+        <td>1</td>
+        <td>{{audio.audioName}}</td>
+        <td>
+          <img [src]="audio.photoURL" alt="">
+        </td>
+        <td>{{audio.artistId?.artistName}}</td>
+        <td>{{audio.typeId?.name_type}}</td>
+        <td>{{audio.authorCreated?.displayName}}</td>
+        <td>
+          <p-tag styleClass="mr-2" severity="success" [value]="audio.status"></p-tag>
+        </td>
+        <td>{{audio.createdAt | date: "medium"}}</td>
+        <td>
+          <button pButton pRipple type="button" icon="pi pi-user-edit"  class="p-button-rounded"></button>
+        </td>
+        <td>
+          <button style="background-color: red; border: none;" pButton pRipple type="button" icon="pi pi-trash"  class="p-button-rounded"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

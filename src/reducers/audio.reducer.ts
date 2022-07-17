@@ -3,9 +3,6 @@ import { Audio } from 'src/app/models/audio.model';
 import { AudioDetail, AudioListing } from 'src/states/audio.state';
 import * as audioAction from '../actions/audio.action';
 
-export const initialState = 0;
-
-
 export const audioListingReducer = createReducer(
     <AudioListing>{},
     on(audioAction.fetchAudio, (state) => {

@@ -16,6 +16,15 @@
     margin-left: 20%;
 }
 
+.input-info {
+  width:85%;
+  margin: 0 auto;
+  display: block;
+  padding: 12px 20px;
+  outline: none;
+  margin-top: 10px;
+}
+
 .upgrade {
     // margin-left: 40%;
     border-radius: 20px;
@@ -107,4 +116,19 @@ mat-toolbar {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.hub{
+  width: 100%;
+  display: flex;
+  margin-top: 2em;
+}
+
+.hub-button{
+  width: 25%;
+}
+
+.button-icon{
+  display: block;
+  margin: 0 auto;
 }

@@ -24,7 +24,7 @@ server.use((req, res, next) => {
   next(createError.NotFound(`This route does not exits`));
 });
 server.use((err, req, res, next) => {
-  res.json({
+  res.status(err.status || 500).json({
     status: err.status || 500,
     message: err.message,
   });

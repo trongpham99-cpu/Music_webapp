@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { endPoint } from '../../environments/config'
 import { GoogleAuthProvider, signInWithPopup, Auth } from '@angular/fire/auth';
+import { registerForm } from 'src/states/auth.state';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,12 +18,16 @@ export class AuthService {
 
   public _user = new BehaviorSubject<string>('');
 
-  public userRegister(userForm: any) {
-    return this.http.post(endPoint + 'user/register', userForm);
+  public userRegister(registerForm: registerForm) {
+    console.log(registerForm);
+    return this.http.post(endPoint + 'user/register', registerForm);
   }
 
-  public userLogin(userForm: any) {
-    return this.http.post(endPoint + "user/login", userForm);
+  public userLogin(email: string, password: string) {
+    return this.http.post(endPoint + "user/login", {
+      email,
+      password
+    });
   }
 
   public getProfile() {
@@ -62,6 +67,10 @@ export class AuthService {
     } catch (error) {
       return error;
     }
+  }
+
+  public getUsers(){
+    return this.http.get(endPoint + "user/get-all");
   }
 
 }
