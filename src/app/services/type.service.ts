@@ -10,7 +10,7 @@ export class TypeService {
 
   constructor(public http: HttpClient) { }
   public getAllType(){
-    return this.http.get(endPoint + "type/getAll")
+    return this.http.get(endPoint + "type/get-all")
   }
   public postData(audioType: any){
     const _type = {

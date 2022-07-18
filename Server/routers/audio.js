@@ -6,6 +6,7 @@ const artistModel = require("../schemas/artist.schema.js");
 const { verifyAccessToken } = require("../configs/jwt_service");
 const typeAudioModel = require("../schemas/type-audio.schema");
 const storage = require("../services/ffmpeg.service");
+const createError = require("http-errors");
 
 router.get("/getAll", async (req, res, next) => {
   try {
@@ -48,28 +49,31 @@ router.get("/getSearch", async (req, res, next) => {
   }
 });
 
-router.post("/add-new", storage, async (req, res, next) => {
+router.post("/add-new" , verifyAccessToken ,storage, async (req, res, next) => {
   try {
-    // let payLoad = req.payLoad;
+    const payLoad = req.payLoad;
+    let isAdmin = await userModel.findById(payLoad.userID);
 
-    // let _user = await userModel.findById(payLoad.userID);
-
-    // if (_user.Role != "admin") return;
+    if(isAdmin.role !== 'admin'){
+      throw createError.Forbidden("Bạn không có quyền thêm nhạc")
+    }
 
     let data = req.body;
 
     const files = req.files;
 
     const id = files[0].originalname.split(".")[0];
+    const imageFile = files[1].originalname;
 
     const path = `http://localhost:3000/public/files/${id}/${id}.m3u8`;
 
-    const photoURL = "http://example.png";
+    const photoURL = `http://localhost:3000/public/files/${imageFile}`;
 
     const _audio = {
       ...data,
       path,
       photoURL,
+      authorCreated: isAdmin._id
     };
 
     let newAudio = new audioModel(_audio);
@@ -94,14 +98,33 @@ router.post("/add-new", storage, async (req, res, next) => {
   }
 });
 
-router.put("/updateData", (request, response) => {
+router.put("/update", verifyAccessToken ,async (req, res, next) => {
   try {
-    let body = request.body;
-    let data = body.data;
-    let docId = body.docId;
+    let body = req.body;
+    let payLoad = req.payLoad;
+
+    const isAdmin = await userModel.findById(payLoad.userID);
+    if(isAdmin.role !== 'admin'){
+      throw createError.Forbidden("Bạn không có quyền chỉnh sửa")
+    }
+
+    const updateAudio = {
+      ...body,
+      artistId: body.artistId._id,
+      typeId: body.typeId._id,
+      authorCreated: body.authorCreated._id
+    }
+    console.log(updateAudio)
+    // await audioModel.findByIdAndUpdate(updateAudio._id, updateAudio);
+
+    return res.status(200).send({
+      status: 200,
+      message: "Chỉnh sửa thành công!"
+    })
+
     // console.log(data);
   } catch (err) {
-    response.status(404).json({ message: err.toString() });
+    next(err);
   }
 });
 

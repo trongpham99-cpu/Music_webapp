@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, from, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Audio } from './../models/audio.model';
 import { endPoint } from '../../environments/config';
@@ -33,28 +33,43 @@ export class AudioService {
     return this.http.get(endPoint + `audio/getDetail/${audioId}`);
   }
 
-  private header = {
-    headers: new HttpHeaders()
-      .set('Authorization', `Bearer ${this.authSV._token}`)
+  public updateAudio(audio: Audio){
+    if (!this.authSV._token) {
+      return;
+    };
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${this.authSV._token}`)
+    }
+    return this.http.put(endPoint + `audio/update`, audio, header);
   }
 
-  public postData(audioForm: any, file: any) {
+  public postData(audioForm: File, imageFile: File, audio: Audio) {
+    
+    if (!this.authSV._token) {
+      return from(Promise.reject({
+        message: "No token"
+      }));
+    };
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${this.authSV._token}`)
+    }
+
     const formData: any = new FormData();
-    formData.append('track', file)
-    formData.append('songName', audioForm.songName)
-    formData.append('authorId', audioForm.authorId)
-    formData.append('category', audioForm.category)
-    formData.append('photoURL', audioForm.photoURL)
-    formData.append('liked', audioForm.liked)
-    formData.append('listened', audioForm.listened)
-    formData.append('sugesstion', audioForm.sugesstion)
-    formData.append('authorCreate', audioForm.authorCreate)
-    return this.http.post(endPoint + `audio/add`, formData, this.header);
+    formData.append('files', imageFile)
+    formData.append('files', audioForm)
+    formData.append('audioName', audio.audioName)
+    formData.append('artistId', audio.artistId)
+    formData.append('typeId', audio.typeId)
+
+    console.log(formData)
+
+    return this.http.post(endPoint + `audio/add-new`, formData, header);
   }
 
   public deleteAudio(audioId: string) {
     if (!this.authSV._token) {
-      console.log(`chua co token`);
       return;
     };
     var header = {

@@ -12,6 +12,12 @@ import {ButtonModule} from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { MaterialModule } from '../../../../shared/material.module'
 import {MegaMenuModule} from 'primeng/megamenu';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ToastModule} from 'primeng/toast';
+import {DialogModule} from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
+import {ToolbarModule} from 'primeng/toolbar';
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -27,7 +33,12 @@ import {MegaMenuModule} from 'primeng/megamenu';
     MegaMenuModule,
     ButtonModule,
     TagModule,
-    MaterialModule
+    MaterialModule,
+    ConfirmPopupModule,
+    ToastModule,
+    DialogModule,
+    FormsModule,
+    ToolbarModule
   ]
 })
 export class AdminModule { }

@@ -13,6 +13,11 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {
+        label: "Trang chủ",
+        icon: "pi pi-home",
+        routerLink: "/"
+      },
+      {
         label: 'Bài hát',
         icon: 'pi pi-fw pi-video',
         routerLink: "/admin/audios"

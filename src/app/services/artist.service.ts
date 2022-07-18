@@ -10,6 +10,6 @@ export class ArtistService {
   constructor(public http: HttpClient) { }
 
   public getAllArtist(){
-    return this.http.get(endPoint + "artist/getAll")
+    return this.http.get(endPoint + "artist/get-all")
   }
 }

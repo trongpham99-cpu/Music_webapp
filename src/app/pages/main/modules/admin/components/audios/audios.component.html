@@ -1,43 +1,86 @@
+<p-confirmPopup></p-confirmPopup>
+<p-toast></p-toast>
 <h1>Quản lý bài hát</h1>
-<app-loading *ngIf="!isFetching" ></app-loading>
+<app-loading *ngIf="!isFetching"></app-loading>
 
 <div *ngIf="isFetching" class="body">
-  <p-table [value]="audios" responsiveLayout="scroll">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>#</th>
-        <th>Tên bài hát</th>
-        <th>Hình ảnh</th>
-        <th>Nghệ sĩ</th>
-        <th>Danh mục</th>
-        <th>Người thêm</th>
-        <th>Trang thái</th>
-        <th>Ngày thêm</th>
-        <th></th>
-        <th></th>
-      </tr>
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+      <button (click)="openCreate()" pButton pRipple label="New" icon="pi pi-plus"
+        class="p-button-success mr-2"></button>
     </ng-template>
-    <ng-template pTemplate="body" let-audio>
-      <tr>
-        <td>1</td>
-        <td>{{audio.audioName}}</td>
-        <td>
-          <img [src]="audio.photoURL" alt="">
-        </td>
-        <td>{{audio.artistId?.artistName}}</td>
-        <td>{{audio.typeId?.name_type}}</td>
-        <td>{{audio.authorCreated?.displayName}}</td>
-        <td>
-          <p-tag styleClass="mr-2" severity="success" [value]="audio.status"></p-tag>
-        </td>
-        <td>{{audio.createdAt | date: "medium"}}</td>
-        <td>
-          <button pButton pRipple type="button" icon="pi pi-user-edit"  class="p-button-rounded"></button>
-        </td>
-        <td>
-          <button style="background-color: red; border: none;" pButton pRipple type="button" icon="pi pi-trash"  class="p-button-rounded"></button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+  </p-toolbar>
+  <div style="margin-top: 20px">
+    <p-table [value]="audios" responsiveLayout="scroll">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#</th>
+          <th>Tên bài hát</th>
+          <th>Hình ảnh</th>
+          <th>Nghệ sĩ</th>
+          <th>Danh mục</th>
+          <th>Người thêm</th>
+          <th>Trang thái</th>
+          <th>Ngày thêm</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-audio>
+        <tr>
+          <td>1</td>
+          <td>{{audio.audioName}}</td>
+          <td>
+            <img [src]="audio.photoURL" alt="">
+          </td>
+          <td>{{audio.artistId?.artistName}}</td>
+          <td>{{audio.typeId?.name_type}}</td>
+          <td>{{audio.authorCreated?.displayName}}</td>
+          <td>
+            <p-tag styleClass="mr-2" severity="success" [value]="audio.status"></p-tag>
+          </td>
+          <td>{{audio.createdAt | date: "medium"}}</td>
+          <td>
+            <button (click)="detail(audio._id)" pButton pRipple type="button" icon="pi pi-user-edit"
+              class="p-button-rounded"></button>
+          </td>
+          <td>
+            <button (click)="confirmDelete($event, audio.audioName)" style="background-color: red; border: none;"
+              pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
 </div>
+
+
+<p-dialog [style]="{width: '50%'}" [header]="audio.audioName" [(visible)]="displayDetail">
+  <div>
+    <div class="head">
+      <img class="image-detail" [src]="audio.photoURL" alt="">
+      <input type="file" (change)="onSelectImage($event)">
+    </div>
+    <div class="body">
+      <input [(ngModel)]="audio.audioName" placeholder="Tên bài hát" class="edit-detail" type="text" name="" id="">
+      <select  [(ngModel)]="audio.artistId" class="edit-detail" id="country" name="country">
+        <option *ngFor="let art of artists" [ngValue]="art._id" >{{art.artistName}}</option>
+      </select>
+      <select class="edit-detail" [(ngModel)]="audio.typeId" id="country" name="country">
+        <option *ngFor="let type of types" [value]="type._id">{{type.name_type}}</option>
+      </select>
+      <select [(ngModel)]="audio.status" class="edit-detail" id="country" name="country">
+        <option value="Active" >Active</option>
+        <option value="In-Active">In-Active</option>
+      </select>
+      <input (change)="onSelectAudio($event)" type="file">
+    </div>
+    <hr>
+    <div class="footer">
+      <p-button (click)="save()" class="save">
+        <i class="pi pi-save"></i>
+      </p-button>
+    </div>
+  </div>
+</p-dialog>

@@ -24,6 +24,7 @@ var storage = multer.diskStorage({
     cb(null, name);
 
     if (!fs.existsSync(_dirFiles + `/${id}`) && type == "mp3") {
+      console.log({id: id, type: type})
       fs.mkdirSync(_dirFiles + `/${id}`, { recursive: true });
       await cutAudioFile(name, id);
     }

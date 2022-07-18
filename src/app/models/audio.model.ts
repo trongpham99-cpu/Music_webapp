@@ -12,6 +12,6 @@ export interface Audio {
     liked: number,
     listened: number,
     status: string,
-    createdAt: string,
-    updatedAt: string
+    createdAt?: string,
+    updatedAt?: string
 }

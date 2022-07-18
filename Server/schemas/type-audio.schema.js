@@ -8,7 +8,7 @@ const typeAudioSchema = mongoose.Schema(
     audios: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "audio",
+        ref: "audios",
       },
     ],
     createdBy: {

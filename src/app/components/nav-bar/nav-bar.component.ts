@@ -68,11 +68,13 @@ export class NavBarComponent implements OnInit {
       }
       if (res.isLogin) {
         localStorage.setItem('_token', res.token);
+        // this.displayBasic = false;
         this.auth._user$.next(res.token)
         this.auth._token = res.token;
         this.auth.getProfile()?.subscribe((res) => {
           console.log(res);
           this.user = <User>res;
+          window.location.reload()
         });
       }
     });
