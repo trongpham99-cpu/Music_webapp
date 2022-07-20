@@ -47,13 +47,16 @@ export class AudiosComponent implements OnInit {
     this.TypeService.getAllType().subscribe(res => this.types = <Array<Type>>res);
   }
 
-  confirmDelete(event: Event, audioName: string) {
+  confirmDelete(event: Event, audioName: string, id: string) {
     this.confirmationService.confirm({
       target: event.target || undefined,
       message: `Bạn có chắc chắn xóa bài hát ${audioName} ?`,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.MessageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        this.AudioService.deleteAudio(id)?.subscribe(res => {
+          this.MessageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+          this.store.dispatch(audioAction.fetchAudio())
+        })
       },
       reject: () => {
         this.MessageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
@@ -104,7 +107,7 @@ export class AudiosComponent implements OnInit {
 
   openCreate() {
     this.displayDetail = true;
-    this.audio =  {
+    this.audio = {
       audioName: '',
       artistId: <Artist>{},
       authorCreated: <User>{},
@@ -125,12 +128,12 @@ export class AudiosComponent implements OnInit {
     event.target.files[0];
     console.log(event.target.files[0]);
     this.imageFile = event.target.files[0];
-    
+
     const reader = new FileReader();
     reader.onload = e => this.audio.photoURL = <string>reader.result;
 
     reader.readAsDataURL(this.imageFile);
-   
+
   }
   onSelectAudio(event: any) {
     event.target.files[0];
@@ -138,10 +141,10 @@ export class AudiosComponent implements OnInit {
   }
 
   createAudio() {
-    if(!this.imageFile && !this.audioFile) return;
+    if (!this.imageFile && !this.audioFile) return;
     console.log(this.audio);
     this.AudioService.postData(this.imageFile, this.audioFile, this.audio).subscribe(
-      res=>{
+      res => {
         this.store.dispatch(audioAction.fetchAudio())
         this.displayDetail = false;
       }

@@ -21,6 +21,15 @@ router.get("/getAll", async (req, res, next) => {
   }
 });
 
+router.get("/getLibrary", verifyAccessToken, async (req, res, next) => {
+  try {
+    const payLoad = req.payLoad;
+    const user = await userModel.findById(payLoad.userID);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/getDetail/:id", async (req, res, next) => {
   try {
     let params = req.params.id;
@@ -49,13 +58,13 @@ router.get("/getSearch", async (req, res, next) => {
   }
 });
 
-router.post("/add-new" , verifyAccessToken ,storage, async (req, res, next) => {
+router.post("/add-new", verifyAccessToken, storage, async (req, res, next) => {
   try {
     const payLoad = req.payLoad;
     let isAdmin = await userModel.findById(payLoad.userID);
 
-    if(isAdmin.role !== 'admin'){
-      throw createError.Forbidden("Bạn không có quyền thêm nhạc")
+    if (isAdmin.role !== "admin") {
+      throw createError.Forbidden("Bạn không có quyền thêm nhạc");
     }
 
     let data = req.body;
@@ -73,7 +82,7 @@ router.post("/add-new" , verifyAccessToken ,storage, async (req, res, next) => {
       ...data,
       path,
       photoURL,
-      authorCreated: isAdmin._id
+      authorCreated: isAdmin._id,
     };
 
     let newAudio = new audioModel(_audio);
@@ -98,29 +107,29 @@ router.post("/add-new" , verifyAccessToken ,storage, async (req, res, next) => {
   }
 });
 
-router.put("/update", verifyAccessToken ,async (req, res, next) => {
+router.put("/update", verifyAccessToken, async (req, res, next) => {
   try {
     let body = req.body;
     let payLoad = req.payLoad;
 
     const isAdmin = await userModel.findById(payLoad.userID);
-    if(isAdmin.role !== 'admin'){
-      throw createError.Forbidden("Bạn không có quyền chỉnh sửa")
+    if (isAdmin.role !== "admin") {
+      throw createError.Forbidden("Bạn không có quyền chỉnh sửa");
     }
 
     const updateAudio = {
       ...body,
       artistId: body.artistId._id,
       typeId: body.typeId._id,
-      authorCreated: body.authorCreated._id
-    }
-    console.log(updateAudio)
+      authorCreated: body.authorCreated._id,
+    };
+    console.log(updateAudio);
     // await audioModel.findByIdAndUpdate(updateAudio._id, updateAudio);
 
     return res.status(200).send({
       status: 200,
-      message: "Chỉnh sửa thành công!"
-    })
+      message: "Chỉnh sửa thành công!",
+    });
 
     // console.log(data);
   } catch (err) {
@@ -128,36 +137,37 @@ router.put("/update", verifyAccessToken ,async (req, res, next) => {
   }
 });
 
-router.delete(
-  "/deleteAll/:docId",
-  verifyAccessToken,
-  async (request, response) => {
-    try {
-      const payLoad = request.payLoad;
-      let docId = request.params.docId;
+router.delete("/delete/:docId", verifyAccessToken, async (req, res, next) => {
+  try {
+    const payLoad = req.payLoad;
 
-      const _user = await userModel.findById(payLoad.userID);
+    let docId = req.params.docId;
 
-      if (_user.Role == "admin") {
-        let result = await audioModel.findByIdAndDelete(docId);
-        if (result == null) {
-          return response.status(400).send({
-            message: `Tìm không được id ${docId} này!!!`,
-          });
-        } else {
-          return response.status(200).send({
-            message: "Xoa thanh cong!!!",
-          });
-        }
+    console.log(payLoad, docId);
+
+    const _user = await userModel.findById(payLoad.userID);
+
+    console.log(_user);
+
+    if (_user.role === "admin") {
+      let result = await audioModel.findById(docId);
+      if (result == null) {
+        return res.status(400).send({
+          message: `Tìm không được id ${docId} này!!!`,
+        });
       } else {
-        return response.status(403).send({
-          message: "Bạn không có quyền xóa bài này!",
+        return res.status(200).send({
+          message: "Xoa thanh cong!!!",
         });
       }
-    } catch (error) {
-      res.status(500).send(error);
+    } else {
+      return res.status(403).send({
+        message: "Bạn không có quyền xóa bài này!",
+      });
     }
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 module.exports = router;

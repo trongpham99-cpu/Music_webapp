@@ -33,7 +33,7 @@ export class AudioService {
     return this.http.get(endPoint + `audio/getDetail/${audioId}`);
   }
 
-  public updateAudio(audio: Audio){
+  public updateAudio(audio: Audio) {
     if (!this.authSV._token) {
       return;
     };
@@ -45,7 +45,7 @@ export class AudioService {
   }
 
   public postData(audioForm: File, imageFile: File, audio: Audio) {
-    
+
     if (!this.authSV._token) {
       return from(Promise.reject({
         message: "No token"
@@ -76,7 +76,7 @@ export class AudioService {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${this.authSV._token}`)
     }
-    return this.http.delete(endPoint + `audio/deleteAll/${audioId}`, header);
+    return this.http.delete(endPoint + `audio/delete/${audioId}`, header);
   }
 
 }

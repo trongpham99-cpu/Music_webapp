@@ -16,17 +16,19 @@
     margin-left: 20%;
 }
 
-.name:hover{
- cursor: pointer;
+.name:hover {
+    cursor: pointer;
 }
 
 .input-info {
-  width:85%;
-  margin: 0 auto;
-  display: block;
-  padding: 12px 20px;
-  outline: none;
-  margin-top: 10px;
+    width: 85%;
+    margin: 0 auto;
+    display: block;
+    padding: 12px 20px;
+    outline: none;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 .upgrade {
@@ -122,17 +124,17 @@ mat-toolbar {
     display: block;
 }
 
-.hub{
-  width: 100%;
-  display: flex;
-  margin-top: 2em;
+.hub {
+    width: 100%;
+    display: flex;
+    margin-top: 2em;
 }
 
-.hub-button{
-  width: 25%;
+.hub-button {
+    width: 25%;
 }
 
-.button-icon{
-  display: block;
-  margin: 0 auto;
+.button-icon {
+    display: block;
+    margin: 0 auto;
 }

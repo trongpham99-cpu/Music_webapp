@@ -12,9 +12,23 @@ export class AdminGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    return new Promise((resolve) => {
+      if (!this.AuthService._token) {
+        location.href = "/";
+        resolve(false);
+        return;
+      }
+      this.AuthService.getProfile()?.subscribe((res: any) => {
+        if (res.role === 'admin') {
+          resolve(true);
+          return;
+        }
+        location.href = "/";
+        resolve(false);
+        return;
+      })
+    })
+
   }
-
-
 
 }

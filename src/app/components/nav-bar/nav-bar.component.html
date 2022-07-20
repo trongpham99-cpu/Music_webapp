@@ -8,7 +8,7 @@
 
   <span *ngIf="user">
     <span style="margin-right: 20px" class="name">{{ user.displayName }}</span>
-    <span class="name">Đăng xuất</span>
+    <span (click)="onLogout()" class="name">Đăng xuất</span>
   </span>
 
   <span *ngIf="!user">

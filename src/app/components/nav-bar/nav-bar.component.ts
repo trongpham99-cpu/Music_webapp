@@ -80,6 +80,14 @@ export class NavBarComponent implements OnInit {
     });
     this.register$.subscribe(
       res => {
+        if (res.isSuccess) {
+          this.displayRegister = false;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: "Đăng ký thành công",
+          });
+        }
         console.log(res)
       }
     )

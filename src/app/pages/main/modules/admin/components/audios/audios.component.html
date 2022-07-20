@@ -45,8 +45,9 @@
               class="p-button-rounded"></button>
           </td>
           <td>
-            <button (click)="confirmDelete($event, audio.audioName)" style="background-color: red; border: none;"
-              pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded"></button>
+            <button (click)="confirmDelete($event, audio.audioName, audio._id)"
+              style="background-color: red; border: none;" pButton pRipple type="button" icon="pi pi-trash"
+              class="p-button-rounded"></button>
           </td>
         </tr>
       </ng-template>
@@ -64,14 +65,14 @@
     </div>
     <div class="body">
       <input [(ngModel)]="audio.audioName" placeholder="Tên bài hát" class="edit-detail" type="text" name="" id="">
-      <select  [(ngModel)]="audio.artistId" class="edit-detail" id="country" name="country">
-        <option *ngFor="let art of artists" [ngValue]="art._id" >{{art.artistName}}</option>
+      <select [(ngModel)]="audio.artistId" class="edit-detail" id="country" name="country">
+        <option *ngFor="let art of artists" [ngValue]="art._id">{{art.artistName}}</option>
       </select>
       <select class="edit-detail" [(ngModel)]="audio.typeId" id="country" name="country">
         <option *ngFor="let type of types" [value]="type._id">{{type.name_type}}</option>
       </select>
       <select [(ngModel)]="audio.status" class="edit-detail" id="country" name="country">
-        <option value="Active" >Active</option>
+        <option value="Active">Active</option>
         <option value="In-Active">In-Active</option>
       </select>
       <input (change)="onSelectAudio($event)" type="file">
